@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Schauss/Shouse Family in North Carolina, 1755–1900</title>
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <style>
+    /* ── Reset & base ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #12100e;
+      --bg2:       #1c1916;
+      --bg3:       #252019;
+      --gold:      #c9a84c;
+      --gold-lt:   #e8c97a;
+      --sepia:     #8b6f47;
+      --text:      #e8dfc8;
+      --text-dim:  #a89880;
+      --blue-mk:   #4a90d9;
+      --gold-mk:   #f0c040;
+      --gray-mk:   #9e9e9e;
+      --green-mk:  #4caf7d;
+      --border:    #3a3020;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── Header ─────────────────────────────────────────────────── */
+    header {
+      text-align: center;
+      padding: 60px 24px 40px;
+      background: linear-gradient(180deg, #0a0804 0%, var(--bg) 100%);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    header::after {
+      content: '';
+      display: block;
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 18px auto 0;
+    }
+    .header-subtitle {
+      font-size: 0.85rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      font-weight: normal;
+      color: var(--gold-lt);
+      letter-spacing: 0.04em;
+      line-height: 1.25;
+    }
+    .header-desc {
+      margin-top: 16px;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+      color: var(--text-dim);
+      font-size: 0.95rem;
+    }
+
+    /* ── Nav ────────────────────────────────────────────────────── */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 14px 22px;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: color 0.2s, background 0.2s;
+    }
+    nav a:hover { color: var(--gold); background: var(--bg3); }
+
+    /* ── Sections ───────────────────────────────────────────────── */
+    section {
+      padding: 60px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    section + section { border-top: 1px solid var(--border); }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: normal;
+      color: var(--gold-lt);
+      margin-bottom: 24px;
+      position: relative;
+      display: inline-block;
+    }
+    h2::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin-top: 6px;
+    }
+
+    /* ── Map ────────────────────────────────────────────────────── */
+    #map-section { padding-top: 48px; }
+    .map-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+    }
+    .legend-dot {
+      width: 13px; height: 13px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.25);
+      flex-shrink: 0;
+    }
+    #map {
+      width: 100%;
+      height: 580px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #1a1610;
+    }
+    .leaflet-popup-content-wrapper {
+      background: #1e1a14;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+    }
+    .leaflet-popup-tip { background: #1e1a14; }
+    .leaflet-popup-content-wrapper a { color: var(--gold); }
+    .popup-title {
+      font-size: 1rem;
+      color: var(--gold-lt);
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+    .popup-historic {
+      font-size: 0.8rem;
+      color: var(--sepia);
+      font-style: italic;
+      margin-bottom: 6px;
+    }
+    .popup-dates {
+      font-size: 0.78rem;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .popup-body { font-size: 0.82rem; color: var(--text-dim); line-height: 1.5; }
+
+    /* ── Timeline ───────────────────────────────────────────────── */
+    #timeline-section .tl-wrap {
+      position: relative;
+      padding-left: 36px;
+    }
+    #timeline-section .tl-wrap::before {
+      content: '';
+      position: absolute;
+      left: 10px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--gold) 0%, var(--sepia) 60%, transparent 100%);
+    }
+    .tl-item {
+      position: relative;
+      margin-bottom: 36px;
+    }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -30px; top: 5px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+    .tl-year {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      margin-bottom: 3px;
+    }
+    .tl-event {
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .tl-detail { font-size: 0.85rem; color: var(--text-dim); }
+
+    /* ── Family Tree ────────────────────────────────────────────── */
+    .family-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 8px;
+    }
+    .family-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px;
+      transition: border-color 0.2s;
+    }
+    .family-card:hover { border-color: var(--sepia); }
+    .family-card h3 {
+      font-size: 1rem;
+      color: var(--gold-lt);
+      font-weight: normal;
+      margin-bottom: 4px;
+    }
+    .family-card .fc-dates {
+      font-size: 0.78rem;
+      color: var(--gold);
+      margin-bottom: 8px;
+      letter-spacing: 0.06em;
+    }
+    .family-card p { font-size: 0.85rem; color: var(--text-dim); }
+
+    /* ── Sources ────────────────────────────────────────────────── */
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .source-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 18px;
+    }
+    .source-card h3 {
+      font-size: 0.9rem;
+      color: var(--green-mk);
+      margin-bottom: 6px;
+      font-weight: normal;
+    }
+    .source-card p { font-size: 0.82rem; color: var(--text-dim); }
+
+    /* ── Footer ─────────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      background: var(--bg2);
+    }
+    footer .footer-title { color: var(--gold); margin-bottom: 8px; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ HEADER ══════════════════════════════ -->
+<header>
+  <div class="header-subtitle">A Family Heritage Project</div>
+  <h1>The Schauss / Shouse Family<br>in North Carolina, 1755–1900</h1>
+  <p class="header-desc">
+    Tracing the journey of a Palatine German family from Albisheim on the Rhine
+    to the Moravian settlements of North Carolina — spanning eight generations and
+    nearly three centuries of American history.
+  </p>
+</header>
+
+<!-- ═══════════════════════════════ NAV ═════════════════════════════════ -->
+<nav>
+  <a href="#map-section">Interactive Map</a>
+  <a href="#timeline-section">Timeline</a>
+  <a href="#family-section">Key Ancestors</a>
+  <a href="#sources-section">Archives &amp; Sources</a>
+</nav>
+
+<!-- ═══════════════════════════════ MAP ══════════════════════════════════ -->
+<section id="map-section">
+  <div class="section-label">Geography</div>
+  <h2>Migration &amp; Settlement Map</h2>
+  <p style="color:var(--text-dim);margin-bottom:20px;max-width:760px;">
+    From the Rhine Valley of Germany to Philadelphia, through Pennsylvania, and
+    finally to the Moravian settlements of North Carolina. Click any marker for
+    historical detail. The orange dashed line traces the family's migration path.
+  </p>
+
+  <div class="map-legend">
+    <div class="legend-item">
+      <div class="legend-dot" style="background:var(--blue-mk)"></div> Residences &amp; Settlements
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:var(--gold-mk)"></div> Churches
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:var(--gray-mk)"></div> Cemeteries
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:var(--green-mk)"></div> Archives &amp; Repositories
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#e8703a;border-radius:2px;"></div> Migration Path
+    </div>
+  </div>
+
+  <div id="map"></div>
+</section>
+
+<!-- ═══════════════════════════════ TIMELINE ════════════════════════════ -->
+<section id="timeline-section">
+  <div class="section-label">Chronology</div>
+  <h2>Family Timeline, 1620–1900</h2>
+
+  <div class="tl-wrap">
+
+    <div class="tl-item">
+      <div class="tl-year">c. 1620</div>
+      <div class="tl-event">Schauss Family Established in Albisheim</div>
+      <div class="tl-detail">The Schauss (also spelled Schauß, Schaws) family is documented in Albisheim an der Pfrimm, a village in the Palatinate region of the Rhine Valley, Germany. The family belongs to the Reformed (Calvinist) church community.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1680s–1720s</div>
+      <div class="tl-event">Palatine Refugee Crisis</div>
+      <div class="tl-detail">Wars, famine, and religious persecution devastate the Rhine Palatinate. Thousands of German families begin emigrating to England, the Netherlands, and the American colonies. The Schauss family begins considering emigration.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1748–1751</div>
+      <div class="tl-event">Johann Adam Schauss Emigrates</div>
+      <div class="tl-detail">Johann Adam Schauss (born c. 1720, Albisheim) emigrates with family members. They travel down the Rhine to Rotterdam, then to a British port, and sail to Philadelphia — the principal port of entry for Palatine Germans.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1751</div>
+      <div class="tl-event">Arrival in Philadelphia</div>
+      <div class="tl-detail">The Schauss family arrives at the Port of Philadelphia. German immigrants ("Palatines") were required to sign oaths of allegiance. Pennsylvania had large German-speaking communities in Philadelphia, Germantown, and Lancaster County.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1751–1755</div>
+      <div class="tl-event">Settlement in Lancaster County, Pennsylvania</div>
+      <div class="tl-detail">The family temporarily settles in Lancaster County, a major hub for German immigrant settlement. Here they encounter Moravian missionaries who are recruiting settlers for their new communities in North Carolina.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1753</div>
+      <div class="tl-event">Moravians Purchase Wachovia Tract, NC</div>
+      <div class="tl-detail">The Moravian Brethren (Unitas Fratrum) purchase 98,985 acres in the Piedmont of North Carolina, calling it "Wachovia" after an Austrian estate. They begin organizing settlement parties, prioritizing skilled tradespeople and farming families.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1753</div>
+      <div class="tl-event">Bethabara Founded — First Moravian Town in NC</div>
+      <div class="tl-detail">The first group of Moravian settlers arrives in North Carolina and establishes Bethabara ("House of Passage"), the first permanent Moravian settlement in the colony. It serves as the staging ground for future settlements.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1759</div>
+      <div class="tl-event">Bethania Founded — Schauss Family Arrives</div>
+      <div class="tl-detail">Bethania is established as the second Moravian town in Wachovia — and uniquely, as a "mixed" settlement open to non-Moravian German families. Johann Adam Schauss and Philipp Schauss are among the early settlers, bringing the family to North Carolina for good.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1760s</div>
+      <div class="tl-event">Land Grants &amp; Farming in Bethania Area</div>
+      <div class="tl-detail">The Schauss brothers receive land grants in the Bethania/Muddy Creek area of what is now Forsyth and Stokes Counties. They farm tobacco, grain, and livestock. Johann Adam serves as a witness on Moravian community documents.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1766</div>
+      <div class="tl-event">Salem (Old Salem) Founded</div>
+      <div class="tl-detail">The Moravians establish Salem as the central "congregation town" of Wachovia — a planned community with a Single Brothers House, Single Sisters House, tavern, and skilled trades. It becomes the commercial and spiritual center of the region.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1771</div>
+      <div class="tl-event">Schauss Name Begins Becoming "Shouse"</div>
+      <div class="tl-detail">As the family integrates with English-speaking neighbors, the German "Schauss" gradually Anglicizes to "Shouse" — a phonetic approximation common among Palatine German families in the Carolinas. Both spellings appear in records through the 1800s.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">c. 1775</div>
+      <div class="tl-event">Philipp Schauss Dies — Buried at Dobbs Parish</div>
+      <div class="tl-detail">Philipp Schauss (brother of Johann Adam) dies and is buried at Dobbs Parish Graveyard near Bethania. His death record is among the earliest Shouse family records in North Carolina. Johann Adam continues farming with his sons.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1780s–1790s</div>
+      <div class="tl-event">Revolutionary War &amp; Post-War Expansion</div>
+      <div class="tl-detail">Shouse family members serve or are affected by the American Revolution. The Moravians maintained complex neutrality but faced pressure from both sides. After the war, the family expands across Stokes County, acquiring additional land grants.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1790</div>
+      <div class="tl-event">First U.S. Census — Shouse Households Recorded</div>
+      <div class="tl-detail">The first federal census records multiple Shouse households in Stokes County, NC. The family has grown to include the children and grandchildren of the original immigrants — now fully established as American frontier farmers.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">Early 1800s</div>
+      <div class="tl-event">Beck-Shouse Family Alliance</div>
+      <div class="tl-detail">Through marriage, the Shouse and Beck families intertwine, establishing the Beck-Shouse Cemetery along Grassy Creek near Bethania. Multiple generations of both families are buried here, making it an important genealogical landmark.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1849</div>
+      <div class="tl-event">St. Philips Moravian Church Founded</div>
+      <div class="tl-detail">The Moravians establish St. Philips as a congregation for African American members — both enslaved and free. It becomes the oldest African American Moravian congregation in North Carolina, reflecting the complex relationship between Moravian faith and slavery in the antebellum South.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1861–1865</div>
+      <div class="tl-event">Civil War — Shouse Men Serve</div>
+      <div class="tl-detail">Several Shouse family members serve in North Carolina Confederate units. The Salem area sees significant disruption. Moravian records document wartime hardships, food shortages, and the eventual arrival of Union troops in 1865.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1878</div>
+      <div class="tl-event">Winston Founded — Twin City Era Begins</div>
+      <div class="tl-detail">The new town of Winston is chartered adjacent to Salem, growing rapidly as a tobacco manufacturing center. By 1913, Salem and Winston merge to form Winston-Salem. The Shouse family witnesses the transformation of their ancestral homeland into an industrial city.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1900</div>
+      <div class="tl-event">End of Primary Research Period</div>
+      <div class="tl-detail">By 1900, the Shouse family is well-established across Forsyth and Stokes Counties. Descendants include farmers, craftsmen, and merchants. The Schauss emigrant of 1751 has by now become hundreds of American descendants across the Carolinas and beyond.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FAMILY ═══════════════════════════════ -->
+<section id="family-section">
+  <div class="section-label">Genealogy</div>
+  <h2>Key Ancestors</h2>
+  <p style="color:var(--text-dim);margin-bottom:24px;max-width:760px;">
+    The first four generations of the Schauss/Shouse family in America, from the
+    Palatine emigrant to the post-Civil War era.
+  </p>
+
+  <div class="family-grid">
+
+    <div class="family-card">
+      <h3>Johann Adam Schauss</h3>
+      <div class="fc-dates">c. 1720 Albisheim, Germany — c. 1785 Bethania, NC</div>
+      <p>
+        The primary immigrant ancestor. Born in Albisheim an der Pfrimm in the
+        Palatinate. Emigrated to Philadelphia c. 1748–1751. Settled in Lancaster
+        County, PA before relocating to the newly-founded Moravian community of
+        Bethania, NC in 1759. Received land grants in Forsyth/Stokes County area.
+        Buried at Dobbs Parish Graveyard.
+      </p>
+    </div>
+
+    <div class="family-card">
+      <h3>Philipp Schauss</h3>
+      <div class="fc-dates">c. 1725 Albisheim — c. 1775 Bethania, NC</div>
+      <p>
+        Brother (or close relation) of Johann Adam. Emigrated with or shortly
+        after Johann Adam. Also settled in Bethania. His burial at Dobbs Parish
+        Graveyard is documented in early Moravian records, making his death one
+        of the earliest dated Shouse family events in North Carolina.
+      </p>
+    </div>
+
+    <div class="family-card">
+      <h3>Second Generation Shouse</h3>
+      <div class="fc-dates">c. 1745–1810, Stokes &amp; Forsyth Counties, NC</div>
+      <p>
+        Children of Johann Adam, born partly in Germany or Pennsylvania, raised
+        in Bethania. By this generation the name "Shouse" appears alongside
+        "Schauss" in tax lists, church records, and land deeds. Members worship
+        at Bethania Moravian Church and Shiloh Union Church.
+      </p>
+    </div>
+
+    <div class="family-card">
+      <h3>Third Generation — Frontier Farmers</h3>
+      <div class="fc-dates">c. 1770–1840, Stokes County, NC</div>
+      <p>
+        Grandchildren of Johann Adam. Fully American-born, they expand across
+        the Muddy Creek and Germanton areas of Stokes County. Many appear in
+        the 1790 and 1800 federal censuses. Intermarriage with the Beck, Shore,
+        and Transou families is documented.
+      </p>
+    </div>
+
+    <div class="family-card">
+      <h3>Beck-Shouse Alliance</h3>
+      <div class="fc-dates">Early 1800s, Grassy Creek area, NC</div>
+      <p>
+        Marriage between Shouse and Beck family members created a lasting bond
+        documented in the Beck-Shouse Cemetery on Bethania Station Road. This
+        cemetery remains a key genealogical site. Some descendants later moved
+        west to Indiana and Missouri following frontier migration patterns.
+      </p>
+    </div>
+
+    <div class="family-card">
+      <h3>Civil War Generation</h3>
+      <div class="fc-dates">c. 1835–1870, Forsyth &amp; Stokes Counties, NC</div>
+      <p>
+        Fourth and fifth generation descendants who lived through the Civil War.
+        Served in NC Confederate units. The Shouse family, like their Moravian
+        neighbors, faced difficult choices between religious pacifist tradition
+        and Confederate conscription pressure. Post-war records show resilience
+        and continuation of farming traditions.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SOURCES ══════════════════════════════ -->
+<section id="sources-section">
+  <div class="section-label">Research</div>
+  <h2>Archives &amp; Primary Sources</h2>
+  <p style="color:var(--text-dim);margin-bottom:24px;max-width:760px;">
+    The Shouse family history is documented across several archives. The Moravian
+    Archives in Winston-Salem holds unparalleled records of life in the Wachovia
+    settlements.
+  </p>
+
+  <div class="sources-grid">
+
+    <div class="source-card">
+      <h3>Moravian Archives, Winston-Salem</h3>
+      <p>
+        The primary repository for Wachovia settlement records. Contains
+        congregation diaries, Bethania land records, death registers, and
+        correspondence dating from 1753. Holds the Bethania Record Book with
+        early Schauss family references.
+      </p>
+    </div>
+
+    <div class="source-card">
+      <h3>Moravian Archives, Bethlehem PA</h3>
+      <p>
+        Northern Province archives. Contains records of Pennsylvania Moravian
+        communities that had contact with the Shouse family during their brief
+        residence in Lancaster County. Also holds emigrant passenger records.
+      </p>
+    </div>
+
+    <div class="source-card">
+      <h3>NC State Archives, Raleigh</h3>
+      <p>
+        Land grant records, colonial court documents, Revolutionary War pension
+        files, and tax lists. Stokes County records (pre-1849 Forsyth County
+        formation) are especially relevant to Shouse family research.
+      </p>
+    </div>
+
+    <div class="source-card">
+      <h3>Forsyth County Courthouse</h3>
+      <p>
+        Deed books, will books, and estate records from 1849 forward (when
+        Forsyth County was formed from Stokes). Contains Shouse land transactions,
+        probate records, and guardianship papers through the 19th century.
+      </p>
+    </div>
+
+    <div class="source-card">
+      <h3>Records of the Moravians in NC</h3>
+      <p>
+        Multi-volume published transcriptions of Moravian congregation records
+        edited by Adelaide Fries. Essential secondary source with English
+        translations of German-language diaries, letters, and reports.
+      </p>
+    </div>
+
+    <div class="source-card">
+      <h3>Federal Census Records</h3>
+      <p>
+        Shouse households appear in NC census records from 1790 onward. The 1850
+        and later censuses include ages, birthplaces, and occupations. Available
+        via Ancestry.com, FamilySearch, and the National Archives.
+      </p>
+    </div>
+
+    <div class="source-card">
+      <h3>Evangelical Church, Albisheim</h3>
+      <p>
+        German parish records (Kirchenbücher) for Albisheim an der Pfrimm.
+        Available through the Landesarchiv Speyer. May contain baptism, marriage,
+        and burial records for the Schauss family prior to emigration, though
+        records before 1700 are incomplete.
+      </p>
+    </div>
+
+    <div class="source-card">
+      <h3>PA German Society Records</h3>
+      <p>
+        Pennsylvania German immigrant ship lists and naturalization oaths.
+        Philadelphia Port arrival records (1727–1808) often list German immigrant
+        men by name. The Schauss name may appear on late 1740s or 1750s manifests.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<footer>
+  <div class="footer-title">The Schauss / Shouse Family Heritage Project</div>
+  <p>Albisheim, Germany &nbsp;·&nbsp; Philadelphia, PA &nbsp;·&nbsp; Bethania, NC &nbsp;·&nbsp; c. 1620–1900</p>
+  <p style="margin-top:12px;">Research ongoing. Data compiled from Moravian Archives, NC State Archives, and federal census records.</p>
+</footer>
+
+
+<!-- ═══════════════════════════════ MAP SCRIPT ═══════════════════════════ -->
+<script>
+(function () {
+  // Dark tile layer (CartoDB Dark Matter)
+  const map = L.map('map', { zoomControl: true }).setView([38.5, -77], 5);
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  // ── Marker factories ────────────────────────────────────────────
+  function makeIcon(color, size) {
+    size = size || 12;
+    return L.divIcon({
+      className: '',
+      html: `<div style="
+        width:${size}px;height:${size}px;
+        background:${color};
+        border-radius:50%;
+        border:2px solid rgba(255,255,255,0.5);
+        box-shadow:0 0 6px ${color}88;
+      "></div>`,
+      iconSize: [size, size],
+      iconAnchor: [size/2, size/2],
+      popupAnchor: [0, -size/2 - 2]
+    });
+  }
+
+  const BLUE  = '#4a90d9';
+  const GOLD  = '#f0c040';
+  const GRAY  = '#9e9e9e';
+  const GREEN = '#4caf7d';
+
+  function popup(title, historic, dates, body) {
+    let html = `<div class="popup-title">${title}</div>`;
+    if (historic) html += `<div class="popup-historic">${historic}</div>`;
+    if (dates)    html += `<div class="popup-dates">${dates}</div>`;
+    if (body)     html += `<div class="popup-body">${body}</div>`;
+    return html;
+  }
+
+  // ── RESIDENCES (blue) ───────────────────────────────────────────
+  const residences = [
+    {
+      ll: [49.5847, 8.1147],
+      title: 'Albisheim, Germany',
+      historic: 'Albisheim an der Pfrimm, Palatinate',
+      dates: 'Family origin c. 1620–1751',
+      body: 'Rhine Valley village where the Schauss family lived for generations. Reformed (Calvinist) church community. Johann Adam Schauss emigrated from here c. 1748–1751 during the great Palatine migration to America.'
+    },
+    {
+      ll: [39.9526, -75.1652],
+      title: 'Philadelphia, PA',
+      historic: 'Port of Philadelphia',
+      dates: 'Arrival c. 1751',
+      body: 'Primary port of entry for Palatine German immigrants. Male immigrants signed oaths of allegiance at the courthouse. The Schauss family entered America here before moving to Lancaster County.'
+    },
+    {
+      ll: [40.0468, -76.1784],
+      title: 'Lancaster County, PA',
+      historic: 'Pennsylvania German settlement area',
+      dates: '1751–1755',
+      body: 'Temporary settlement before the move to North Carolina. Major hub for German-speaking immigrants. Here the Schauss family likely had contact with Moravian missionaries recruiting settlers for Wachovia.'
+    },
+    {
+      ll: [36.1865, -80.3092],
+      title: 'Bethania, NC',
+      historic: 'Bethania — "House of God"',
+      dates: 'Primary settlement 1759+',
+      body: 'Second Moravian town in Wachovia. Unique as a "mixed" settlement open to non-Moravian German families. Johann Adam Schauss and Philipp Schauss were among the first settlers. Family remained here for generations.'
+    },
+    {
+      ll: [36.1387, -80.2837],
+      title: 'Bethabara, NC',
+      historic: 'Bethabara — "House of Passage"',
+      dates: 'Moravian settlement est. 1753',
+      body: 'First Moravian town in North Carolina. Founded 1753 as staging ground for Wachovia settlement. The Schauss family may have passed through here on arrival in NC. Now a National Historic Landmark.'
+    },
+    {
+      ll: [36.0854, -80.2442],
+      title: 'Salem (Old Salem), NC',
+      historic: 'Salem — planned Moravian congregation town',
+      dates: 'Founded 1766',
+      body: 'Central congregation town of Wachovia. A planned community with regulated trades, tavern, and distinctive architecture. Shouse family members traded here regularly. Now preserved as Old Salem Museums & Gardens.'
+    },
+    {
+      ll: [36.18, -80.45],
+      title: 'Muddy Creek area, NC',
+      historic: 'Muddy Creek / Stokes County',
+      dates: '1760s onward',
+      body: 'Area of Shouse family land grants in Stokes County. Multiple Shouse households farmed tobacco and grain along Muddy Creek. Tax lists from the 1780s–1800s document family members here.'
+    },
+    {
+      ll: [35.98, -80.29],
+      title: 'Friedberg, NC',
+      historic: 'Friedberg Moravian Community',
+      dates: 'Est. 1769',
+      body: 'Southern Wachovia Moravian settlement. Some Shouse family members or their neighbors had connections here. Friedberg congregation records are preserved in the Moravian Archives.'
+    },
+    {
+      ll: [36.02, -80.15],
+      title: 'Friedland, NC',
+      historic: 'Friedland Moravian Community',
+      dates: 'Est. 1780',
+      body: 'Eastern Wachovia community. Third major rural Moravian congregation in the Wachovia tract. Less directly connected to the Shouse family but part of the broader Moravian network they inhabited.'
+    },
+    {
+      ll: [36.24, -80.22],
+      title: 'Germanton, NC',
+      historic: 'Germanton, Stokes County seat',
+      dates: 'County seat 1790–1849',
+      body: 'County seat of Stokes County through the antebellum era. Shouse family members appeared in county court records here. Land deeds and estate records for pre-1849 Forsyth County residents are held at NC State Archives.'
+    }
+  ];
+
+  residences.forEach(r => {
+    L.marker(r.ll, { icon: makeIcon(BLUE, 14) })
+      .bindPopup(popup(r.title, r.historic, r.dates, r.body))
+      .addTo(map);
+  });
+
+  // ── CHURCHES (gold) ─────────────────────────────────────────────
+  const churches = [
+    {
+      ll: [36.1865, -80.3092],
+      title: 'Bethania Moravian Church',
+      historic: 'Bethania Congregation, Wachovia',
+      dates: 'Est. 1759',
+      body: 'One of the original Moravian congregations of Wachovia. Shouse family members worshipped here or in the related Bethania community church. Congregation diaries are preserved in the Moravian Archives.'
+    },
+    {
+      ll: [36.1351, -80.3184],
+      title: 'Bethabara Moravian Church',
+      historic: 'Bethabara Congregation',
+      dates: 'Est. 1753',
+      body: 'First Moravian church in North Carolina. The congregation served the early settlers of Wachovia. Bethabara records from 1753 onward are among the most complete colonial-era church records in the American South.'
+    },
+    {
+      ll: [36.0999, -80.2442],
+      title: 'Home Moravian Church, Salem',
+      historic: 'Salem Congregation',
+      dates: 'Est. 1771',
+      body: 'The mother church of Salem. Now one of the oldest Moravian congregations in the US. Its God\'s Acre cemetery and Easter sunrise service remain living traditions. Congregation records from 1771 are invaluable for researchers.'
+    },
+    {
+      ll: [36.084, -80.247],
+      title: "St. Philip's Moravian Church",
+      historic: "St. Philips — oldest African American Moravian congregation in NC",
+      dates: 'Est. 1849',
+      body: "Founded as a congregation for African American Moravians — both enslaved and free. Reflects the complex intersection of Moravian faith and slavery in the antebellum South. Now a National Historic Landmark in Old Salem."
+    },
+    {
+      ll: [36.19, -80.41],
+      title: 'Shiloh Union Church',
+      historic: 'Shiloh Lutheran-Reformed Church',
+      dates: 'Early 1800s',
+      body: 'Union (shared Lutheran and Reformed) congregation serving non-Moravian German families in the Bethania area. Some Shouse family members worshipped here, reflecting the interdenominational character of the German frontier community.'
+    },
+    {
+      ll: [36.15, -80.42],
+      title: 'Nazareth Lutheran Church',
+      historic: 'Nazareth Lutheran, Stokes County',
+      dates: 'Early 1800s',
+      body: 'Lutheran congregation in the Stokes County German settlement area. Shouse family members of Lutheran background may have been associated with this congregation. Records held at various Lutheran archives.'
+    },
+    {
+      ll: [49.5847, 8.1147],
+      title: 'Evangelical Church, Albisheim',
+      historic: 'Reformed (Calvinist) Parish, Albisheim',
+      dates: 'Active since Reformation era',
+      body: 'The home church of the Schauss family in Germany. Parish registers (Kirchenbücher) may contain records of the family before emigration. Records held at Landesarchiv Speyer, Germany.'
+    }
+  ];
+
+  churches.forEach(c => {
+    L.marker(c.ll, { icon: makeIcon(GOLD, 13) })
+      .bindPopup(popup(c.title, c.historic, c.dates, c.body))
+      .addTo(map);
+  });
+
+  // ── CEMETERIES (gray) ───────────────────────────────────────────
+  const cemeteries = [
+    {
+      ll: [36.1865, -80.312],
+      title: "Dobbs Parish Graveyard",
+      historic: "Dobbs Parish / Bethania area",
+      dates: 'c. 1760s–1800s',
+      body: 'Historic graveyard near Bethania where Johann Adam Schauss and Philipp Schauss are recorded as buried. One of the earliest cemeteries in the Bethania area. Important genealogical site for Shouse family research.'
+    },
+    {
+      ll: [36.189, -80.311],
+      title: "Bethania God's Acre",
+      historic: "Bethania Moravian Cemetery",
+      dates: 'Est. c. 1760',
+      body: "The Moravian 'God's Acre' cemetery at Bethania. Graves are arranged in rows by gender and date of death, reflecting Moravian theology of equality before God. Contains graves of many early Wachovia settlers."
+    },
+    {
+      ll: [36.0995, -80.2445],
+      title: 'Salem Cemetery / God\'s Acre',
+      historic: "Salem Congregation God's Acre",
+      dates: 'Est. 1771',
+      body: 'The famous Salem God\'s Acre — rows of identical flat stones arranged by gender. Site of the world-renowned Easter Sunrise service. Some Shouse family members or their neighbors are buried here.'
+    },
+    {
+      ll: [36.1608, -80.2786],
+      title: 'Beck-Shouse Cemetery',
+      historic: 'Beck-Shouse family burying ground',
+      dates: 'Early 1800s onward',
+      body: 'Private family cemetery near Bethania Station Road and Hanes Mill Road along Grassy Creek. Documents the intermarriage of the Beck and Shouse families. A key genealogical landmark for Shouse family researchers in Forsyth County.'
+    }
+  ];
+
+  cemeteries.forEach(c => {
+    L.marker(c.ll, { icon: makeIcon(GRAY, 12) })
+      .bindPopup(popup(c.title, c.historic, c.dates, c.body))
+      .addTo(map);
+  });
+
+  // ── REPOSITORIES (green) ────────────────────────────────────────
+  const repos = [
+    {
+      ll: [36.1007, -80.2473],
+      title: 'Moravian Archives, Winston-Salem',
+      historic: 'Southern Province Archives',
+      dates: 'Records from 1753',
+      body: 'The single most important archive for Wachovia settlement research. Holds congregation diaries, Bethania land records, personal correspondence, and the "Memorabilia" (annual reports) of all Wachovia congregations. Open to researchers by appointment.'
+    },
+    {
+      ll: [40.6259, -75.3707],
+      title: 'Moravian Archives, Bethlehem PA',
+      historic: 'Northern Province Archives',
+      dates: 'Records from 1741',
+      body: 'Northern Province of the Moravian Church archives. Contains records of Pennsylvania Moravian communities and emigrant lists. May hold records connecting to the Shouse family\'s brief time in Lancaster County, PA.'
+    },
+    {
+      ll: [36.0971, -80.2437],
+      title: 'Forsyth County Courthouse',
+      historic: 'Forsyth County Register of Deeds',
+      dates: 'Records from 1849',
+      body: 'Deed books, will books, and estate records from 1849 (when Forsyth County was formed from Stokes County). Contains Shouse land transactions and probate records through the 19th century. Earlier records at NC State Archives.'
+    },
+    {
+      ll: [35.7796, -78.6382],
+      title: 'NC State Archives, Raleigh',
+      historic: 'North Carolina State Archives',
+      dates: 'Colonial era to present',
+      body: 'Land grant records, colonial court documents, Revolutionary War pension files, tax lists, and Stokes County records predating 1849. Essential for Shouse family research in the 18th–early 19th century period.'
+    }
+  ];
+
+  repos.forEach(r => {
+    L.marker(r.ll, { icon: makeIcon(GREEN, 13) })
+      .bindPopup(popup(r.title, r.historic, r.dates, r.body))
+      .addTo(map);
+  });
+
+  // ── MIGRATION PATH ──────────────────────────────────────────────
+  const migrationPath = [
+    [49.5847, 8.1147],   // Albisheim
+    [51.9225, 4.4792],   // Rotterdam (waypoint)
+    [51.5074, -0.1278],  // London (waypoint)
+    [39.9526, -75.1652], // Philadelphia
+    [40.0468, -76.1784], // Lancaster County
+    [36.9741, -79.0558], // Piedmont waypoint
+    [36.1865, -80.3092]  // Bethania
+  ];
+
+  L.polyline(migrationPath, {
+    color: '#e8703a',
+    weight: 2.5,
+    opacity: 0.75,
+    dashArray: '8, 6',
+    lineJoin: 'round'
+  }).addTo(map)
+    .bindPopup('<div class="popup-title">Migration Path</div><div class="popup-body">Schauss family migration route: Albisheim → Rotterdam → London → Philadelphia → Lancaster County, PA → Bethania, NC (c. 1748–1759)</div>');
+
+  // ── ATLANTIC OCEAN arc (approximate great circle) ───────────────
+  // Just add a label marker mid-Atlantic
+  L.marker([40.5, -40], {
+    icon: L.divIcon({
+      className: '',
+      html: '<div style="color:#e8703a;font-size:10px;letter-spacing:0.1em;opacity:0.7;white-space:nowrap;text-shadow:1px 1px 2px #000">— Atlantic crossing c. 1751 —</div>',
+      iconSize: [180, 18],
+      iconAnchor: [90, 9]
+    })
+  }).addTo(map);
+
+})();
+</script>
+
+</body>
+</html>

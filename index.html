@@ -561,6 +561,7 @@
 <nav>
   <a href="#map-section">Interactive Map</a>
   <a href="#german-origins-section">German Origins</a>
+  <a href="#tree-section">Family Tree</a>
   <a href="#timeline-section">Timeline</a>
   <a href="#family-section">Key Ancestors</a>
   <a href="#sources-section">Archives &amp; Sources</a>
@@ -1131,6 +1132,49 @@
       Church. Records after 1818 are simply &ldquo;Protestantisch.&rdquo; The family may have been Reformed members
       recorded in Lutheran parish books &mdash; a common practice in mixed areas.
     </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FAMILY TREE ═════════════════════════ -->
+<section id="tree-section">
+  <div class="section-label">Genealogy</div>
+  <h2>Schauss / Shouse Family Tree</h2>
+  <p style="color:var(--text-dim);margin-bottom:20px;max-width:760px;">
+    Ten generations from Eckweiler (c. 1560) to North Carolina (1900). Click any
+    person to see details, sources, and connections. Scroll to zoom, drag to pan.
+    The tree forks where the family split &mdash; one branch stayed in Albisheim,
+    the other emigrated to America in 1736.
+  </p>
+
+  <div class="tree-legend">
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#c9a84c"></div> German-born
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#4caf7d"></div> Stayed in Germany
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#e8703a"></div> Emigrated
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#4a90d9"></div> Born in America
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#8b6f47"></div> Connected Families
+    </div>
+  </div>
+
+  <div id="tree-container">
+    <svg id="tree-svg"></svg>
+    <div class="tree-controls">
+      <button id="tree-zoom-in" title="Zoom in">+</button>
+      <button id="tree-zoom-out" title="Zoom out">&minus;</button>
+      <button id="tree-reset" class="tree-reset" title="Reset view">Reset</button>
+    </div>
+    <div id="tree-detail" class="tree-detail">
+      <button class="tree-detail__close" id="tree-detail-close">&times;</button>
+      <div id="tree-detail-content"></div>
+    </div>
   </div>
 </section>
 

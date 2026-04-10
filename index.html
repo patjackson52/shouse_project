@@ -1178,6 +1178,81 @@
   </div>
 </section>
 
+<script>
+// ═══════════════════════════════ FAMILY TREE DATA ═══════════════════════
+const TREE_DATA = {
+  id: "hanss-schauss", name: "Han\u00df Schau\u00df", birth: "before 1600", birthPlace: "Eckweiler, Bad Kreuznach", death: "unknown", deathPlace: "", occupation: "", tag: "german",
+  marriage: { spouse: "Catharina Von Allenfeldt", spouseBirth: "c. 1560", spouseDeath: "Apr 5, 1609", date: "", place: "Eckweiler" },
+  sources: [{ label: "WikiTree \u2014 Melchior Schau\u00df", url: "https://www.wikitree.com/wiki/Schau%C3%9F-85" }],
+  children: [
+    {
+      id: "melchior-schauss", name: "Melchior Schau\u00df", birth: "Feb 24, 1595", birthPlace: "Eckweiler", death: "Jun 24, 1628", deathPlace: "Eckweiler", occupation: "", tag: "german",
+      marriage: { spouse: "Helena Ante\u00dfes", spouseBirth: "", spouseDeath: "", date: "Dec 4, 1621", place: "Eckweiler" },
+      sources: [{ label: "WikiTree", url: "https://www.wikitree.com/wiki/Schau%C3%9F-85" }, { label: "Eckweiler Kirchenbuch 1568\u20131798", url: "" }],
+      children: [
+        {
+          id: "johannes-schauss", name: "Johannes Schauss", birth: "c. Jul 23, 1620", birthPlace: "B\u00fcdingen, Lorraine", death: "c. Feb 27, 1674", deathPlace: "B\u00fcdingen", occupation: "", tag: "german",
+          marriage: { spouse: "Maria Magdalena Klein", spouseBirth: "1625", spouseDeath: "", date: "Jan 30, 1644", place: "Evangelische, Albisheim" },
+          sources: [{ label: "WikiTree", url: "https://www.wikitree.com/wiki/Schauss-18" }],
+          children: [
+            {
+              id: "hans-bernhardt", name: "Hans Bernhardt Schauss", birth: "c. 1650", birthPlace: "B\u00fcdingen", death: "Aug 31, 1720", deathPlace: "Albisheim", occupation: "", tag: "german",
+              marriage: { spouse: "Anna Margarethe Naass", spouseBirth: "Mar 1, 1657, Albisheim", spouseDeath: "Aug 31, 1720, Albisheim", date: "Apr 21, 1674", place: "Albisheim" },
+              sources: [{ label: "WikiTree", url: "https://www.wikitree.com/wiki/Schauss-17" }, { label: "Albisheim Kirchenbuch", url: "" }],
+              children: [
+                {
+                  id: "johann-conrad-sr", name: "Johann Conrad Schauss Sr.", birth: "Jan 2, 1675", birthPlace: "Albisheim", death: "Apr 27, 1734", deathPlace: "Albisheim", occupation: "", tag: "german",
+                  marriage: { spouse: "Anna Engle-Burgis Conrad", spouseBirth: "Oct 30, 1680, Albisheim", spouseDeath: "c. 1712, Albisheim", date: "Aug 29, 1699", place: "Evangelische, Albisheim" },
+                  sources: [{ label: "WikiTree", url: "https://www.wikitree.com/wiki/Schauss-16" }, { label: "FHL Microfilm 193,748", url: "" }, { label: "Weller Dissertation (2004)", url: "https://www.worldcat.org/title/781727046" }],
+                  children: [
+                    {
+                      id: "johann-adam", name: "Johann Adam Schauss", birth: "c. 1703/1704", birthPlace: "Immesheim, Pfalz", death: "Dec 12, 1770", deathPlace: "Bethania, NC", occupation: "Wheelwright & Miller", tag: "emigrated",
+                      badge: "Emigrated 1736 on Ship Harle",
+                      marriage: { spouse: "Maria Barbara Baum", spouseBirth: "Jan 8, 1707, Albisheim", spouseDeath: "before 1768, Easton, PA", date: "Jan 16, 1725", place: "Albisheim" },
+                      sources: [{ label: "WikiTree", url: "https://www.wikitree.com/wiki/Schauss-12" }, { label: "Ship Harle Passenger List (#94)", url: "https://www.olivetreegenealogy.com/ships/palship24.shtml" }, { label: "PA German Pioneers, Vol. 1", url: "" }, { label: "Weller Dissertation (2004)", url: "https://www.worldcat.org/title/781727046" }],
+                      children: [
+                        { id: "magdalena", name: "Maria Magdalena Margaretha", birth: "Sep 25, 1725", birthPlace: "Albisheim", death: "", deathPlace: "", tag: "emigrated", sources: [], children: [] },
+                        { id: "friedrich-christoph", name: "Friedrich Christoph Schauss", birth: "Apr 13, 1727", birthPlace: "Albisheim", death: "", deathPlace: "", tag: "emigrated", sources: [], children: [] },
+                        {
+                          id: "philip-nicolaus", name: "Philip Nicolaus Schauss", birth: "Dec 17, 1728", birthPlace: "Immesheim", death: "1810", deathPlace: "Stokes Co., NC", tag: "emigrated",
+                          marriage: { spouse: "Maria Catherine Beck", spouseBirth: "", spouseDeath: "", date: "Jul 19, 1748", place: "Jordan Ev. Lutheran Church" },
+                          sources: [{ label: "Geni.com", url: "https://www.geni.com/people/Philip-Nicolaus-Schauss/6000000027376082268" }], children: []
+                        },
+                        { id: "anna-maria-gertraud", name: "Anna Maria Gertraud", birth: "Jul 18, 1731", birthPlace: "Immesheim", death: "", deathPlace: "", tag: "emigrated", sources: [], children: [] },
+                        { id: "johann-show", name: "Johann (Show)", birth: "Jan 7, 1737", birthPlace: "Pennsylvania", death: "", deathPlace: "", tag: "american", sources: [], children: [] },
+                        { id: "conrad", name: "Conrad Schauss", birth: "Jan 7, 1738", birthPlace: "Falkner Swamp, PA", death: "", deathPlace: "", tag: "american", sources: [], children: [] },
+                        { id: "anna-margaretha-child", name: "Anna Margaretha Schauss", birth: "Jul 18, 1740", birthPlace: "Falkner Swamp, PA", death: "", deathPlace: "", tag: "american", sources: [], children: [] },
+                        { id: "heinrich-sr", name: "Heinrich Schauss Sr.", birth: "1741", birthPlace: "Falkner Swamp, PA", death: "", deathPlace: "", tag: "american", sources: [], children: [] },
+                        { id: "gottlieb", name: "Gottlieb Schauss", birth: "Dec 14, 1744", birthPlace: "Bethlehem, PA", death: "", deathPlace: "", tag: "american", sources: [], children: [] },
+                        { id: "beniginia", name: "Beniginia Schauss", birth: "Dec 1746", birthPlace: "Bethlehem, PA", death: "", deathPlace: "", tag: "american", sources: [], children: [] },
+                        { id: "christian", name: "Christian Shouse", birth: "Jul 11, 1748", birthPlace: "Whitehall, Bucks Co., PA", death: "", deathPlace: "", tag: "american", sources: [], children: [] }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  id: "johannes-1678", name: "Johannes Schauss", birth: "Feb 17, 1678", birthPlace: "Albisheim", death: "", deathPlace: "", occupation: "", tag: "german",
+                  marriage: { spouse: "Maria Barbara Meyers", spouseBirth: "", spouseDeath: "", date: "Apr 14, 1705", place: "Albisheim" },
+                  sources: [{ label: "Albisheim Kirchenbuch", url: "" }], children: []
+                },
+                { id: "anna-margaretha-1680", name: "Anna Margaretha Schauss", birth: "Oct 31, 1680", birthPlace: "Albisheim", death: "", deathPlace: "", tag: "german", sources: [], children: [] },
+                { id: "hans-adam-1683", name: "Hans Adam Schauss", birth: "Jun 10, 1683", birthPlace: "Albisheim", death: "", deathPlace: "", tag: "german", sources: [], children: [] },
+                {
+                  id: "philipp-heinrich", name: "Philipp Heinrich Schauss", birth: "Feb 3, 1686", birthPlace: "Albisheim", death: "Apr 11, 1765", deathPlace: "Albisheim", occupation: "Linen Weaver & Mayor of Albisheim", tag: "stayed",
+                  badge: "Stayed in Germany \u2014 Mayor of Albisheim",
+                  marriage: { spouse: "Anna Hedwig Waltherin", spouseBirth: "", spouseDeath: "", date: "", place: "Albisheim" },
+                  sources: [{ label: "Ancestry", url: "https://www.ancestry.com/genealogy/records/phillip-heinrich-schauss-24-1kycqf4" }, { label: "Ortsfamilienbuch Albisheim (Uhrig, 2009)", url: "" }],
+                  children: []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
+</script>
 <!-- ═══════════════════════════════ TIMELINE ════════════════════════════ -->
 <section id="timeline-section">
   <div class="section-label">Chronology</div>

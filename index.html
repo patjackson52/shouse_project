@@ -1253,6 +1253,238 @@ const TREE_DATA = {
   ]
 };
 </script>
+<script>
+// ═══════════════════════════════ FAMILY TREE RENDERER ══════════════════
+(function () {
+  const TAG_COLORS = {
+    german:    '#c9a84c',
+    stayed:    '#4caf7d',
+    emigrated: '#e8703a',
+    american:  '#4a90d9',
+    connected: '#8b6f47'
+  };
+
+  const NODE_W = 200, NODE_H = 70, SPOUSE_W = 160, SPOUSE_H = 55;
+  const container = document.getElementById('tree-container');
+  const svg = d3.select('#tree-svg');
+  const g = svg.append('g').attr('id', 'tree-g');
+
+  // ── Zoom ────────────────────────────────────────────────────
+  const zoom = d3.zoom()
+    .scaleExtent([0.15, 3])
+    .on('zoom', (e) => g.attr('transform', e.transform));
+  svg.call(zoom);
+
+  // ── Zoom controls ───────────────────────────────────────────
+  document.getElementById('tree-zoom-in').addEventListener('click', () => svg.transition().duration(300).call(zoom.scaleBy, 1.4));
+  document.getElementById('tree-zoom-out').addEventListener('click', () => svg.transition().duration(300).call(zoom.scaleBy, 0.7));
+  document.getElementById('tree-reset').addEventListener('click', resetView);
+
+  // ── Detail panel ────────────────────────────────────────────
+  const detailEl = document.getElementById('tree-detail');
+  const detailContent = document.getElementById('tree-detail-content');
+  document.getElementById('tree-detail-close').addEventListener('click', () => detailEl.classList.remove('active'));
+  svg.on('click', (e) => { if (e.target === svg.node()) detailEl.classList.remove('active'); });
+
+  function showDetail(d) {
+    const p = d.data;
+    let html = '<h3>' + p.name + '</h3>';
+    if (p.badge) {
+      const cls = p.tag === 'stayed' ? 'stayed' : p.tag === 'emigrated' ? 'emigrated' : p.tag === 'american' ? 'american' : 'german';
+      html += '<div class="tree-detail__tag tree-detail__tag--' + cls + '">' + p.badge + '</div>';
+    } else if (p.tag) {
+      const labels = { german: 'German-born', stayed: 'Stayed in Germany', emigrated: 'Emigrated to America', american: 'Born in America' };
+      const cls = p.tag;
+      if (labels[cls]) html += '<div class="tree-detail__tag tree-detail__tag--' + cls + '">' + labels[cls] + '</div>';
+    }
+    html += '<p><strong>Born:</strong> ' + (p.birth || 'unknown') + (p.birthPlace ? ', ' + p.birthPlace : '') + '</p>';
+    if (p.death) html += '<p><strong>Died:</strong> ' + p.death + (p.deathPlace ? ', ' + p.deathPlace : '') + '</p>';
+    if (p.occupation) html += '<p><strong>Occupation:</strong> ' + p.occupation + '</p>';
+    if (p.marriage) {
+      html += '<p style="margin-top:8px;"><strong>Marriage:</strong></p>';
+      html += '<p>' + p.marriage.spouse;
+      if (p.marriage.date) html += '<br>' + p.marriage.date;
+      if (p.marriage.place) html += ', ' + p.marriage.place;
+      html += '</p>';
+      if (p.marriage.spouseBirth) html += '<p style="font-size:0.78rem;"><em>Spouse b. ' + p.marriage.spouseBirth + '</em></p>';
+    }
+    if (p.sources && p.sources.length) {
+      html += '<p style="margin-top:10px;"><strong>Sources:</strong></p>';
+      p.sources.forEach(function(s) {
+        html += s.url ? '<p>\u2022 <a href="' + s.url + '" target="_blank">' + s.label + '</a></p>' : '<p>\u2022 ' + s.label + '</p>';
+      });
+    }
+    detailContent.innerHTML = html;
+    detailEl.classList.add('active');
+  }
+
+  // ── Build hierarchy ─────────────────────────────────────────
+  const root = d3.hierarchy(TREE_DATA);
+
+  // Collapse all children beyond depth 3 (generations 1-4 visible)
+  root.descendants().forEach(function(d) {
+    if (d.depth >= 3 && d.children) {
+      d._children = d.children;
+      d.children = null;
+    }
+  });
+
+  const treeLayout = d3.tree().nodeSize([240, 140]);
+
+  function update(source) {
+    treeLayout(root);
+    var nodes = root.descendants();
+    var links = root.links();
+    var duration = 400;
+
+    // ── Links ──────────────────────────────────────────────
+    var link = g.selectAll('.tree-link').data(links, function(d) { return d.target.data.id; });
+
+    var linkEnter = link.enter().append('path')
+      .attr('class', 'tree-link')
+      .attr('fill', 'none')
+      .attr('stroke', '#5a4a30')
+      .attr('stroke-width', 1.5)
+      .attr('d', function() {
+        var o = { x: source.x0 || source.x, y: source.y0 || source.y };
+        return diagonal({ source: o, target: o });
+      });
+
+    link.merge(linkEnter).transition().duration(duration)
+      .attr('d', function(d) { return diagonal(d); });
+
+    link.exit().transition().duration(duration)
+      .attr('d', function() {
+        var o = { x: source.x, y: source.y };
+        return diagonal({ source: o, target: o });
+      }).remove();
+
+    // ── Nodes ──────────────────────────────────────────────
+    var node = g.selectAll('.tree-node').data(nodes, function(d) { return d.data.id; });
+
+    var nodeEnter = node.enter().append('g')
+      .attr('class', 'tree-node')
+      .attr('transform', 'translate(' + (source.x0 || source.x) + ',' + (source.y0 || source.y) + ')')
+      .attr('cursor', 'pointer')
+      .on('click', function(e, d) {
+        e.stopPropagation();
+        if (d.children) { d._children = d.children; d.children = null; }
+        else if (d._children) { d.children = d._children; d._children = null; }
+        update(d);
+        showDetail(d);
+      });
+
+    nodeEnter.append('rect')
+      .attr('x', -NODE_W / 2).attr('y', -NODE_H / 2)
+      .attr('width', NODE_W).attr('height', NODE_H)
+      .attr('rx', 6).attr('ry', 6)
+      .attr('fill', '#1c1916')
+      .attr('stroke', function(d) { return TAG_COLORS[d.data.tag] || '#5a4a30'; })
+      .attr('stroke-width', 2);
+
+    nodeEnter.append('text')
+      .attr('text-anchor', 'middle').attr('y', -12)
+      .attr('fill', '#e8c97a').attr('font-size', '12px').attr('font-weight', 'bold')
+      .text(function(d) { return d.data.name.length > 24 ? d.data.name.slice(0, 22) + '\u2026' : d.data.name; });
+
+    nodeEnter.append('text')
+      .attr('text-anchor', 'middle').attr('y', 6)
+      .attr('fill', '#a89880').attr('font-size', '10px')
+      .text(function(d) {
+        var t = '';
+        if (d.data.birth) t += 'b. ' + d.data.birth;
+        if (d.data.death) t += ' \u2014 d. ' + d.data.death;
+        return t.length > 32 ? t.slice(0, 30) + '\u2026' : t;
+      });
+
+    nodeEnter.append('text')
+      .attr('text-anchor', 'middle').attr('y', 22)
+      .attr('fill', '#8b6f47').attr('font-size', '9px')
+      .text(function(d) {
+        var p = d.data.birthPlace || '';
+        return p.length > 28 ? p.slice(0, 26) + '\u2026' : p;
+      });
+
+    // Expand/collapse indicator
+    nodeEnter.append('text')
+      .attr('class', 'expand-indicator')
+      .attr('text-anchor', 'middle').attr('y', NODE_H / 2 + 14)
+      .attr('fill', '#c9a84c').attr('font-size', '10px')
+      .text(function(d) { return d._children ? '\u25BC' : ''; });
+
+    // Marriage spouse label
+    nodeEnter.each(function(d) {
+      if (d.data.marriage && d.data.marriage.spouse) {
+        var sel = d3.select(this);
+        sel.append('rect')
+          .attr('x', NODE_W / 2 + 8).attr('y', -SPOUSE_H / 2)
+          .attr('width', SPOUSE_W).attr('height', SPOUSE_H)
+          .attr('rx', 4).attr('ry', 4)
+          .attr('fill', '#1c1916')
+          .attr('stroke', '#8b6f47')
+          .attr('stroke-width', 1)
+          .attr('stroke-dasharray', '4,3');
+
+        sel.append('line')
+          .attr('x1', NODE_W / 2).attr('y1', 0)
+          .attr('x2', NODE_W / 2 + 8).attr('y2', 0)
+          .attr('stroke', '#c9a84c').attr('stroke-width', 1).attr('stroke-dasharray', '3,2');
+
+        sel.append('text')
+          .attr('x', NODE_W / 2 + 8 + SPOUSE_W / 2).attr('y', -6)
+          .attr('text-anchor', 'middle')
+          .attr('fill', '#a89880').attr('font-size', '10px')
+          .text(d.data.marriage.spouse.length > 20 ? d.data.marriage.spouse.slice(0, 18) + '\u2026' : d.data.marriage.spouse);
+
+        sel.append('text')
+          .attr('x', NODE_W / 2 + 8 + SPOUSE_W / 2).attr('y', 10)
+          .attr('text-anchor', 'middle')
+          .attr('fill', '#8b6f47').attr('font-size', '9px')
+          .text(d.data.marriage.date ? 'm. ' + d.data.marriage.date : '');
+      }
+    });
+
+    // Update positions
+    var nodeUpdate = nodeEnter.merge(node);
+    nodeUpdate.transition().duration(duration)
+      .attr('transform', function(d) { return 'translate(' + d.x + ',' + d.y + ')'; });
+
+    // Update expand indicator
+    nodeUpdate.select('.expand-indicator')
+      .text(function(d) { return d._children ? '\u25BC' : ''; });
+
+    // Remove exiting nodes
+    node.exit().transition().duration(duration)
+      .attr('transform', 'translate(' + source.x + ',' + source.y + ')')
+      .attr('opacity', 0).remove();
+
+    // Store positions for transitions
+    nodes.forEach(function(d) { d.x0 = d.x; d.y0 = d.y; });
+  }
+
+  function diagonal(d) {
+    return 'M' + d.source.x + ',' + (d.source.y + NODE_H / 2) +
+           'C' + d.source.x + ',' + ((d.source.y + d.target.y) / 2) +
+           ' ' + d.target.x + ',' + ((d.source.y + d.target.y) / 2) +
+           ' ' + d.target.x + ',' + (d.target.y - NODE_H / 2);
+  }
+
+  function resetView() {
+    var target = root.descendants().find(function(d) { return d.data.id === 'hans-bernhardt'; }) || root;
+    var w = container.clientWidth;
+    var t = d3.zoomIdentity.translate(w / 2 - (target.x || 0), 80).scale(0.85);
+    svg.transition().duration(600).call(zoom.transform, t);
+  }
+
+  // Initial render
+  root.x0 = 0;
+  root.y0 = 0;
+  update(root);
+
+  // Initial view — center on tree
+  setTimeout(resetView, 100);
+})();
+</script>
 <!-- ═══════════════════════════════ TIMELINE ════════════════════════════ -->
 <section id="timeline-section">
   <div class="section-label">Chronology</div>

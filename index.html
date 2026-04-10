@@ -1812,7 +1812,7 @@ const TREE_DATA = {
 <script>
 (function () {
   // Dark tile layer (CartoDB Dark Matter)
-  const map = L.map('map', { zoomControl: true }).setView([38.5, -77], 5);
+  const map = L.map('map', { zoomControl: true }).setView([42, -30], 3);
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
@@ -1858,14 +1858,14 @@ const TREE_DATA = {
       title: 'Albisheim an der Pfrimm',
       historic: 'Donnersbergkreis, Rhineland-Palatinate',
       dates: 'Family seat 1674–present · Pop. 1,892',
-      body: 'Hans Bernhardt Schauss married Anna Margarethe Naass here Apr 21, 1674, establishing the family. Philipp Heinrich Schauss (1686–1765) served as Mayor & linen weaver. Johann Adam emigrated 1736 on the Harle. Parish records from 1641 with gaps.'
+      body: 'Hans Bernhardt Schauss married Anna Margarethe Naass here Apr 21, 1674, establishing the family. Philipp Heinrich Schauss (1686\u20131765) served as Mayor & linen weaver. Johann Adam emigrated 1736 on the Harle. Parish records from 1641 with gaps. See: Ortsfamilienbuch "Die Familien Albisheims 1641\u20131900" by Detlef Uhrig (2009). Contact: Geschichts- und Heimatverein Albisheim e.V., Pfrimmtalstra\u00dfe 9.'
     },
     {
       ll: [49.7667, 7.7167],
       title: 'Eckweiler',
       historic: 'Bad Kreuznach district, Rheinland-Pfalz',
       dates: 'Earliest Schauss origins · before 1600',
-      body: 'Earliest documented Schauss location. Hanß Schauß (bef. 1600) & Catharina Von Allenfeldt lived here. Son Melchior Schauß (1595–1628) married Helena Anteßes here 1621. Church records survive from 1568. Village became Protestant during the Reformation.'
+      body: 'Earliest documented Schauss location. Han\u00df Schau\u00df (bef. 1600) & Catharina Von Allenfeldt lived here. Son Melchior Schau\u00df (1595\u20131628) married Helena Ante\u00dfes here 1621. Church records survive from 1568. FHL Microfilms: 489885 (1632\u20131675) & 493211 (1760\u20131798), Staatsarchiv Koblenz.'
     },
     {
       ll: [50.0, 7.85],
@@ -1899,15 +1899,36 @@ const TREE_DATA = {
       ll: [39.9526, -75.1652],
       title: 'Philadelphia, PA',
       historic: 'Port of Philadelphia',
-      dates: 'Arrival c. 1751',
-      body: 'Primary port of entry for Palatine German immigrants. Male immigrants signed oaths of allegiance at the courthouse. The Schauss family entered America here before moving to Lancaster County.'
+      dates: 'Arrival Sep 1, 1736',
+      body: 'Johann Adam Schauss arrived Sep 1, 1736 on the Ship Harle (Passenger #94: "Johan Adam Shans", age 32). Primary port of entry for Palatine Germans. Male immigrants signed oaths of allegiance at the Philadelphia courthouse.'
     },
     {
       ll: [40.0468, -76.1784],
       title: 'Lancaster County, PA',
       historic: 'Pennsylvania German settlement area',
-      dates: '1751–1755',
+      dates: '1736–c. 1754',
       body: 'Temporary settlement before the move to North Carolina. Major hub for German-speaking immigrants. Here the Schauss family likely had contact with Moravian missionaries recruiting settlers for Wachovia.'
+    },
+    {
+      ll: [40.27, -75.58],
+      title: 'Falkner Swamp, PA',
+      historic: 'Montgomery County, Pennsylvania',
+      dates: '1737–1741 · 5 children born here',
+      body: 'German Reformed community where Johann Adam Schauss settled after arrival. Children Conrad (1738), Anna Margaretha (1740), and Heinrich Sr. (1741) were born here. Also known as New Hanover Township.'
+    },
+    {
+      ll: [40.66, -75.49],
+      title: 'Whitehall, PA',
+      historic: 'Bucks County, Pennsylvania',
+      dates: '1748 · Christian Shouse born',
+      body: 'Christian Shouse, the youngest child of Johann Adam, born Jul 11, 1748. By this time the family name was already being Anglicized to "Shouse" in some records.'
+    },
+    {
+      ll: [40.69, -75.22],
+      title: 'Easton, PA',
+      historic: 'Northampton County, Pennsylvania',
+      dates: 'Maria Barbara Baum died here before 1768',
+      body: 'Maria Barbara (Baum) Schauss, wife of Johann Adam, died here before 1768 at approximately age 60. She was born Jan 8, 1707 in Albisheim and emigrated with her husband in 1736.'
     },
     {
       ll: [36.1865, -80.3092],
@@ -2125,11 +2146,29 @@ const TREE_DATA = {
       dates: 'Genealogy society · 850+ members',
       body: 'Palatinate genealogy society with archive of 8,500+ publications. Nearly 1 million family name cards (Familiennamenkartei) — search for Schauss/Schauß. Also maintains a Müllerdatenbank (Miller Database) relevant to Johann Adam Schauss.'
     }
+    ,{
+      ll: [49.4447, 7.7689],
+      title: 'Pfalzbibliothek Kaiserslautern',
+      historic: 'Palatinate Library, Kaiserslautern',
+      dates: 'Ortsfamilienbuch & church book transcripts',
+      body: 'Holds the definitive Ortsfamilienbuch "Die Familien Albisheims 1641\u20131900" by Detlef Uhrig (catalog 1b 6809, 2 vols). Also holds transcripts of nearly 400 church and family books for the entire Palatinate, available for loan.'
+    }
   ];
 
   germanRepos.forEach(r => {
     L.marker(r.ll, { icon: makeIcon(GREEN, 13) })
       .bindPopup(popup(r.title, r.historic, r.dates, r.body))
+      .addTo(map);
+  });
+
+  // ── WAYPOINT MARKERS (muted orange) ─────────────────────────
+  const ORANGE_MUTED = '#b87040';
+  [
+    { ll: [51.9225, 4.4792], title: 'Rotterdam', body: 'Embarkation port for Palatine emigrants. Ships departed down the Rhine to Rotterdam before crossing to England.' },
+    { ll: [50.7636, -1.2980], title: 'Cowes, Isle of Wight', body: 'Last port before Atlantic crossing. Ships stopped to take on provisions and additional passengers.' }
+  ].forEach(function(w) {
+    L.marker(w.ll, { icon: makeIcon(ORANGE_MUTED, 10) })
+      .bindPopup(popup(w.title, 'Waypoint', '', w.body))
       .addTo(map);
   });
 
@@ -2148,9 +2187,9 @@ const TREE_DATA = {
 
   L.polyline(germanPath, {
     color: '#c9a84c',
-    weight: 2,
+    weight: 3,
     opacity: 0.6,
-    dashArray: '6, 8',
+    dashArray: '3, 6',
     lineJoin: 'round'
   }).addTo(map)
     .bindPopup('<div class="popup-title">German Migration</div><div class="popup-body">Schauss family movement within Germany: Eckweiler (before 1600) → Büdingen (c. 1620) → Albisheim (1674 onward)</div>');
@@ -2159,7 +2198,7 @@ const TREE_DATA = {
   const migrationPath = [
     [49.5847, 8.1147],   // Albisheim
     [51.9225, 4.4792],   // Rotterdam (waypoint)
-    [51.5074, -0.1278],  // London (waypoint)
+    [50.7636, -1.2980],  // Cowes, Isle of Wight (waypoint)
     [39.9526, -75.1652], // Philadelphia
     [40.0468, -76.1784], // Lancaster County
     [36.9741, -79.0558], // Piedmont waypoint
@@ -2175,15 +2214,26 @@ const TREE_DATA = {
   }).addTo(map)
     .bindPopup('<div class="popup-title">Transatlantic Migration</div><div class="popup-body">Johann Adam Schauss: Albisheim → Rotterdam → London → Philadelphia (arrived Sep 1, 1736 on the <em>Harle</em>) → Pennsylvania → Bethania, NC (c. 1754)</div>');
 
-  // ── ATLANTIC OCEAN arc (approximate great circle) ───────────────
-  L.marker([40.5, -40], {
-    icon: L.divIcon({
-      className: '',
-      html: '<div style="color:#e8703a;font-size:10px;letter-spacing:0.1em;opacity:0.7;white-space:nowrap;text-shadow:1px 1px 2px #000">— Atlantic crossing · Sep 1, 1736 · Ship Harle —</div>',
-      iconSize: [260, 18],
-      iconAnchor: [130, 9]
-    })
-  }).addTo(map);
+  // ── SHIP HARLE MARKER (mid-Atlantic) ────────────────────────
+  var shipIcon = L.divIcon({
+    className: '',
+    html: '<div style="font-size:20px;text-shadow:0 0 6px #e8703a88;" title="Ship Harle">\u26F5</div>',
+    iconSize: [24, 24],
+    iconAnchor: [12, 12],
+    popupAnchor: [0, -14]
+  });
+  L.marker([42.0, -35.0], { icon: shipIcon })
+    .bindPopup('<div class="popup-title">Ship Harle of London</div>' +
+      '<div class="popup-dates">Arrived Philadelphia \u2014 September 1, 1736</div>' +
+      '<div class="popup-body">' +
+      '<strong>Master:</strong> Ralph Harle<br>' +
+      '<strong>Route:</strong> Rotterdam \u2192 Cowes \u2192 Philadelphia<br>' +
+      '<strong>Passengers:</strong> 388 total (151 qualified foreigners)<br><br>' +
+      '<strong style="color:#e8c97a;">Passenger #94: \u201cJohan Adam Shans\u201d</strong><br>' +
+      'Age 32 \u2014 signed oath as \u201cJohann Adam Schauss\u201d<br><br>' +
+      '<em style="font-size:0.75rem;">Source: Pennsylvania German Pioneers, Vol. 1 (Strassburger, 1980)</em>' +
+      '</div>')
+    .addTo(map);
 
 })();
 </script>

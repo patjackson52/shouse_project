@@ -8,6 +8,8 @@
   <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- D3.js -->
+  <script src="https://unpkg.com/d3@7/dist/d3.min.js"></script>
 
   <style>
     /* ── Reset & base ───────────────────────────────────────────── */
@@ -420,6 +422,116 @@
       font-weight: bold;
     }
 
+    /* ── Family Tree ────────────────────────────────────────────── */
+    #tree-section { padding-bottom: 20px; }
+    #tree-container {
+      position: relative;
+      width: 100%;
+      height: 700px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    #tree-container svg { width: 100%; height: 100%; }
+    .tree-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .tree-legend .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+    }
+    .tree-legend .legend-dot {
+      width: 13px; height: 13px;
+      border-radius: 3px;
+      border: 2px solid rgba(255,255,255,0.25);
+      flex-shrink: 0;
+    }
+    .tree-controls {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      display: flex;
+      gap: 6px;
+      z-index: 10;
+    }
+    .tree-controls button {
+      width: 32px; height: 32px;
+      background: var(--bg2);
+      color: var(--gold);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .tree-controls button:hover { background: var(--bg3); }
+    .tree-controls .tree-reset {
+      width: auto;
+      padding: 0 10px;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .tree-detail {
+      position: absolute;
+      bottom: 14px;
+      right: 60px;
+      width: 320px;
+      max-height: 400px;
+      overflow-y: auto;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 18px;
+      z-index: 20;
+      display: none;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.6);
+    }
+    .tree-detail.active { display: block; }
+    .tree-detail__close {
+      position: absolute;
+      top: 8px; right: 10px;
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    .tree-detail__close:hover { color: var(--gold); }
+    .tree-detail h3 {
+      font-size: 1rem;
+      color: var(--gold-lt);
+      font-weight: normal;
+      margin-bottom: 4px;
+      padding-right: 24px;
+    }
+    .tree-detail__tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      padding: 2px 7px;
+      border-radius: 3px;
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+    }
+    .tree-detail__tag--stayed { background: #2a3a2a; color: #6cbf6c; }
+    .tree-detail__tag--emigrated { background: #3a2a2a; color: #d9845a; }
+    .tree-detail__tag--german { background: #3a3520; color: var(--gold); }
+    .tree-detail__tag--american { background: #1e2a3a; color: #4a90d9; }
+    .tree-detail p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 6px; }
+    .tree-detail strong { color: var(--text); }
+    .tree-detail a { color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--sepia); }
+    .tree-detail a:hover { color: var(--gold-lt); }
+
     /* ── Footer ─────────────────────────────────────────────────── */
     footer {
       text-align: center;
@@ -742,9 +854,12 @@
       <h3>FamilySearch</h3>
       <div class="cc-type">Online &middot; Free Access</div>
       <p>
-        LDS-filmed Albisheim records with batch numbers. Collection: &ldquo;Rhineland-Palatinate Church
-        Record Extractions and Family Registers, 1600&ndash;1925.&rdquo;<br>
-        <a href="https://www.familysearch.org/en/wiki/Albisheim,_Bayern_(Pfalz),_Germany" target="_blank">Albisheim Wiki Page</a>
+        LDS-filmed Albisheim records. <strong>FHL Microfilm 193,748</strong> contains Evangelische
+        church marriage records (confirmed source for the 1699 Schauss-Conrad marriage). Collection:
+        &ldquo;Rhineland-Palatinate Church Record Extractions and Family Registers, 1600&ndash;1925&rdquo;
+        (106,564 images, browsable free). Source: PRFK archives, Ludwigshafen.<br>
+        <a href="https://www.familysearch.org/en/wiki/Albisheim,_Bayern_(Pfalz),_Germany" target="_blank">Albisheim Wiki Page</a> &middot;
+        <a href="https://www.familysearch.org/en/search/collection/1475962" target="_blank">Browse Collection</a>
       </p>
     </div>
 
@@ -765,8 +880,84 @@
       <p>
         Church records from Eckweiler covering 1568&ndash;1798 &mdash; predating the Albisheim records.
         Contains the earliest Schau&szlig; baptisms, marriages, and burials.
-        Han&szlig; and Melchior Schau&szlig; appear in these records.<br>
+        FamilySearch microfilms: <strong>Film 489885</strong> (1632&ndash;1675) and <strong>Film 493211</strong>
+        (1760&ndash;1798). Manuscripts at Staatsarchiv Koblenz.<br>
         <a href="https://www.werelate.org/wiki/Source:Eckweiler,_Rheinland-Pfalz,_Germany._Kirchenbuch,_1568-1798" target="_blank">WeRelate source page</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Ortsfamilienbuch - Critical Resource -->
+  <h3 style="color:var(--gold-lt);font-weight:normal;font-size:1.1rem;margin:40px 0 8px;">The Definitive Resource: Ortsfamilienbuch</h3>
+  <div style="background:var(--bg2);border:2px solid var(--gold);border-radius:6px;padding:20px;margin-bottom:20px;">
+    <h3 style="color:var(--gold-lt);font-weight:normal;font-size:1rem;margin-bottom:8px;">
+      &ldquo;Die Familien Albisheims: 1641&ndash;1900, ihre Genealogie und Geschichte&rdquo;
+    </h3>
+    <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.7;">
+      <strong style="color:var(--gold);">Author:</strong> Detlef Uhrig &nbsp;&middot;&nbsp;
+      <strong style="color:var(--gold);">Published:</strong> 2009, Kaiserslautern &nbsp;&middot;&nbsp;
+      <strong style="color:var(--gold);">Format:</strong> 2 volumes &nbsp;&middot;&nbsp;
+      <strong style="color:var(--gold);">Catalog #:</strong> 1b 6809 (1+2)<br><br>
+      This is the <strong>definitive genealogical resource</strong> for Albisheim. An Ortsfamilienbuch
+      (village family book) compiles <em>all</em> births, marriages, and deaths from parish records
+      into family groups for the entire village across 259 years. <strong>Every Schauss family member
+      recorded in Albisheim from 1641 to 1900 should appear in this book</strong> &mdash; including the
+      descendants of Philipp Heinrich Schauss (Mayor) who stayed in Germany after 1736.<br><br>
+      <strong style="color:var(--gold);">Where to consult:</strong><br>
+      &bull; <strong>Pfalzbibliothek</strong> (Palatinate Library), Kaiserslautern &mdash;
+        <a href="https://www.pfalzbibliothek.de/bestand-und-schwerpunkte/kirchenbuecher/" target="_blank"
+        style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--sepia);">pfalzbibliothek.de</a><br>
+      &bull; <strong>Geschichts- und Heimatverein Albisheim e.V.</strong> (History &amp; Heritage Society),
+        Pfrimmtalstra&szlig;e 9, 67308 Albisheim. Chairman: Ralf Petri &mdash;
+        <a href="https://albisheim.de/v2/dorfleben/vereine/geschichts-und-heimatverein/" target="_blank"
+        style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--sepia);">albisheim.de</a>
+    </p>
+  </div>
+
+  <!-- Present-Day Contact -->
+  <h3 style="color:var(--gold-lt);font-weight:normal;font-size:1.1rem;margin:32px 0 8px;">Present-Day Contacts in Germany</h3>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <h3>Geschichts- und Heimatverein Albisheim e.V.</h3>
+      <div class="cc-type">Local History Society &middot; Albisheim</div>
+      <p>
+        The history and heritage association of Albisheim. Holds a copy of the Ortsfamilienbuch.
+        Organizes archaeological events and historical research. Registered association (VR 11771,
+        Amtsgericht Kaiserslautern).<br>
+        <strong>Address:</strong> Pfrimmtalstra&szlig;e 9, 67308 Albisheim<br>
+        <strong>Chairman:</strong> Ralf Petri<br>
+        <a href="https://albisheim.de/v2/dorfleben/vereine/geschichts-und-heimatverein/" target="_blank">Official page</a>
+      </p>
+    </div>
+
+    <div class="contact-card">
+      <h3>Pfalzbibliothek Kaiserslautern</h3>
+      <div class="cc-type">Palatinate Library &middot; Kaiserslautern</div>
+      <p>
+        Holds transcripts of nearly 400 church books and family books for the entire Palatinate,
+        available for loan. The Albisheim Ortsfamilienbuch (catalog # 1b 6809) is available here.
+        Also holds Detlef Uhrig&rsquo;s study of the Albisheim Lutheran Church, 1641&ndash;1798.<br>
+        <a href="https://www.pfalzbibliothek.de/" target="_blank">pfalzbibliothek.de</a>
+      </p>
+    </div>
+
+    <div class="contact-card">
+      <h3>Institut f&uuml;r pf&auml;lzische Geschichte</h3>
+      <div class="cc-type">Institute for Palatinate History</div>
+      <p>
+        Academic institute with a library cataloging the Geschichts- und Heimatverein Albisheim&rsquo;s
+        publications. Their catalog includes Albisheim historical works.<br>
+        <a href="https://opac.pfalzgeschichte.de/" target="_blank">Library catalog</a>
+      </p>
+    </div>
+
+    <div class="contact-card">
+      <h3>Protestantische Kirchengemeinde Albisheim</h3>
+      <div class="cc-type">Protestant Parish &middot; Active Congregation</div>
+      <p>
+        The still-active Protestant parish of Albisheim. The Peterskirche at Kirchgasse 14 continues
+        to serve the community. May have knowledge of historic parish records and local family histories.<br>
+        <a href="https://albisheim.de/v2/dorfleben/einrichtungen/protestantische-kirchengemeinde/" target="_blank">Parish page</a>
       </p>
     </div>
   </div>
@@ -828,6 +1019,105 @@
     <li>Do Schauss/Schau&szlig; descendants still live in the Albisheim/Donnersbergkreis area today?</li>
     <li>What do the Eckweiler church records (1568&ndash;1798) reveal about the earliest Schau&szlig; generations beyond what&rsquo;s currently known?</li>
   </ol>
+
+  <!-- Ship Harle & Emigration -->
+  <h3 style="color:var(--gold-lt);font-weight:normal;font-size:1.1rem;margin:40px 0 8px;">The Ship <em>Harle</em> &mdash; Emigration Record</h3>
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:18px;margin-bottom:20px;">
+    <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.7;">
+      <strong style="color:var(--gold-lt);">Ship:</strong> Harle of London &nbsp;&middot;&nbsp;
+      <strong style="color:var(--gold-lt);">Master:</strong> Ralph Harle &nbsp;&middot;&nbsp;
+      <strong style="color:var(--gold-lt);">Route:</strong> Rotterdam &rarr; Cowes &rarr; Philadelphia &nbsp;&middot;&nbsp;
+      <strong style="color:var(--gold-lt);">Arrival:</strong> September 1, 1736<br>
+      <strong style="color:var(--gold-lt);">Passengers:</strong> 151 foreigners from the Palatinate qualified, 388 total including families<br><br>
+      <strong style="color:var(--gold);">Passenger #94: &ldquo;Johan Adam Shans&rdquo;</strong> &mdash; listed age 32.
+      This is Johann Adam Schauss of Albisheim/Immesheim. He signed his full name &ldquo;Johann Adam Schauss&rdquo;
+      on the oath of allegiance at the Philadelphia courthouse. His wife Maria Barbara Baum and
+      their four children born in Germany (ages ~11, 9, 8, and 5) traveled with him.<br><br>
+      <strong style="color:var(--text-dim);">Source:</strong> <em>Pennsylvania German Pioneers</em> by Ralph Beaver Strassburger, LL.D., Vol. 1
+      (Baltimore: Genealogical Publishing Co., 1980). Also: PA State Archives Record Group-26,
+      &ldquo;Names of Foreigners who Took the Oath of Allegiance, 1727&ndash;1775.&rdquo;<br>
+      <a href="https://www.olivetreegenealogy.com/ships/palship24.shtml" target="_blank" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--sepia);">Olive Tree Genealogy &mdash; Ship Harle Passenger List</a> &middot;
+      <a href="https://www.immigrantships.net/v4/1700v4/harle17360901.html" target="_blank" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--sepia);">Immigrant Ships &mdash; Full List</a>
+    </p>
+  </div>
+
+  <!-- Complete Children of Johann Adam -->
+  <h3 style="color:var(--gold-lt);font-weight:normal;font-size:1.1rem;margin:32px 0 8px;">Children of Johann Adam Schauss &amp; Maria Barbara Baum</h3>
+  <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:12px;">
+    Married January 16, 1725 in Albisheim. Johann Adam was a wheelwright and miller (&ldquo;Klein M&uuml;hle&rdquo;).
+    First four children born in Germany, remaining seven born in Pennsylvania after emigration.
+  </p>
+  <div style="overflow-x:auto;">
+  <table class="gen-table">
+    <thead>
+      <tr><th>#</th><th>Name</th><th>Born</th><th>Birthplace</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td class="name-cell">Maria Magdalena Margaretha</td><td>Sep 25, 1725</td><td>Albisheim, Pfalz</td><td>Born in Germany</td></tr>
+      <tr><td>2</td><td class="name-cell">Friedrich Christoph</td><td>Apr 13, 1727</td><td>Albisheim / Immesheim</td><td>Born in Germany</td></tr>
+      <tr><td>3</td><td class="name-cell">Philip Nicolaus</td><td>Dec 17, 1728</td><td>Immesheim, Pfalz</td><td>Born in Germany; d. 1810 Stokes Co., NC</td></tr>
+      <tr><td>4</td><td class="name-cell">Anna Maria Gertraud</td><td>Jul 18, 1731</td><td>Immesheim, Pfalz</td><td>Born in Germany</td></tr>
+      <tr><td>5</td><td class="name-cell">Johann (Show)</td><td>Jan 7, 1737</td><td>Pennsylvania</td><td>First child born in America</td></tr>
+      <tr><td>6</td><td class="name-cell">Conrad</td><td>Jan 7, 1738</td><td>Falkner Swamp, Montgomery Co., PA</td><td>&mdash;</td></tr>
+      <tr><td>7</td><td class="name-cell">Anna Margaretha</td><td>Jul 18, 1740</td><td>Falkner Swamp, Philadelphia Co., PA</td><td>&mdash;</td></tr>
+      <tr><td>8</td><td class="name-cell">Heinrich Sr.</td><td>1741</td><td>Falkner Swamp, Philadelphia Co., PA</td><td>&mdash;</td></tr>
+      <tr><td>9</td><td class="name-cell">Gottlieb</td><td>Dec 14, 1744</td><td>Bethlehem, Northampton Co., PA</td><td>&mdash;</td></tr>
+      <tr><td>10</td><td class="name-cell">Beniginia</td><td>Dec 1746</td><td>Bethlehem, Northampton Co., PA</td><td>&mdash;</td></tr>
+      <tr><td>11</td><td class="name-cell">Christian (Shouse)</td><td>Jul 11, 1748</td><td>Whitehall, Bucks Co., PA</td><td>Name already Anglicized</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- Connected Families in Albisheim -->
+  <h3 style="color:var(--gold-lt);font-weight:normal;font-size:1.1rem;margin:32px 0 8px;">Connected Families in Albisheim &amp; the Palatinate</h3>
+  <div class="family-grid">
+    <div class="family-card">
+      <h3>Baum Family &mdash; Albisheim</h3>
+      <div class="fc-dates">In-laws of Johann Adam Schauss</div>
+      <p>
+        <strong>Johann Philipp Baum</strong> (c. 1670, Albisheim &mdash; Apr 13, 1729) married
+        <strong>Anna Margaretha Stahler</strong> (Apr 28, 1678, Albisheim &mdash; May 8, 1723)
+        in 1706 at Lambsheim. Their daughter Maria Barbara Baum (Jan 8, 1707, Albisheim) married
+        Johann Adam Schauss in 1725. Siblings: Johann Jacob (1699), Maria Margaretha (1703),
+        Johann Engelberth (d. 1705), Hans V. (d. 1706), Johann Christian (1709). The Baums were
+        an established Albisheim family.
+      </p>
+    </div>
+
+    <div class="family-card">
+      <h3>Naass Family &mdash; Albisheim</h3>
+      <div class="fc-dates">Maternal line of the Albisheim Schauss family</div>
+      <p>
+        <strong>Anna Margarethe Naass</strong> (Mar 1, 1657, Albisheim &mdash; Aug 31, 1720, Albisheim)
+        married Hans Bernhardt Schauss in 1674. Her family was native to Albisheim, predating the
+        Schauss arrival. Anna Engle-Burgis Conrad&rsquo;s mother may also have been a Naas(s).
+        The Naass name appears repeatedly in Albisheim records.
+      </p>
+    </div>
+
+    <div class="family-card">
+      <h3>Conrad Family &mdash; Albisheim</h3>
+      <div class="fc-dates">Mother of Johann Adam Schauss</div>
+      <p>
+        <strong>Anna Engle-Burgis Conrad</strong> (Oct 30, 1680, Albisheim &mdash; c. 1712, Albisheim)
+        married Johann Conrad Schauss Sr. on Aug 29, 1699 at the Evangelische church, Albisheim
+        (FHL Microfilm 193,748). Possible parents: Hans Michael Conrad and Anna Margretha Barbara Naas Conrad.
+        Mother of Johann Adam, the emigrant.
+      </p>
+    </div>
+
+    <div class="family-card">
+      <h3>Eckweiler Branch &mdash; Separate Schauss Line</h3>
+      <div class="fc-dates">Bad Kreuznach district &middot; Wickert connection</div>
+      <p>
+        A separate Schauss branch remained in the Eckweiler area: <strong>Nicholaus Schauss</strong>
+        (c. 1685, Ippensheid, Bad Kreuznach) married <strong>Maria Elisabetha Wickert</strong>
+        (Mar 25, 1689, Eckweiler) on Jan 31, 1708 in Eckweiler. Also: <strong>Anna Catharina Schauss</strong>
+        (c. 1680, Winterburg), daughter of Niclaus Schousser, married Johann Melchior Wickert Feb 9, 1700
+        in Eckweiler. These may be cousins of the Albisheim branch.
+      </p>
+    </div>
+  </div>
 
   <!-- Reformed/Calvinist Note -->
   <div style="background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:18px;margin-top:24px;">

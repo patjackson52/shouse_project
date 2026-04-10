@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Schauss/Shouse Family in North Carolina, 1755–1900</title>
+  <title>The Schauss/Shouse Family — From the Palatinate to North Carolina</title>
 
   <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -273,6 +273,152 @@
       font-weight: normal;
     }
     .source-card p { font-size: 0.82rem; color: var(--text-dim); }
+    .source-card a { color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--sepia); }
+    .source-card a:hover { color: var(--gold-lt); border-color: var(--gold); }
+
+    /* ── German Origins ─────────────────────────────────────────── */
+    .german-migration-path {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+      margin: 24px 0;
+      padding: 20px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    .gmp-stop {
+      text-align: center;
+      padding: 8px 14px;
+    }
+    .gmp-stop .gmp-place {
+      font-size: 0.95rem;
+      color: var(--gold-lt);
+      font-weight: bold;
+    }
+    .gmp-stop .gmp-dates {
+      font-size: 0.72rem;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+    }
+    .gmp-stop .gmp-detail {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+    .gmp-arrow {
+      color: var(--sepia);
+      font-size: 1.4rem;
+      padding: 0 4px;
+      flex-shrink: 0;
+    }
+
+    .gen-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.85rem;
+    }
+    .gen-table th {
+      text-align: left;
+      padding: 10px 14px;
+      background: var(--bg3);
+      color: var(--gold);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-bottom: 2px solid var(--border);
+    }
+    .gen-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-dim);
+      vertical-align: top;
+    }
+    .gen-table tr:hover td { background: var(--bg3); }
+    .gen-table .name-cell { color: var(--gold-lt); font-weight: bold; }
+    .gen-table .stayed-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      padding: 2px 7px;
+      border-radius: 3px;
+      background: #2a3a2a;
+      color: #6cbf6c;
+      letter-spacing: 0.06em;
+      margin-left: 6px;
+    }
+    .gen-table .emigrated-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      padding: 2px 7px;
+      border-radius: 3px;
+      background: #3a2a2a;
+      color: #d9845a;
+      letter-spacing: 0.06em;
+      margin-left: 6px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .contact-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 18px;
+    }
+    .contact-card h3 {
+      font-size: 0.9rem;
+      color: var(--gold-lt);
+      margin-bottom: 4px;
+      font-weight: normal;
+    }
+    .contact-card .cc-type {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .contact-card p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.6; }
+    .contact-card a { color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--sepia); }
+    .contact-card a:hover { color: var(--gold-lt); border-color: var(--gold); }
+
+    .research-questions {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+      counter-reset: rq;
+    }
+    .research-questions li {
+      counter-increment: rq;
+      padding: 12px 16px 12px 48px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+      color: var(--text-dim);
+    }
+    .research-questions li::before {
+      content: counter(rq);
+      position: absolute;
+      left: 14px;
+      top: 12px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--bg3);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.72rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
 
     /* ── Footer ─────────────────────────────────────────────────── */
     footer {
@@ -291,17 +437,18 @@
 <!-- ═══════════════════════════════ HEADER ══════════════════════════════ -->
 <header>
   <div class="header-subtitle">A Family Heritage Project</div>
-  <h1>The Schauss / Shouse Family<br>in North Carolina, 1755–1900</h1>
+  <h1>The Schauss / Shouse Family<br>From the Palatinate to North Carolina</h1>
   <p class="header-desc">
-    Tracing the journey of a Palatine German family from Albisheim on the Rhine
-    to the Moravian settlements of North Carolina — spanning eight generations and
-    nearly three centuries of American history.
+    Tracing six generations of a Reformed German family from Eckweiler and Albisheim
+    in the Rhine Palatinate, across the Atlantic to the Moravian settlements of
+    North Carolina &mdash; spanning ten generations and over four centuries of history.
   </p>
 </header>
 
 <!-- ═══════════════════════════════ NAV ═════════════════════════════════ -->
 <nav>
   <a href="#map-section">Interactive Map</a>
+  <a href="#german-origins-section">German Origins</a>
   <a href="#timeline-section">Timeline</a>
   <a href="#family-section">Key Ancestors</a>
   <a href="#sources-section">Archives &amp; Sources</a>
@@ -338,41 +485,418 @@
   <div id="map"></div>
 </section>
 
+<!-- ═══════════════════════════════ GERMAN ORIGINS ══════════════════════ -->
+<section id="german-origins-section">
+  <div class="section-label">German Origins</div>
+  <h2>The Schauss Family in the Palatinate</h2>
+  <p style="color:var(--text-dim);margin-bottom:12px;max-width:760px;">
+    Six generations of the Schauss (Schau&szlig;, Schaws) family have been traced in Germany,
+    from the village of Eckweiler near Bad Kreuznach in the late 1500s, through B&uuml;dingen,
+    to their permanent seat in Albisheim an der Pfrimm in the Palatinate. The family belonged
+    to the Reformed (Calvinist) church tradition. Research draws on church records,
+    the award-winning Weller dissertation (2004), and multiple genealogical databases.
+  </p>
+
+  <!-- Migration path visualization -->
+  <div class="german-migration-path">
+    <div class="gmp-stop">
+      <div class="gmp-place">Eckweiler</div>
+      <div class="gmp-dates">before 1600 &ndash; c. 1620</div>
+      <div class="gmp-detail">Bad Kreuznach &middot; earliest origins</div>
+    </div>
+    <div class="gmp-arrow">&rarr;</div>
+    <div class="gmp-stop">
+      <div class="gmp-place">B&uuml;dingen</div>
+      <div class="gmp-dates">c. 1620 &ndash; 1674</div>
+      <div class="gmp-detail">Lorraine / Westerwaldkreis</div>
+    </div>
+    <div class="gmp-arrow">&rarr;</div>
+    <div class="gmp-stop">
+      <div class="gmp-place">Albisheim</div>
+      <div class="gmp-dates">1674 &ndash; present</div>
+      <div class="gmp-detail">Pfrimm Valley &middot; family seat</div>
+    </div>
+    <div class="gmp-arrow">&rarr;</div>
+    <div class="gmp-stop">
+      <div class="gmp-place">G&ouml;llheim</div>
+      <div class="gmp-dates">1723</div>
+      <div class="gmp-detail">marriage connection</div>
+    </div>
+    <div class="gmp-arrow">&rarr;</div>
+    <div class="gmp-stop">
+      <div class="gmp-place">Immesheim</div>
+      <div class="gmp-dates">c. 1704</div>
+      <div class="gmp-detail">Johann Adam born here</div>
+    </div>
+  </div>
+
+  <!-- Six Generations Table -->
+  <h3 style="color:var(--gold-lt);font-weight:normal;font-size:1.1rem;margin:32px 0 8px;">Six Generations in Germany (c. 1560&ndash;1765)</h3>
+  <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:16px;">
+    Traced from Eckweiler (Bad Kreuznach) through Albisheim. Philipp Heinrich Schauss,
+    Mayor of Albisheim, anchored the family in Germany while his nephew Johann Adam emigrated to America in 1736.
+  </p>
+
+  <div style="overflow-x:auto;">
+  <table class="gen-table">
+    <thead>
+      <tr>
+        <th>Gen.</th>
+        <th>Name</th>
+        <th>Born</th>
+        <th>Died</th>
+        <th>Location</th>
+        <th>Key Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1st</td>
+        <td class="name-cell">Han&szlig; Schau&szlig; &amp; Catharina Von Allenfeldt</td>
+        <td>bef. 1600 / c. 1560</td>
+        <td>unknown / Apr 5, 1609</td>
+        <td>Eckweiler, Bad Kreuznach</td>
+        <td>Earliest documented ancestors. Protestant Reformation era.</td>
+      </tr>
+      <tr>
+        <td>2nd</td>
+        <td class="name-cell">Melchior Schau&szlig;</td>
+        <td>Feb 24, 1595, Eckweiler</td>
+        <td>Jun 24, 1628, Eckweiler</td>
+        <td>Eckweiler, Bad Kreuznach</td>
+        <td>Married Helena Ante&szlig;es Dec 4, 1621 in Eckweiler. Died age 33.</td>
+      </tr>
+      <tr>
+        <td>3rd</td>
+        <td class="name-cell">Johannes (Gabriel) Schauss</td>
+        <td>c. Jul 23, 1620, B&uuml;dingen</td>
+        <td>c. Feb 27, 1674, B&uuml;dingen</td>
+        <td>B&uuml;dingen (Lorraine)</td>
+        <td>Married Maria Magdalena Klein Jan 30, 1644 at Evangelische, Albisheim. Had 7 sons &amp; 3 daughters.</td>
+      </tr>
+      <tr>
+        <td>4th</td>
+        <td class="name-cell">Hans Bernhardt Schauss</td>
+        <td>c. 1650, B&uuml;dingen</td>
+        <td>Aug 31, 1720, Albisheim</td>
+        <td>B&uuml;dingen &rarr; Albisheim</td>
+        <td>Married Anna Margarethe Naass Apr 21, 1674 in Albisheim. <strong>Established the family in Albisheim.</strong> Wife was local Albisheim family.</td>
+      </tr>
+      <tr>
+        <td rowspan="4">5th</td>
+        <td class="name-cell">Johann Conrad Schauss Sr.</td>
+        <td>Jan 2, 1675, Albisheim</td>
+        <td>Apr 27, 1734, Albisheim</td>
+        <td>Albisheim / G&ouml;llheim</td>
+        <td>Married (1) Anna Engle-Burgis Conrad 1699, Albisheim; (2) Johanna Felicitas He&szlig;lerin 1723, G&ouml;llheim.</td>
+      </tr>
+      <tr>
+        <td class="name-cell">Anna Margaretha Schauss</td>
+        <td>Oct 31, 1680</td>
+        <td>&mdash;</td>
+        <td>Albisheim</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="name-cell">Hans Adam Schauss</td>
+        <td>Jun 10, 1683, Albisheim</td>
+        <td>&mdash;</td>
+        <td>Albisheim</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td class="name-cell">Philipp Heinrich Schauss <span class="stayed-tag">Stayed</span></td>
+        <td>Feb 3, 1686, Albisheim</td>
+        <td>Apr 11, 1765, Albisheim</td>
+        <td>Albisheim</td>
+        <td>Linen weaver &amp; <strong>Mayor of Albisheim</strong>. Married Anna Barbara (Waltherin). Had 16 children. Lived his entire life in Albisheim.</td>
+      </tr>
+      <tr>
+        <td rowspan="2">6th</td>
+        <td class="name-cell">Johann Adam Schauss <span class="emigrated-tag">Emigrated 1736</span></td>
+        <td>c. 1703/1704, Immesheim</td>
+        <td>1770, Bethania, NC</td>
+        <td>Albisheim &rarr; Philadelphia &rarr; NC</td>
+        <td>Millwright &amp; miller. Married Maria Barbara Baum (of Albisheim). Arrived Philadelphia Sep 1, 1736 on the <em>Harle</em>. Progenitor of the Shouse family in NC.</td>
+      </tr>
+      <tr>
+        <td class="name-cell">Philipp Nikolaus Schauss <span class="emigrated-tag">Emigrated</span></td>
+        <td>Dec 17, 1728, Albisheim</td>
+        <td>1810, Stokes Co., NC</td>
+        <td>Albisheim &rarr; NC</td>
+        <td>Son of Johann Adam. Married Maria Catherine Beck Jul 19, 1748 at Jordan Evangelical Lutheran Church.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- Albisheim Profile -->
+  <h3 style="color:var(--gold-lt);font-weight:normal;font-size:1.1rem;margin:40px 0 8px;">Albisheim an der Pfrimm &mdash; The Family&rsquo;s Homeland</h3>
+  <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:16px;">
+    A village of 1,892 people in the Donnersbergkreis district of Rhineland-Palatinate,
+    situated in the Pfrimm Valley (Zellertal) about 21 km west of Worms. Postal code 67308.
+  </p>
+
+  <div class="family-grid">
+    <div class="family-card">
+      <h3>Protestantische Peterskirche</h3>
+      <div class="fc-dates">Kirchgasse 14, 67308 Albisheim &middot; Built 1792</div>
+      <p>
+        St. Peter&rsquo;s Protestant Church, with its historic Stumm organ. The family&rsquo;s church &mdash;
+        Schauss baptisms, marriages, and burials were recorded here. The municipal coat of arms
+        features Saint Peter. The Lutheran parish dates to 1554, with records beginning 1641.
+        After 1818, Lutheran and Reformed congregations merged.
+      </p>
+    </div>
+
+    <div class="family-card">
+      <h3>Rathaus (Town Hall)</h3>
+      <div class="fc-dates">Classicist building from 1832</div>
+      <p>
+        The historic town hall of Albisheim. Philipp Heinrich Schauss (1686&ndash;1765) served as
+        <strong>Mayor (B&uuml;rgermeister)</strong> of Albisheim &mdash; an earlier building would have been
+        his seat of office. His mayoral service demonstrates the family&rsquo;s prominence in village life.
+      </p>
+    </div>
+
+    <div class="family-card">
+      <h3>Warteturm (Watch Tower)</h3>
+      <div class="fc-dates">Wingertsberg &middot; First documented 1551</div>
+      <p>
+        An 8-meter stone watchtower that has overlooked the village since at least the mid-1500s &mdash;
+        a landmark the earliest Schauss arrivals would have known. Located on the Zellertalweg
+        walking trail, a 9 km round walk from Albisheim.
+      </p>
+    </div>
+
+    <div class="family-card">
+      <h3>K&ouml;nigsfest</h3>
+      <div class="fc-dates">Third weekend of September &middot; Since 1222</div>
+      <p>
+        Albisheim&rsquo;s annual &ldquo;King&rsquo;s Festival&rdquo; traces its tradition back to 1222 &mdash;
+        over 800 years. The Schauss family would have celebrated this festival for generations.
+        A living connection to the family&rsquo;s homeland, held every September.
+      </p>
+    </div>
+
+    <div class="family-card">
+      <h3>Neighboring Schauss Villages</h3>
+      <div class="fc-dates">Immesheim &middot; G&ouml;llheim &middot; Gauersheim</div>
+      <p>
+        <strong>Immesheim</strong> (~150 people): birthplace of Johann Adam Schauss, c. 1704. Part of the Albisheim parish.<br>
+        <strong>G&ouml;llheim</strong> (~4,000): Johann Conrad Sr. married his second wife here in 1723. Seat of the Verbandsgemeinde.<br>
+        <strong>Gauersheim</strong>: administered the Albisheim parish 1688&ndash;1698 during a gap period.
+      </p>
+    </div>
+
+    <div class="family-card">
+      <h3>Eckweiler &mdash; Earliest Origins</h3>
+      <div class="fc-dates">Bad Kreuznach district &middot; ~60 km south of Albisheim</div>
+      <p>
+        The earliest known Schauss origin. Han&szlig; Schau&szlig; (before 1600) and his wife Catharina Von
+        Allenfeldt lived here. Their son Melchior (1595&ndash;1628) married and died in Eckweiler.
+        Church records survive from 1568. The village became Protestant during the Reformation.
+      </p>
+    </div>
+  </div>
+
+  <!-- Church Records & Archives -->
+  <h3 style="color:var(--gold-lt);font-weight:normal;font-size:1.1rem;margin:40px 0 8px;">Church Records &amp; Archives</h3>
+  <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:16px;">
+    Key repositories for researching the Schauss family in Germany. The Albisheim Lutheran parish
+    began records in 1641 with gaps; the parish was unoccupied 1688&ndash;1698 (administered from Gauersheim).
+  </p>
+
+  <div class="contact-grid">
+    <div class="contact-card">
+      <h3>ARCHION &mdash; Digitized Church Books</h3>
+      <div class="cc-type">Online Archive &middot; Paid Access</div>
+      <p>
+        Albisheim Kirchenbuch #1 available from 1720. Over 175,000 church books digitized.
+        Images only (not indexed) &mdash; browse page by page for Schauss entries.<br>
+        <a href="https://www.archion.de/en/" target="_blank">archion.de</a>
+      </p>
+    </div>
+
+    <div class="contact-card">
+      <h3>Zentralarchiv der Ev. Kirche der Pfalz</h3>
+      <div class="cc-type">Archive &middot; Speyer, Germany</div>
+      <p>
+        Domplatz 6, 67346 Speyer. Holds Protestant Palatinate church records on microfilm.
+        Library includes family pedigrees and town chronicles. Tue&ndash;Thu 8&ndash;16h; 2nd Thu 8&ndash;18h.<br>
+        <a href="https://www.zentralarchiv-speyer.de/" target="_blank">zentralarchiv-speyer.de</a>
+      </p>
+    </div>
+
+    <div class="contact-card">
+      <h3>Landesarchiv Speyer</h3>
+      <div class="cc-type">State Archive &middot; Speyer, Germany</div>
+      <p>
+        Otto-Mayer-Str. 9, 67346 Speyer. Holds French-era civil records (1798&ndash;1814), emigration records,
+        tax lists, land records, and court records. Phone: 06232 9192-0.<br>
+        Email: post@landesarchiv-speyer.de
+      </p>
+    </div>
+
+    <div class="contact-card">
+      <h3>FamilySearch</h3>
+      <div class="cc-type">Online &middot; Free Access</div>
+      <p>
+        LDS-filmed Albisheim records with batch numbers. Collection: &ldquo;Rhineland-Palatinate Church
+        Record Extractions and Family Registers, 1600&ndash;1925.&rdquo;<br>
+        <a href="https://www.familysearch.org/en/wiki/Albisheim,_Bayern_(Pfalz),_Germany" target="_blank">Albisheim Wiki Page</a>
+      </p>
+    </div>
+
+    <div class="contact-card">
+      <h3>Pf&auml;lzisch-Rheinische Familienkunde (PRFK)</h3>
+      <div class="cc-type">Genealogy Society &middot; Ludwigshafen</div>
+      <p>
+        Rottstra&szlig;e 17, 67061 Ludwigshafen. Archive with 8,500+ publications, nearly
+        1 million family name cards (Familiennamenkartei), and a Miller Database (M&uuml;llerdatenbank).
+        850+ members. Regional groups in Worms and Speyer.<br>
+        <a href="https://www.prfk.org/" target="_blank">prfk.org</a>
+      </p>
+    </div>
+
+    <div class="contact-card">
+      <h3>Eckweiler Kirchenbuch (1568&ndash;1798)</h3>
+      <div class="cc-type">Church Records &middot; Earliest Schauss Records</div>
+      <p>
+        Church records from Eckweiler covering 1568&ndash;1798 &mdash; predating the Albisheim records.
+        Contains the earliest Schau&szlig; baptisms, marriages, and burials.
+        Han&szlig; and Melchior Schau&szlig; appear in these records.<br>
+        <a href="https://www.werelate.org/wiki/Source:Eckweiler,_Rheinland-Pfalz,_Germany._Kirchenbuch,_1568-1798" target="_blank">WeRelate source page</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Key Published Sources -->
+  <h3 style="color:var(--gold-lt);font-weight:normal;font-size:1.1rem;margin:40px 0 8px;">Key Published Sources</h3>
+  <div class="sources-grid">
+    <div class="source-card">
+      <h3>Weller Dissertation (2004)</h3>
+      <p>
+        <em>&ldquo;A Family History/Genealogy of the Schauss/Shouse Family in North Carolina, 1755&ndash;1900&rdquo;</em>
+        by Dr. Nelson A. L. Weller. Ph.D. dissertation, Union Institute and University.
+        Won the NC Genealogical Society&rsquo;s Award for Excellence in Publishing. Traces the German
+        line back to 1620.<br>
+        <a href="https://www.familysearch.org/library/books/records/item/299528-a-family-history-genealogy-of-the-schauss-shouse-family-in-north-carolina-1755-1900?offset=2" target="_blank">FamilySearch Library</a> &middot;
+        <a href="https://www.worldcat.org/title/family-historygenealogy-of-the-schaussshouse-family-in-north-carolina-1755-1900/oclc/781727046" target="_blank">WorldCat</a>
+      </p>
+    </div>
+
+    <div class="source-card">
+      <h3>Shouse Genealogies of Selected Families</h3>
+      <p>
+        Compiled and edited by Eugene Trimble (1987). Comprehensive family compilations with
+        German origins data including the Albisheim 1100th Anniversary Book references.<br>
+        <a href="https://www.eugenetrimble.com/Shouse.pdf" target="_blank">Download PDF</a>
+      </p>
+    </div>
+
+    <div class="source-card">
+      <h3>Albisheim Taxpayer Records (1574&ndash;1581)</h3>
+      <p>
+        &ldquo;Untertanen der Pflege Albisheim&rdquo; published in <em>Pf&auml;lzisch-Rheinische Familienkunde</em>
+        12:7:342&ndash;348 (1992). Lists taxpayers in the Albisheim administrative district &mdash;
+        may include early Schauss entries predating the church records.
+      </p>
+    </div>
+
+    <div class="source-card">
+      <h3>WikiTree Schauss Profiles</h3>
+      <p>
+        Extensively sourced free profiles with church record citations:<br>
+        <a href="https://www.wikitree.com/wiki/Schauss-16" target="_blank">Johann Conrad Sr.</a> &middot;
+        <a href="https://www.wikitree.com/wiki/Schauss-17" target="_blank">Hans Bernhardt</a> &middot;
+        <a href="https://www.wikitree.com/wiki/Schauss-18" target="_blank">Johannes</a> &middot;
+        <a href="https://www.wikitree.com/wiki/Schau%C3%9F-85" target="_blank">Melchior</a> &middot;
+        <a href="https://www.wikitree.com/genealogy/SCHAUSS" target="_blank">Overview</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Open Research Questions -->
+  <h3 style="color:var(--gold-lt);font-weight:normal;font-size:1.1rem;margin:40px 0 8px;">Open Research Questions</h3>
+  <ol class="research-questions">
+    <li>What Schauss family members remained in Albisheim after 1736? Philipp Heinrich (Mayor, d. 1765) stayed with 16 children &mdash; what happened to his descendants through the 1800s and 1900s?</li>
+    <li>Where exactly is &ldquo;B&uuml;dingen, Lorraine&rdquo;? Sources conflict between Lorraine and Westerwaldkreis. This is not the famous B&uuml;dingen in Hesse. The exact village must be identified.</li>
+    <li>What church records survive for Albisheim before 1720? The parish began 1641 with gaps. What exists for 1641&ndash;1720 &mdash; the period when the Schauss family arrived?</li>
+    <li>Are there surviving Schauss headstones in the Albisheim Protestant cemetery? Philipp Heinrich Schauss died 1765 in Albisheim.</li>
+    <li>What does the Albisheim 1100th Anniversary Book contain about the Schauss family?</li>
+    <li>Do Schauss/Schau&szlig; descendants still live in the Albisheim/Donnersbergkreis area today?</li>
+    <li>What do the Eckweiler church records (1568&ndash;1798) reveal about the earliest Schau&szlig; generations beyond what&rsquo;s currently known?</li>
+  </ol>
+
+  <!-- Reformed/Calvinist Note -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:18px;margin-top:24px;">
+    <h3 style="color:var(--gold-lt);font-weight:normal;font-size:0.95rem;margin-bottom:8px;">A Note on Reformed (Calvinist) Identity</h3>
+    <p style="font-size:0.85rem;color:var(--text-dim);line-height:1.7;">
+      The Palatinate had a turbulent confessional history. Elector Frederick III promoted Reformed (Calvinist) faith
+      after 1560, commissioning the Heidelberg Catechism in 1563. John Casimir restored the Reformed faith in 1583.
+      But in the late 1600s, Reformed worship was prohibited, driving emigration. The Albisheim parish is documented
+      as <strong>Lutheran</strong> (est. 1554), yet the Schauss family is identified as <strong>Reformed</strong>.
+      In 1818, all Palatine Lutheran and Reformed congregations merged into the united Protestant-Evangelical-Christian
+      Church. Records after 1818 are simply &ldquo;Protestantisch.&rdquo; The family may have been Reformed members
+      recorded in Lutheran parish books &mdash; a common practice in mixed areas.
+    </p>
+  </div>
+</section>
+
 <!-- ═══════════════════════════════ TIMELINE ════════════════════════════ -->
 <section id="timeline-section">
   <div class="section-label">Chronology</div>
-  <h2>Family Timeline, 1620–1900</h2>
+  <h2>Family Timeline, 1560–1900</h2>
 
   <div class="tl-wrap">
 
     <div class="tl-item">
-      <div class="tl-year">c. 1620</div>
+      <div class="tl-year">before 1600</div>
+      <div class="tl-event">Earliest Schauss Family in Eckweiler</div>
+      <div class="tl-detail">Han&szlig; Schau&szlig; and his wife Catharina Von Allenfeldt (c. 1560&ndash;1609) are documented in Eckweiler, a village near Bad Kreuznach in Rheinland-Pfalz. Church records from 1568 survive. The village became Protestant during the Reformation.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1595&ndash;1628</div>
+      <div class="tl-event">Melchior Schau&szlig; in Eckweiler</div>
+      <div class="tl-detail">Melchior Schau&szlig;, son of Han&szlig;, born Feb 24, 1595 in Eckweiler. Married Helena Ante&szlig;es Dec 4, 1621. Died Jun 24, 1628 at age 33 &mdash; during the Thirty Years&rsquo; War (1618&ndash;1648), which devastated the Palatinate.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">c. 1620&ndash;1674</div>
+      <div class="tl-event">Johannes Schauss in B&uuml;dingen</div>
+      <div class="tl-detail">Johannes Schauss (son of Melchior) born c. 1620 in B&uuml;dingen. Married Maria Magdalena Klein Jan 30, 1644 at the Evangelische church in Albisheim. Had seven sons and three daughters. This generation bridges Eckweiler and Albisheim.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1674</div>
       <div class="tl-event">Schauss Family Established in Albisheim</div>
-      <div class="tl-detail">The Schauss (also spelled Schauß, Schaws) family is documented in Albisheim an der Pfrimm, a village in the Palatinate region of the Rhine Valley, Germany. The family belongs to the Reformed (Calvinist) church community.</div>
+      <div class="tl-detail">Hans Bernhardt Schauss (c. 1650, B&uuml;dingen) marries Anna Margarethe Naass (b. 1657, Albisheim) on Apr 21, 1674 in Albisheim an der Pfrimm. This marriage establishes the family permanently in Albisheim. They have four children: Johann Conrad (1675), Anna Margaretha (1680), Hans Adam (1683), and Philipp Heinrich (1686).</div>
     </div>
 
     <div class="tl-item">
-      <div class="tl-year">1680s–1720s</div>
+      <div class="tl-year">1686&ndash;1765</div>
+      <div class="tl-event">Philipp Heinrich Schauss &mdash; Mayor of Albisheim</div>
+      <div class="tl-detail">Youngest son of Hans Bernhardt. Linen weaver who became B&uuml;rgermeister (Mayor) of Albisheim. Married Anna Barbara (Waltherin) and had 16 children, though many died young. Lived his entire life in Albisheim, anchoring the family there while his nephew&rsquo;s branch emigrated to America.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1680s&ndash;1720s</div>
       <div class="tl-event">Palatine Refugee Crisis</div>
-      <div class="tl-detail">Wars, famine, and religious persecution devastate the Rhine Palatinate. Thousands of German families begin emigrating to England, the Netherlands, and the American colonies. The Schauss family begins considering emigration.</div>
+      <div class="tl-detail">Wars (including the Nine Years&rsquo; War and War of Spanish Succession), famine, and religious persecution devastate the Rhine Palatinate. The Albisheim parish was unoccupied 1688&ndash;1698, administered from Gauersheim. Thousands of German families begin emigrating. Reformed worship was prohibited in the late 1600s.</div>
     </div>
 
     <div class="tl-item">
-      <div class="tl-year">1748–1751</div>
-      <div class="tl-event">Johann Adam Schauss Emigrates</div>
-      <div class="tl-detail">Johann Adam Schauss (born c. 1720, Albisheim) emigrates with family members. They travel down the Rhine to Rotterdam, then to a British port, and sail to Philadelphia — the principal port of entry for Palatine Germans.</div>
+      <div class="tl-year">Sep 1, 1736</div>
+      <div class="tl-event">Johann Adam Schauss Arrives in Philadelphia</div>
+      <div class="tl-detail">Johann Adam Schauss (c. 1703/1704, Immesheim), millwright and miller, arrives at the Port of Philadelphia on the ship <em>Harle</em>. He had married Maria Barbara Baum (daughter of Johann Philip and Anna Maria Baum of Albisheim) in 1725. German immigrants signed oaths of allegiance upon arrival.</div>
     </div>
 
     <div class="tl-item">
-      <div class="tl-year">1751</div>
-      <div class="tl-event">Arrival in Philadelphia</div>
-      <div class="tl-detail">The Schauss family arrives at the Port of Philadelphia. German immigrants ("Palatines") were required to sign oaths of allegiance. Pennsylvania had large German-speaking communities in Philadelphia, Germantown, and Lancaster County.</div>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-year">1751–1755</div>
-      <div class="tl-event">Settlement in Lancaster County, Pennsylvania</div>
-      <div class="tl-detail">The family temporarily settles in Lancaster County, a major hub for German immigrant settlement. Here they encounter Moravian missionaries who are recruiting settlers for their new communities in North Carolina.</div>
+      <div class="tl-year">1736&ndash;c. 1754</div>
+      <div class="tl-event">Settlement in Pennsylvania</div>
+      <div class="tl-detail">Johann Adam Schauss settles in Pennsylvania, working as a miller. The family encounters Moravian missionaries recruiting settlers for their new communities in North Carolina. Around 1754, the family moves south.</div>
     </div>
 
     <div class="tl-item">
@@ -475,24 +999,25 @@
 
     <div class="family-card">
       <h3>Johann Adam Schauss</h3>
-      <div class="fc-dates">c. 1720 Albisheim, Germany — c. 1785 Bethania, NC</div>
+      <div class="fc-dates">c. 1703/1704 Immesheim, Germany &mdash; 1770 Bethania, NC</div>
       <p>
-        The primary immigrant ancestor. Born in Albisheim an der Pfrimm in the
-        Palatinate. Emigrated to Philadelphia c. 1748–1751. Settled in Lancaster
-        County, PA before relocating to the newly-founded Moravian community of
-        Bethania, NC in 1759. Received land grants in Forsyth/Stokes County area.
-        Buried at Dobbs Parish Graveyard.
+        The primary immigrant ancestor. Son of Johann Conrad Schauss Sr. and Anna Engle-Burgis
+        Conrad of Albisheim. Millwright and miller by trade. Married Maria Barbara Baum
+        (daughter of Johann Philip &amp; Anna Maria Baum of Albisheim) in 1725.
+        Arrived Philadelphia Sep 1, 1736 on the ship <em>Harle</em>. Settled in
+        Pennsylvania before relocating to Bethania, NC c. 1754. Died at his son&rsquo;s
+        home in Bethania. Had eleven children including Philipp Nikolaus.
       </p>
     </div>
 
     <div class="family-card">
-      <h3>Philipp Schauss</h3>
-      <div class="fc-dates">c. 1725 Albisheim — c. 1775 Bethania, NC</div>
+      <h3>Philipp Nikolaus Schauss</h3>
+      <div class="fc-dates">Dec 17, 1728 Albisheim &mdash; 1810 Stokes County, NC</div>
       <p>
-        Brother (or close relation) of Johann Adam. Emigrated with or shortly
-        after Johann Adam. Also settled in Bethania. His burial at Dobbs Parish
-        Graveyard is documented in early Moravian records, making his death one
-        of the earliest dated Shouse family events in North Carolina.
+        Son of Johann Adam. Born in Albisheim, emigrated with his father as a child.
+        Married Maria Catherine Beck Jul 19, 1748 at Jordan Evangelical Lutheran Church.
+        His death in Stokes County represents one of the last events for someone born
+        in the German homeland who lived in North Carolina.
       </p>
     </div>
 
@@ -612,12 +1137,13 @@
     </div>
 
     <div class="source-card">
-      <h3>Evangelical Church, Albisheim</h3>
+      <h3>Peterskirche, Albisheim &amp; German Archives</h3>
       <p>
-        German parish records (Kirchenbücher) for Albisheim an der Pfrimm.
-        Available through the Landesarchiv Speyer. May contain baptism, marriage,
-        and burial records for the Schauss family prior to emigration, though
-        records before 1700 are incomplete.
+        Parish records (Kirchenb&uuml;cher) from 1641 with gaps; Kirchenbuch #1 from
+        1720 on <a href="https://www.archion.de/en/" target="_blank">Archion</a>.
+        Microfilms at Zentralarchiv der Ev. Kirche der Pfalz, Speyer. Civil records
+        at Landesarchiv Speyer. Eckweiler Kirchenbuch (1568&ndash;1798) covers earliest
+        Schau&szlig; generations. See German Origins section for full details.
       </p>
     </div>
 
@@ -636,8 +1162,8 @@
 <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
 <footer>
   <div class="footer-title">The Schauss / Shouse Family Heritage Project</div>
-  <p>Albisheim, Germany &nbsp;·&nbsp; Philadelphia, PA &nbsp;·&nbsp; Bethania, NC &nbsp;·&nbsp; c. 1620–1900</p>
-  <p style="margin-top:12px;">Research ongoing. Data compiled from Moravian Archives, NC State Archives, and federal census records.</p>
+  <p>Eckweiler &nbsp;&middot;&nbsp; Albisheim, Germany &nbsp;&middot;&nbsp; Philadelphia, PA &nbsp;&middot;&nbsp; Bethania, NC &nbsp;&middot;&nbsp; c. 1560&ndash;1900</p>
+  <p style="margin-top:12px;">Research ongoing. Data compiled from German church records, Moravian Archives, NC State Archives, Weller dissertation (2004), WikiTree, and federal census records.</p>
 </footer>
 
 
@@ -688,10 +1214,45 @@
   const residences = [
     {
       ll: [49.5847, 8.1147],
-      title: 'Albisheim, Germany',
-      historic: 'Albisheim an der Pfrimm, Palatinate',
-      dates: 'Family origin c. 1620–1751',
-      body: 'Rhine Valley village where the Schauss family lived for generations. Reformed (Calvinist) church community. Johann Adam Schauss emigrated from here c. 1748–1751 during the great Palatine migration to America.'
+      title: 'Albisheim an der Pfrimm',
+      historic: 'Donnersbergkreis, Rhineland-Palatinate',
+      dates: 'Family seat 1674–present · Pop. 1,892',
+      body: 'Hans Bernhardt Schauss married Anna Margarethe Naass here Apr 21, 1674, establishing the family. Philipp Heinrich Schauss (1686–1765) served as Mayor & linen weaver. Johann Adam emigrated 1736 on the Harle. Parish records from 1641 with gaps.'
+    },
+    {
+      ll: [49.7667, 7.7167],
+      title: 'Eckweiler',
+      historic: 'Bad Kreuznach district, Rheinland-Pfalz',
+      dates: 'Earliest Schauss origins · before 1600',
+      body: 'Earliest documented Schauss location. Hanß Schauß (bef. 1600) & Catharina Von Allenfeldt lived here. Son Melchior Schauß (1595–1628) married Helena Anteßes here 1621. Church records survive from 1568. Village became Protestant during the Reformation.'
+    },
+    {
+      ll: [50.0, 7.85],
+      title: 'Büdingen (Lorraine)',
+      historic: 'Possibly Westerwaldkreis, Rheinland-Pfalz',
+      dates: 'c. 1620–1674 · transitional home',
+      body: 'Johannes Schauss (c.1620–1674) and Hans Bernhardt Schauss (c.1650–1720) lived here before settling in Albisheim. NOTE: Exact location disputed — sources conflict between Lorraine and Westerwaldkreis. Not the famous Büdingen in Hesse.'
+    },
+    {
+      ll: [49.5956, 8.1347],
+      title: 'Immesheim',
+      historic: 'Donnersbergkreis · Albisheim parish',
+      dates: 'Johann Adam born here c. 1703/1704',
+      body: 'Smallest village in Verbandsgemeinde Göllheim (~150 people). Part of the Albisheim parish. Johann Adam Schauss, the emigrant ancestor, was born here. Adjacent to Albisheim.'
+    },
+    {
+      ll: [49.5950, 8.0611],
+      title: 'Göllheim',
+      historic: 'Seat of Verbandsgemeinde · Pop. ~4,000',
+      dates: 'Marriage connection 1723',
+      body: 'Johann Conrad Schauss Sr. married his second wife Johanna Felicitas Heßlerin here Apr 6, 1723. Site of the 1298 Battle of Göllheim. Today the administrative seat of the municipality that includes Albisheim.'
+    },
+    {
+      ll: [49.6025, 8.1444],
+      title: 'Gauersheim',
+      historic: 'Neighboring parish',
+      dates: 'Administered Albisheim parish 1688–1698',
+      body: 'When the Albisheim parish was unoccupied 1688–1698, Gauersheim administered it. Part of the Albisheim parish from 1592. Check Gauersheim records for the gap period — Schauss family events may appear here.'
     },
     {
       ll: [39.9526, -75.1652],
@@ -810,10 +1371,17 @@
     },
     {
       ll: [49.5847, 8.1147],
-      title: 'Evangelical Church, Albisheim',
-      historic: 'Reformed (Calvinist) Parish, Albisheim',
-      dates: 'Active since Reformation era',
-      body: 'The home church of the Schauss family in Germany. Parish registers (Kirchenbücher) may contain records of the family before emigration. Records held at Landesarchiv Speyer, Germany.'
+      title: 'Peterskirche, Albisheim',
+      historic: 'Protestant Church · Kirchgasse 14, 67308 Albisheim',
+      dates: 'Parish est. 1554 · Current building 1792',
+      body: 'St. Peter\'s Protestant Church with historic Stumm organ. The Schauss family church — all baptisms, marriages, and burials recorded here. Parish records begin 1641 with gaps. Kirchenbuch #1 (from 1720) available on Archion.'
+    },
+    {
+      ll: [49.7667, 7.7167],
+      title: 'Protestant Church, Eckweiler',
+      historic: 'Eckweiler, Bad Kreuznach',
+      dates: 'Kirchenbuch 1568–1798',
+      body: 'The earliest church records containing Schauß family entries. Eckweiler became Protestant during the Reformation. Records from 1568 predate the Albisheim parish records by 73 years. Hanß and Melchior Schauß appear here.'
     }
   ];
 
@@ -893,13 +1461,60 @@
     }
   ];
 
+  // ── GERMAN REPOSITORIES (green) ──────────────────────────────
+  const germanRepos = [
+    {
+      ll: [49.3173, 8.4411],
+      title: 'Zentralarchiv der Ev. Kirche der Pfalz',
+      historic: 'Domplatz 6, 67346 Speyer',
+      dates: 'Protestant church records on microfilm',
+      body: 'Central archive of the Protestant Church of the Palatinate. Holds Albisheim parish records on microfilm/microfiche. Library includes family pedigrees and town chronicles. Tue–Thu 8–16h. Email: archiv@evkirchepfalz.de'
+    },
+    {
+      ll: [49.3193, 8.4431],
+      title: 'Landesarchiv Speyer',
+      historic: 'Otto-Mayer-Str. 9, 67346 Speyer',
+      dates: 'State archive · Civil & emigration records',
+      body: 'Holds French-era civil records (1798–1814), emigration records, notarial records, tax lists, land records, and court records for the Palatinate. Phone: 06232 9192-0. Email: post@landesarchiv-speyer.de'
+    },
+    {
+      ll: [49.4811, 8.4353],
+      title: 'PRFK — Pfälzisch-Rheinische Familienkunde',
+      historic: 'Rottstraße 17, 67061 Ludwigshafen am Rhein',
+      dates: 'Genealogy society · 850+ members',
+      body: 'Palatinate genealogy society with archive of 8,500+ publications. Nearly 1 million family name cards (Familiennamenkartei) — search for Schauss/Schauß. Also maintains a Müllerdatenbank (Miller Database) relevant to Johann Adam Schauss.'
+    }
+  ];
+
+  germanRepos.forEach(r => {
+    L.marker(r.ll, { icon: makeIcon(GREEN, 13) })
+      .bindPopup(popup(r.title, r.historic, r.dates, r.body))
+      .addTo(map);
+  });
+
   repos.forEach(r => {
     L.marker(r.ll, { icon: makeIcon(GREEN, 13) })
       .bindPopup(popup(r.title, r.historic, r.dates, r.body))
       .addTo(map);
   });
 
-  // ── MIGRATION PATH ──────────────────────────────────────────────
+  // ── GERMAN MIGRATION PATH (within Germany) ──────────────────────
+  const germanPath = [
+    [49.7667, 7.7167],   // Eckweiler
+    [50.0, 7.85],        // Büdingen
+    [49.5847, 8.1147],   // Albisheim
+  ];
+
+  L.polyline(germanPath, {
+    color: '#c9a84c',
+    weight: 2,
+    opacity: 0.6,
+    dashArray: '6, 8',
+    lineJoin: 'round'
+  }).addTo(map)
+    .bindPopup('<div class="popup-title">German Migration</div><div class="popup-body">Schauss family movement within Germany: Eckweiler (before 1600) → Büdingen (c. 1620) → Albisheim (1674 onward)</div>');
+
+  // ── TRANSATLANTIC MIGRATION PATH ──────────────────────────────
   const migrationPath = [
     [49.5847, 8.1147],   // Albisheim
     [51.9225, 4.4792],   // Rotterdam (waypoint)
@@ -917,16 +1532,15 @@
     dashArray: '8, 6',
     lineJoin: 'round'
   }).addTo(map)
-    .bindPopup('<div class="popup-title">Migration Path</div><div class="popup-body">Schauss family migration route: Albisheim → Rotterdam → London → Philadelphia → Lancaster County, PA → Bethania, NC (c. 1748–1759)</div>');
+    .bindPopup('<div class="popup-title">Transatlantic Migration</div><div class="popup-body">Johann Adam Schauss: Albisheim → Rotterdam → London → Philadelphia (arrived Sep 1, 1736 on the <em>Harle</em>) → Pennsylvania → Bethania, NC (c. 1754)</div>');
 
   // ── ATLANTIC OCEAN arc (approximate great circle) ───────────────
-  // Just add a label marker mid-Atlantic
   L.marker([40.5, -40], {
     icon: L.divIcon({
       className: '',
-      html: '<div style="color:#e8703a;font-size:10px;letter-spacing:0.1em;opacity:0.7;white-space:nowrap;text-shadow:1px 1px 2px #000">— Atlantic crossing c. 1751 —</div>',
-      iconSize: [180, 18],
-      iconAnchor: [90, 9]
+      html: '<div style="color:#e8703a;font-size:10px;letter-spacing:0.1em;opacity:0.7;white-space:nowrap;text-shadow:1px 1px 2px #000">— Atlantic crossing · Sep 1, 1736 · Ship Harle —</div>',
+      iconSize: [260, 18],
+      iconAnchor: [130, 9]
     })
   }).addTo(map);
 

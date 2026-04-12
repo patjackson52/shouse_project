@@ -580,6 +580,35 @@ A **Schauß family winery** has been operating in **Monzingen an der Nahe** sinc
 
 **This winery family is very likely descended from the Eckweiler Schauss branch** and represents one of the most accessible present-day contacts for the family.
 
+#### ALBERT SCHAUß — Born in Eckweiler, Leader of Church Preservation (KEY CONTACT)
+
+**This is the single most important present-day discovery:**
+
+- **Albert Schauß** was **BORN in Eckweiler** and lived there for 30 years
+- When the village was destroyed in 1979-82, he and his family were **resettled to Roxheim** in 1980
+- He now leads the **Freundeskreis Eckweilerer Kirche** (Friends Circle of Eckweiler Church), which preserves and maintains the ancestral Schauss church
+- He **rings the three bells** of the Holy Cross Church and organizes spiritual/cultural events there
+- He arranged a concert by the Roxheim MGV Frohsinn choir in the Eckweiler church
+- **Address:** In der Rossbach 27, 55595 Roxheim
+- **Phone:** 0671 36471
+- **Email:** albert.schauss@web.de
+- **Source:** [Rhein-Zeitung article](https://www.rhein-zeitung.de/lokales/oeffentlicher-anzeiger/auf-vermittlung-von-albert-schauss-roxheims-mgv-frohsinn-brillierte-in-der-eckweilerer-kirche_arid-2469384.html)
+
+**Albert Schauß is a direct descendant of the Eckweiler Schauss family** — the brothers who stayed when Hans Bernhardt moved to Albisheim in 1674. He is the living connection between the ancestral homeland and the present day. He would very likely have knowledge of the Schauss family history in Eckweiler, the surviving cemetery, and any family records or traditions.
+
+**The Eckweiler church he preserves is the very church where:**
+- Hanß Schauß and Catharina Von Allenfeldt worshipped (before 1600)
+- Melchior Schauß married Helena Anteßes (Dec 4, 1621)
+- Johannes Schauss's children were baptized (1647-1668)
+- Church records date from 1568
+
+#### Additional Eckweiler Details
+- The village was **first documented in 1341**, though a marker claims founding around 800 AD
+- ~70% was destroyed in WWII (1945) by phosphorus shells; the church tower was damaged
+- Population was ~350 before abandonment
+- The site is part of the **Evangelische Kirchengemeinde Gebroth-Winterburg**
+- A downloadable PDF guide "Kirche ohne Dorf" (Church without Village) is available from [soonwald.de](https://soonwald.de/eckweiler/)
+
 #### Sonja Schauß — Psychotherapist in Bad Kreuznach
 - **Sonja Schauß** works as a Psychologische Psychotherapeutin at Krankenhaus St. Marienwörth, Mühlenstraße 39, 55543 Bad Kreuznach
 - Phone: 0671 92897879

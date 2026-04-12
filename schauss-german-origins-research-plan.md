@@ -534,12 +534,31 @@ From "The Church Record Book of the Evangelical Parish, Albisheim, Pfalz":
 - **Altmannstein, Bavaria**: Helmut, Johann, Karl Schauß — small cluster
 - **Speyer**: Volker Schauß (67346) — lives in the city where the church archives are held
 
-#### The "Schauß Mühle" (Schauss Mill) in Roxheim
-Roxheim, Bad Kreuznach has a site called **Schauß Mühle** — a Schauss-named mill. This is highly significant because:
-- Johann Adam Schauss was a **miller** by trade (at the "Klein Mühle")
-- The Eckweiler Schauss family is from this exact area (Bad Kreuznach)
-- Multiple Schauss still live in Roxheim today
-- This could be a historic family property dating back centuries
+#### The "Schauß Mühle" (Schauss Mill) in Roxheim — Major Historic Site
+
+Roxheim, Bad Kreuznach has an officially recognized settlement called **Schauß Mühle** — a Schauss-named mill on the Katzenbach creek, north of the Nahe river. It is one of two outlying homesteads (Wohnplätze) belonging to Roxheim, alongside Rollars Mühle. The site is significant enough to:
+- Be listed as an **official Wohnplatz** (residential settlement) in Wikipedia and German administrative records
+- Have its own **weather page** on WetterOnline and wetter-deutschland.com
+- Be listed as a **transit stop** on fahrplan.guru (bus route accessible)
+- Appear on **OpenStreetMap** as a named location
+
+**Why this is highly significant for the Schauss family:**
+- Johann Adam Schauss was a **miller** by trade (at the "Klein Mühle" in Albisheim before emigrating)
+- The Eckweiler Schauss family is from the Bad Kreuznach district — this exact area
+- **Three Schauss families still live in Roxheim today** (Dirk, Annette, and one other)
+- The mill may be a centuries-old family property — mills were often passed down through generations
+- Roxheim was in the **Electorate of the Palatinate, Oberamt of Kreuznach** — same political entity as Eckweiler
+- The name appears in historical records for Roxheim as a recognized place name, not just a building
+
+**Next steps for Schauß Mühle research:**
+1. Contact the Ortsgemeinde Roxheim or Verbandsgemeinde Rüdesheim for local history of the mill
+2. Search the Landesarchiv Koblenz for mill ownership records (Mühlenakten)
+3. Check the PRFK Müllerdatenbank (Miller Database) for Schauss millers in the Bad Kreuznach area
+4. Search Roxheim church records for Schauss family members
+5. Visit the location — it is on the Katzenbach creek, accessible by bus
+
+#### Notable Modern Schauss: Prof. Dr. Peter Schauss
+A quantum physicist named **Peter Schauss** (note spelling without ß) was educated at TU Darmstadt and LMU Munich, worked at Princeton and University of Virginia, and in 2024 became a professor at the University of Hamburg. He is from Germany originally. While his connection to the historic Schauss family is unconfirmed, the Darmstadt/Rhine region origin is consistent with the Palatinate geographic cluster.
 
 ### Key Record References Found
 - **FHL Microfilm 193,748** — Albisheim Evangelische church marriage records

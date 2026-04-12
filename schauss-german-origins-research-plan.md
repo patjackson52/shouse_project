@@ -557,6 +557,44 @@ Roxheim, Bad Kreuznach has an officially recognized settlement called **Schauß 
 4. Search Roxheim church records for Schauss family members
 5. Visit the location — it is on the Katzenbach creek, accessible by bus
 
+#### WEINGUT SCHAUß — Active Schauss Family Winery in Monzingen (7th Generation!)
+
+A **Schauß family winery** has been operating in **Monzingen an der Nahe** since 1800 — now in its **7th generation**:
+
+- **Founded:** May 9, 1800, when **Johann Nicolaus Schauß from Daubach** married **Henriette Jäger from Monzingen**
+- **Current owner:** **Elmar Schauß** (Dipl.-Ing. Weinbau u. Oenologie) with wife Simone and two children
+- **Address:** Römerstraße 12, 55569 Monzingen
+- **Phone:** 06751 2882
+- **Email:** weingut-schauss@web.de
+- **Website:** [weingut-schauss.de](https://www.weingut-schauss.de/)
+- **Also operates:** Hotel-Restaurant **Stadtmühle Monzingen** (a 1533 mill converted to a hotel in 2016-2019)
+- **Notable:** Edgar Schauß was a pioneer in red wine cultivation in the western Nahe area
+- **Awards:** Multiple state honors (2010, 2011, 2016), gold medals, Feinschmecker recognition
+
+**Genealogical significance:**
+- Johann Nicolaus Schauß came from **Daubach** — the same village where **Peter Schauß** (father of Susanna Maria, b. 1781) lived
+- Daubach is in the **Bad Kreuznach district** — the same district as Eckweiler
+- The Stadtmühle (town mill) connection: the Schauß family purchased a historic mill dating to 1533 and converted it — **mills and the Schauss name are repeatedly connected**
+- Monzingen is ~15 km from Eckweiler — well within the family's geographic range
+- **Elmar Schauß** also appears in the Das Telefonbuch listing for Monzingen (Soonwaldstr. 13, 55569)
+
+**This winery family is very likely descended from the Eckweiler Schauss branch** and represents one of the most accessible present-day contacts for the family.
+
+#### Sonja Schauß — Psychotherapist in Bad Kreuznach
+- **Sonja Schauß** works as a Psychologische Psychotherapeutin at Krankenhaus St. Marienwörth, Mühlenstraße 39, 55543 Bad Kreuznach
+- Phone: 0671 92897879
+- Another Schauß professional in the Bad Kreuznach area
+
+#### Corrected Early Genealogy: Valentin Schaußes (Not Hanß)
+Research indicates that **Melchior Schauß's father was named Valentin Schaußes** (not Hanß Schauß as previously recorded on WikiTree). This comes from church record sources (Lutherische Kirchenbücher, 1533-1950, Evangelische Kirchenbuchamt Hannover). The WikiTree profile for Melchior lists Hanß as father, but the marriage record of Melchior names his father as Valentin. This discrepancy needs resolution.
+
+#### Eckweiler Branch — Expanded Family Network
+The Wickert Family Tree page on WikiTree reveals a larger Schauss network in Eckweiler:
+- **Anna Catharina Schauss** (c. 1680, Winterburg) — daughter of **Niclaus Schousser** — married Johann Melchior Wickert Feb 9, 1700 in Eckweiler. Had **8 children** (1702-1725).
+- **Nicholaus Schauss** (c. 1685, Ippensheid) — married Maria Elisabetha Wickert Jan 31, 1708 in Eckweiler
+- These two may be siblings — both children of "Niclaus Schousser/Schauss" from the Winterburg/Ippensheid area
+- The name "Schousser" suggests an older spelling variant of Schauss/Schauß
+
 #### Notable Modern Schauss: Prof. Dr. Peter Schauss
 A quantum physicist named **Peter Schauss** (note spelling without ß) was educated at TU Darmstadt and LMU Munich, worked at Princeton and University of Virginia, and in 2024 became a professor at the University of Hamburg. He is from Germany originally. While his connection to the historic Schauss family is unconfirmed, the Darmstadt/Rhine region origin is consistent with the Palatinate geographic cluster.
 

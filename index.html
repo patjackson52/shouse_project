@@ -1529,27 +1529,7 @@ const TREE_DATA = {
                                         { id: "fredrick-larkin", name: "Fredrick Larkin Shouse", birth: "Dec 24, 1853", birthPlace: "Mt. Airy, Surry Co., NC", death: "", deathPlace: "", tag: "american", sources: [], children: [] },
                                         { id: "nancy-clementine", name: "Nancy Clementine Shouse Haymore", birth: "May 2, 1854", birthPlace: "Surry Co., NC", death: "", deathPlace: "", tag: "american", sources: [], children: [] },
                                         { id: "isaac-l", name: "Isaac L. Shouse", birth: "Mar 1856", birthPlace: "NC", death: "", deathPlace: "", tag: "american", sources: [], children: [] },
-                                        { id: "mary-elizabeth-belton", name: "Mary Elizabeth Shouse Belton", birth: "Dec 22, 1874", birthPlace: "Surry Co., NC", death: "", deathPlace: "", tag: "american", sources: [], children: [] },
-                                        {
-                                          id: "gap-to-bennie", name: "\u2026 (1\u20132 generations) \u2026", birth: "", birthPlace: "Forsyth Co., NC", death: "", deathPlace: "", tag: "american",
-                                          badge: "Gap \u2014 exact link to be determined",
-                                          sources: [{ label: "Census records or Weller book (2019 ed.) needed", url: "" }],
-                                          children: [
-                                            {
-                                              id: "bennie-eugene", name: "Bennie Eugene Shouse", birth: "", birthPlace: "Forsyth Co., NC", death: "", deathPlace: "NC", tag: "american",
-                                              marriage: { spouse: "Della", spouseBirth: "", spouseDeath: "", date: "", place: "" },
-                                              sources: [{ label: "Obit of son William Eugene", url: "https://www.hooperfuneralhome.net/guestbook/6101402" }],
-                                              children: [
-                                                {
-                                                  id: "william-eugene", name: "William \u201cBill\u201d Eugene Shouse", birth: "c. 1933", birthPlace: "Winston-Salem, NC", death: "Jul 24, 2013", deathPlace: "Pfafftown, NC", occupation: "", tag: "american",
-                                                  badge: "Pfafftown, NC",
-                                                  sources: [{ label: "Hooper Funeral Home obituary", url: "https://www.hooperfuneralhome.net/guestbook/6101402" }],
-                                                  children: []
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
+                                        { id: "mary-elizabeth-belton", name: "Mary Elizabeth Shouse Belton", birth: "Dec 22, 1874", birthPlace: "Surry Co., NC", death: "", deathPlace: "", tag: "american", sources: [], children: [] }
                                       ]
                                     },
                                     { id: "elisabeth-kiger", name: "Elisabeth Shouse Kiger", birth: "", birthPlace: "Stokes Co., NC", death: "", deathPlace: "", tag: "american", sources: [], children: [] },
@@ -1559,9 +1539,52 @@ const TREE_DATA = {
                                 }
                               ]
                             },
-                            { id: "heinrich-jr", name: "Heinrich Schauss Jr.", birth: "1767", birthPlace: "NC", death: "1806", deathPlace: "NC", tag: "american",
-                              marriage: { spouse: "Elizabeth Null", spouseBirth: "", spouseDeath: "", date: "", place: "" },
-                              sources: [], children: [] },
+                            {
+                              id: "heinrich-jr", name: "Heinrich Schauss Jr.", birth: "1767", birthPlace: "NC", death: "1806", deathPlace: "NC", tag: "american",
+                              badge: "Line to William Eugene Shouse of Bethania",
+                              marriage: { spouse: "Elizabeth Null", spouseBirth: "", spouseDeath: "bef. 1818", date: "", place: "" },
+                              sources: [{ label: "fmoran.com Shouse Family", url: "https://www.fmoran.com/shouse.html" }],
+                              children: [
+                                {
+                                  id: "john-shouse-holder", name: "John Shouse", birth: "", birthPlace: "NC", death: "", deathPlace: "", tag: "american",
+                                  marriage: { spouse: "Mary Holder", spouseBirth: "", spouseDeath: "", date: "1811", place: "" },
+                                  sources: [],
+                                  children: [
+                                    {
+                                      id: "david-shouse", name: "David Shouse", birth: "Aug 27, 1817", birthPlace: "NC", death: "May 27, 1893", deathPlace: "Bethania, NC", tag: "american",
+                                      marriage: { spouse: "Henrietta Pfaff", spouseBirth: "Sep 28, 1820", spouseDeath: "Mar 1, 1880", date: "", place: "" },
+                                      sources: [{ label: "Bethania God's Acre", url: "" }],
+                                      children: [
+                                        {
+                                          id: "john-henry-shouse-1839", name: "John Henry Shouse", birth: "Sep 10, 1839", birthPlace: "NC", death: "Oct 29, 1919", deathPlace: "Bethania, NC", tag: "american",
+                                          marriage: { spouse: "Eliza V. Conrad", spouseBirth: "Apr 20, 1839", spouseDeath: "Dec 15, 1929", date: "", place: "" },
+                                          sources: [{ label: "Bethania God's Acre", url: "" }, { label: "Ancestry", url: "https://www.ancestry.com/genealogy/records/john-henry-shouse-24-49gs5cl" }],
+                                          children: [
+                                            { id: "robert-i", name: "Robert I. Shouse", birth: "Aug 30, 1867", birthPlace: "NC", death: "Mar 11, 1868", deathPlace: "", tag: "american", sources: [{ label: "Bethania God's Acre", url: "" }], children: [] },
+                                            { id: "charles-o", name: "Charles O. Shouse", birth: "Mar 24, 1870", birthPlace: "NC", death: "Jun 28, 1877", deathPlace: "", tag: "american", sources: [{ label: "Bethania God's Acre", url: "" }], children: [] },
+                                            {
+                                              id: "william-v", name: "William V. Shouse", birth: "Nov 17, 1872", birthPlace: "NC", death: "Oct 22, 1959", deathPlace: "Bethania, NC", tag: "american",
+                                              marriage: { spouse: "Bessie V. Tise", spouseBirth: "Jun 22, 1887", spouseDeath: "Aug 23, 1947", date: "", place: "" },
+                                              sources: [{ label: "Bethania God's Acre", url: "" }],
+                                              children: [
+                                                {
+                                                  id: "william-eugene-bethania", name: "William Eugene Shouse", birth: "May 28, 1913", birthPlace: "Bethania, NC", death: "Mar 10, 2000", deathPlace: "Bethania, NC", tag: "american",
+                                                  badge: "Bethania Moravian Church \u2014 Pfafftown, NC",
+                                                  marriage: { spouse: "Lexie Angell", spouseBirth: "Aug 17, 1918", spouseDeath: "Feb 19, 2014", date: "", place: "" },
+                                                  sources: [{ label: "Bethania Moravian God's Acre, Plot G Row 5 Grave 7", url: "" }],
+                                                  children: []
+                                                }
+                                              ]
+                                            },
+                                            { id: "eda-may", name: "Eda May Shouse", birth: "Aug 17, 1874", birthPlace: "NC", death: "Aug 17, 1895", deathPlace: "", tag: "american", sources: [{ label: "Bethania God's Acre", url: "" }], children: [] }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
                             { id: "johannes-1769", name: "Johannes Schauss", birth: "Dec 8, 1769", birthPlace: "Bethania, NC", death: "aft. 1809", deathPlace: "", tag: "american",
                               marriage: { spouse: "Catharina Null", spouseBirth: "Mar 29, 1770", spouseDeath: "May 19, 1795", date: "", place: "" },
                               sources: [], children: [] },

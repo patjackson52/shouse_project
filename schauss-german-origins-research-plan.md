@@ -404,9 +404,157 @@ With extensive Schauss/Shouse descendants in North America and potentially remai
 
 ---
 
+## New Findings from FamilySearch Research (April 10, 2026)
+
+### Ship Harle — Complete Emigration Record
+- **Ship:** Harle of London, Master Ralph Harle
+- **Route:** Rotterdam → Cowes → Philadelphia
+- **Arrival:** September 1, 1736
+- **Passengers:** 151 foreigners qualified (388 total with families)
+- **Johann Adam listed as:** Passenger #94 "Johan Adam Shans" — age 32
+- **Source:** *Pennsylvania German Pioneers* by Strassburger/Hinke, Vol. 1 (1980); PA State Archives RG-26
+- **Full list:** [Olive Tree Genealogy](https://www.olivetreegenealogy.com/ships/palship24.shtml) | [Immigrant Ships](https://www.immigrantships.net/v4/1700v4/harle17360901.html)
+
+### Complete Children of Johann Adam Schauss & Maria Barbara Baum
+Married January 16, 1725 in Albisheim. First 4 born in Germany, 7 born in Pennsylvania:
+
+1. Maria Magdalena Margaretha — Sep 25, 1725, Albisheim
+2. Friedrich Christoph — Apr 13, 1727, Albisheim/Immesheim
+3. Philip Nicolaus — Dec 17, 1728, Immesheim (d. 1810, Stokes Co., NC)
+4. Anna Maria Gertraud — Jul 18, 1731, Immesheim
+5. Johann (Show) — Jan 7, 1737, Pennsylvania (first born in America)
+6. Conrad — Jan 7, 1738, Falkner Swamp, Montgomery Co., PA
+7. Anna Margaretha — Jul 18, 1740, Falkner Swamp, Philadelphia Co., PA
+8. Heinrich Sr. — 1741, Falkner Swamp, Philadelphia Co., PA
+9. Gottlieb — Dec 14, 1744, Bethlehem, Northampton Co., PA
+10. Beniginia — Dec 1746, Bethlehem, Northampton Co., PA
+11. Christian (Shouse) — Jul 11, 1748, Whitehall, Bucks Co., PA
+
+### Baum Family — In-Laws in Albisheim
+- **Johann Philipp Baum** (c. 1670, Albisheim — Apr 13, 1729)
+- **Anna Margaretha (Stahler) Baum** (Apr 28, 1678, Albisheim — May 8, 1723)
+- Married 1706 at Lambsheim
+- Children: Johann Jacob (1699), Maria Margaretha (1703), Johann Engelberth (d. 1705), Hans V. (d. 1706), **Maria Barbara** (Jan 8, 1707, married J.A. Schauss), Johann Christian (1709)
+
+### Anna Engle-Burgis Conrad — Mother of the Emigrant
+- Born Oct 30, 1680, Albisheim; died c. 1712, Albisheim
+- Married Johann Conrad Schauss Sr. on Aug 29, 1699 at Evangelische, Albisheim
+- **Marriage sourced from FHL Microfilm 193,748** — confirmed FamilySearch record
+- Possible parents: Hans Michael Conrad and Anna Margretha Barbara (Naas) Conrad (disputed)
+
+### Eckweiler Branch — Separate Schauss Line Discovered
+- **Nicholaus Schauss** (c. 1685, Ippensheid, Bad Kreuznach) married Maria Elisabetha Wickert (Mar 25, 1689, Eckweiler) on Jan 31, 1708 in Eckweiler
+- **Anna Catharina Schauss** (c. 1680, Winterburg), daughter of Niclaus Schousser, married Johann Melchior Wickert (Feb 6, 1676, Eckweiler) on Feb 9, 1700 in Eckweiler
+- These individuals may be siblings or cousins of Hans Bernhardt Schauss's generation — potentially connecting the Eckweiler and Albisheim branches
+
+### CRITICAL DISCOVERY: Ortsfamilienbuch for Albisheim (1641-1900)
+- **Title:** "Die Familien Albisheims: 1641-1900, ihre Genealogie und Geschichte"
+- **Author:** Detlef Uhrig
+- **Published:** 2009, Kaiserslautern, 2 volumes
+- **Catalog #:** 1b 6809 (1+2) at Pfalzbibliothek
+- **Where to consult:**
+  - Pfalzbibliothek, Kaiserslautern — [pfalzbibliothek.de](https://www.pfalzbibliothek.de/)
+  - Geschichts- und Heimatverein Albisheim e.V., Pfrimmtalstraße 9, 67308 Albisheim (Chairman: Ralf Petri)
+- **Why this matters:** This book compiles ALL births, marriages, and deaths from parish records into family groups for Albisheim across 259 years. EVERY Schauss family member recorded in Albisheim from 1641 to 1900 should appear — including the descendants of Philipp Heinrich who stayed.
+
+### Also by Detlef Uhrig:
+- "Albisheim: die lutherische Kirche und ihre Pfarrer 1641-1798" (2009, Kaiserslautern) — study of the Lutheran church and its pastors
+
+### Additional Sibling Discovered
+- **Johannes Schauss** — born Feb 17, 1678 in Albisheim, married Maria Barbara Meyers Apr 14, 1705. This is an additional child of Hans Bernhardt Schauss not previously listed on WikiTree (which shows only 4 children). The Albisheim church records show at least 5 children.
+
+### Geschichts- und Heimatverein Albisheim e.V. — Key Present-Day Contact
+- **Address:** Pfrimmtalstraße 9, 67308 Albisheim
+- **Chairman:** Ralf Petri
+- **Registration:** VR 11771, Amtsgericht Kaiserslautern
+- **Website:** [albisheim.de/vereine/geschichts-und-heimatverein](https://albisheim.de/v2/dorfleben/vereine/geschichts-und-heimatverein/)
+- **Published:** "Albisheim/Pfrimm: Ein geschichtliches Bilderbuch 1969 bis 2009" (10th anniversary, 2009)
+- **Activities:** Archaeological excavations, historical documentation, community events
+
+### FamilySearch Indexed Collections Confirmed
+- **Collection 1473000:** "Germany, Births and Baptisms, 1558-1898" — Pfalz (Bayern) has 1,665,783 records indexed
+- **Collection 1473009:** "Germany, Marriages, 1558-1929" — includes Pfalz/Bayern marriages
+- **FHL Microfilm 193,748:** Albisheim Evangelische church marriage records (confirmed source for 1699 marriage)
+
+### Confirmed Baptism Records from Albisheim Kirchenbuch
+From "The Church Record Book of the Evangelical Parish, Albisheim, Pfalz":
+- Johann Conrad Schauss — baptized Jan 2, 1675 (copy on p. 143 of Weller dissertation)
+- Johannes Schauss — born Feb 17, 1678
+- Anna Margaretha Schauss — born Oct 30, 1680
+- Hans Adam Schauss — born Jun 10, 1683
+- Philipp Heinrich Schauss — born Feb 3, 1686
+- Maria Barbara Baum — christened Jan 8, 1707
+- Maria Magdalena Margaretha Schauss — born Sep 25, 1725
+- Friedrich Christoph Schauss — baptized Apr 15, 1727
+- Phillip Nicholas Schauss — christened Dec 21, 1728 in Albisheim (born in Immesheim)
+
+### PRESENT-DAY SCHAUSS/SCHAUß LIVING IN GERMANY — Das Telefonbuch Results (April 2026)
+
+**92 total Schauss/Schauß listings** found across Germany via dastelefonbuch.de.
+
+#### HIGHEST PRIORITY — Living Near Albisheim (Donnersbergkreis / Zellertal):
+
+| Name | Address | Distance from Albisheim | Notes |
+|------|---------|------------------------|-------|
+| **Freia Schauss** | Zeller Weg 3, 67308 Zellertal-Niefernheim | ~3 km | SAME postal code as Albisheim. Adjacent village. |
+| **Fritz Schauß** | Zeller Weg 3, 67308 Zellertal-Niefernheim | ~3 km | Same address as Freia — family members. Phone: 06355 2..6 20 |
+| **Richard Schauss** | 67297 Marnheim | ~5 km | Neighboring municipality to Albisheim |
+| **Eckhard Schauss** | Kirchenstr. 1, 67259 Heuchelheim b. Frankenthal | ~20 km | Palatinate, near Lambsheim (where Baum family married) |
+
+**These are very likely descendants of Philipp Heinrich Schauss (Mayor of Albisheim, 1686-1765) who stayed in Germany.** Zellertal-Niefernheim is literally the next village over from Albisheim in the same valley.
+
+#### Bad Kreuznach Cluster (Eckweiler Origins Area):
+
+| Name | Location | Notes |
+|------|----------|-------|
+| **Dirk Schauss** | Am Birnbaum 2, 55595 Roxheim | Roxheim has a "Schauß Mühle" (Schauss Mill)! |
+| **Annette Schauss** | 55595 Roxheim | Same town |
+| **Schauss** (first name unclear) | In der Lehmkaul 4, 55595 Roxheim | Third listing |
+| **Reinhard Schauß** | 55566 Bad Sobernheim | Near Eckweiler |
+| **Elmar Schauß** | Soonwaldstr. 13, 55569 Monzingen | Near Eckweiler |
+| **I. u. J. Schauß** | Rüdesheim (Kr Bad Kreuznach) | Bad Kreuznach district |
+| **Stephan u. Doris Schauß** | 55595 Burgsponheim | Bad Kreuznach area |
+
+**These may descend from the Eckweiler branch (Nicholaus Schauss, c.1685, married Wickert in 1708).**
+
+#### Kaiserslautern Area (Palatinate):
+
+| Name | Location |
+|------|----------|
+| **Manfred Schauß** | 67655 Kaiserslautern |
+| **Ronald Schauß** | 67655 Kaiserslautern |
+| **Martin Schauß** | Kaiserslautern, Morlautern |
+| **Harald Schauß** | 66887 Föckelberg |
+| **Brigitte und Florian Schauß** | Hauptstr. 36, 67693 Waldleiningen |
+
+#### Other Notable Clusters:
+
+- **Hohenstein/Taunusstein/Idstein cluster** (Hesse): Arthur, Claudia, Helmut, Jörg, Margarete, Pia & Rudolf, Reinhold, Thomas, Walter, Werner Schauß — 10+ listings in this small area
+- **Wiesbaden/Frankfurt area**: Multiple listings
+- **Altmannstein, Bavaria**: Helmut, Johann, Karl Schauß — small cluster
+- **Speyer**: Volker Schauß (67346) — lives in the city where the church archives are held
+
+#### The "Schauß Mühle" (Schauss Mill) in Roxheim
+Roxheim, Bad Kreuznach has a site called **Schauß Mühle** — a Schauss-named mill. This is highly significant because:
+- Johann Adam Schauss was a **miller** by trade (at the "Klein Mühle")
+- The Eckweiler Schauss family is from this exact area (Bad Kreuznach)
+- Multiple Schauss still live in Roxheim today
+- This could be a historic family property dating back centuries
+
+### Key Record References Found
+- **FHL Microfilm 193,748** — Albisheim Evangelische church marriage records
+- **FamilySearch Collection 1475962** — Rhineland-Palatinate Church Record Extractions (106,564 images, free to browse)
+- **Eckweiler Kirchenbuch records** microfilmed by GSU in 1962, manuscripts at Staatsarchiv Koblenz:
+  - Film 489885: Records 1632-1675 (baptisms, marriages, deaths)
+  - Film 493211: Records 1760-1798 (baptisms, confirmations, marriages, deaths)
+- **Johann Adam's occupation:** Wheelwright and miller at the "Klein Mühle" (small mill) before emigrating
+
+---
+
 ## Revision History
 
 - **April 10, 2026** — Research plan created with comprehensive web research findings
+- **April 10, 2026** — Added FamilySearch findings: Ship Harle details, complete children list, Baum family, Conrad family, Eckweiler branch, FHL microfilm numbers
 
 ---
 

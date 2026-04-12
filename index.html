@@ -803,12 +803,17 @@
     </div>
 
     <div class="family-card">
-      <h3>Eckweiler &mdash; Earliest Origins</h3>
-      <div class="fc-dates">Bad Kreuznach district &middot; ~60 km south of Albisheim</div>
+      <h3>Eckweiler &mdash; Earliest Origins (Abandoned 1979)</h3>
+      <div class="fc-dates">Bad Kreuznach &middot; Amt Winterburg &middot; Now a W&uuml;stung</div>
       <p>
-        The earliest known Schauss origin. Han&szlig; Schau&szlig; (before 1600) and his wife Catharina Von
-        Allenfeldt lived here. Their son Melchior (1595&ndash;1628) married and died in Eckweiler.
-        Church records survive from 1568. The village became Protestant during the Reformation.
+        The earliest known Schauss origin and home to <strong>at least 4 brothers</strong> who stayed
+        when Hans Bernhardt left for Albisheim. Hanss Caspar (1656), Johannes Melchior (1657),
+        Hanss Velten, and Hans Christoph all remained in Eckweiler &mdash; their descendants became the
+        Daubach/Monzingen winery family and the Roxheim mill family.<br><br>
+        <strong>The village was abandoned in 1979</strong> when NATO expanded the Pferdsfeld airbase.
+        Only the <strong>Heiligkreuzkirche</strong> (Holy Cross Church, c. 1500) and <strong>cemetery</strong>
+        survive &mdash; both monument-protected. Open May&ndash;Oct, 1st Sunday, 2&ndash;5 PM.
+        The cemetery may contain Schauss headstones from the 1600s&ndash;1900s.
       </p>
     </div>
   </div>
@@ -1343,10 +1348,12 @@ const TREE_DATA = {
         {
           id: "johannes-schauss", name: "Johannes Schauss", birth: "c. Jul 23, 1620", birthPlace: "B\u00fcdingen, Lorraine", death: "c. Feb 27, 1674", deathPlace: "B\u00fcdingen", occupation: "", tag: "german",
           marriage: { spouse: "Maria Magdalena Klein", spouseBirth: "1625", spouseDeath: "", date: "Jan 30, 1644", place: "Evangelische, Albisheim" },
-          sources: [{ label: "WikiTree", url: "https://www.wikitree.com/wiki/Schauss-18" }],
+          sources: [{ label: "WikiTree", url: "https://www.wikitree.com/wiki/Schauss-18" }, { label: "Geni.com \u2014 7+ sons documented", url: "https://www.geni.com/people/Johannes-Schauss/6000000001529499262" }],
+          note: "Had 7 sons and 3 daughters. Hans Bernhardt moved to Albisheim; at least 4 brothers stayed in Eckweiler.",
           children: [
             {
               id: "hans-bernhardt", name: "Hans Bernhardt Schauss", birth: "c. 1650", birthPlace: "B\u00fcdingen", death: "Aug 31, 1720", deathPlace: "Albisheim", occupation: "", tag: "german",
+              badge: "Moved to Albisheim 1674",
               marriage: { spouse: "Anna Margarethe Naass", spouseBirth: "Mar 1, 1657, Albisheim", spouseDeath: "Aug 31, 1720, Albisheim", date: "Apr 21, 1674", place: "Albisheim" },
               sources: [{ label: "WikiTree", url: "https://www.wikitree.com/wiki/Schauss-17" }, { label: "Albisheim Kirchenbuch", url: "" }],
               children: [
@@ -1394,6 +1401,45 @@ const TREE_DATA = {
                   sources: [{ label: "Ancestry", url: "https://www.ancestry.com/genealogy/records/phillip-heinrich-schauss-24-1kycqf4" }, { label: "Ortsfamilienbuch Albisheim (Uhrig, 2009)", url: "" }],
                   children: []
                 }
+              ]
+            },
+            {
+              id: "hanss-caspar", name: "Hanss Caspar Schauss", birth: "1656", birthPlace: "Eckweiler", death: "", deathPlace: "", occupation: "", tag: "stayed",
+              badge: "Stayed in Eckweiler",
+              sources: [{ label: "Geni.com", url: "https://www.geni.com/people/Hanss-Schauss/6000000001529499254" }],
+              children: []
+            },
+            {
+              id: "johannes-melchior", name: "Johannes Melchior Schauss", birth: "Dec 10, 1657", birthPlace: "Eckweiler", death: "", deathPlace: "", occupation: "", tag: "stayed",
+              badge: "Stayed in Eckweiler",
+              marriage: { spouse: "Anna Sophia Corvini", spouseBirth: "", spouseDeath: "", date: "", place: "Eckweiler" },
+              sources: [{ label: "Geni.com", url: "https://www.geni.com/people/Johannes-Schauss/6000000001529499262" }, { label: "Eckweiler Kirchenbuch", url: "" }],
+              children: [
+                { id: "johan-fredericus", name: "Johan Fredericus Schauss", birth: "", birthPlace: "Eckweiler", death: "", deathPlace: "", tag: "stayed", sources: [], children: [] },
+                { id: "johan-eberhard", name: "Johan Eberhard Schauss", birth: "", birthPlace: "Eckweiler", death: "", deathPlace: "", tag: "stayed", sources: [], children: [] },
+                {
+                  id: "johan-gerg", name: "Johan Gerg Schauss", birth: "Jul 9, 1690", birthPlace: "Eckweiler", death: "", deathPlace: "", tag: "stayed",
+                  sources: [{ label: "Ancestry", url: "https://www.ancestry.com/genealogy/records/johan-gerg-schauss-24-2b719v6" }], children: []
+                }
+              ]
+            },
+            {
+              id: "hanss-velten", name: "Hanss Velten Schauss", birth: "", birthPlace: "Eckweiler", death: "", deathPlace: "", occupation: "", tag: "stayed",
+              badge: "Stayed in Eckweiler",
+              sources: [],
+              children: []
+            },
+            {
+              id: "hans-christoph", name: "Hans Christoph Schauss", birth: "", birthPlace: "Eckweiler", death: "", deathPlace: "", occupation: "", tag: "stayed",
+              badge: "Stayed in Eckweiler \u2014 Daubach/Monzingen line",
+              sources: [],
+              children: [
+                {
+                  id: "johan-valentin", name: "Johan Valentin Schauss", birth: "Nov 16, 1698", birthPlace: "Eckweiler", death: "", deathPlace: "", tag: "stayed",
+                  sources: [{ label: "Geni.com", url: "https://www.geni.com/people/Johan-Schauss/6000000001529499347" }], children: []
+                },
+                { id: "johan-philipo", name: "Johan Philipo Schauss", birth: "", birthPlace: "Eckweiler", death: "", deathPlace: "", tag: "stayed", sources: [], children: [] },
+                { id: "johann-heinrich", name: "Johann Heinrich Schauss", birth: "", birthPlace: "Eckweiler", death: "", deathPlace: "", tag: "stayed", sources: [], children: [] }
               ]
             }
           ]

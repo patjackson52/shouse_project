@@ -674,6 +674,29 @@ A quantum physicist named **Peter Schauss** (note spelling without ß) was educa
 
 - **April 10, 2026** — Research plan created with comprehensive web research findings
 - **April 10, 2026** — Added FamilySearch findings: Ship Harle details, complete children list, Baum family, Conrad family, Eckweiler branch, FHL microfilm numbers
+- **April 12, 2026** — Present-day Schauss listings (92 in Germany), Schauß Mühle, Weingut Schauß, Albert Schauß born in Eckweiler, Eckweiler brothers breakthrough, Familienbuch resources
+
+## Critical Unpursued Leads (April 12, 2026)
+
+### Published Genealogical Resources to Obtain
+1. **Familienbuch Rehbach 1684-1815** by Paul Wilbert (1991) — covers Eckweiler, Daubach, Winterburg, Ippenschied, and 10+ surrounding villages. WILL CONTAIN SCHAUSS ENTRIES. Also: continuation volume 1815-1960.
+2. **Familienbuch Roxheim 1691-1905** by Heinz Augustin (Bd. 170, WGfF, 2002, 967 pages) — covers the Roxheim evangelical parish. Order: WGfF-Shop, WG10060. May contain Schauss entries given the Schauß Mühle and present-day Schauss residents.
+3. **Familienbuch Bad Sobernheim 1664-1880** by Josef Schmieden (Bd. 152, WGfF, 1185 pages, 2 vols) — covers the town where Eckweiler residents were resettled. Order: WG10047.
+4. **Verkartung der Eckweiler Kirchenbücher (1568-1819, 1568-1885)** by Werner Bentz — indexed card file of ALL Eckweiler church records. The archive is at the Archiv der Evangelischen Kirche im Rheinland, Bad Kreuznach (Kirchenkreis "An Nahe und Glan").
+
+### Find a Grave Entries
+- **Peter Schauss (1945-2012)** — buried Waldfriedhof Oberrad, Frankfurt am Main [Memorial 107621925](https://www.findagrave.com/memorial/107621925/peter-schauss)
+- **Susanna Schauss Krieger (1758-1828)** — daughter of Philip Nicolaus Schauss & Maria Catherine Beck; buried **Bethania Moravian God's Acre**, Forsyth Co., NC [Memorial 17178647](https://www.findagrave.com/memorial/17178647/susanna-krieger)
+- **Maria Catherine Beck Schauss (1734-1796)** — wife of Philip Nicolaus; [Memorial 149358019](https://www.findagrave.com/memorial/149358019/maria-catherine-schauss)
+
+### Additional Eckweiler Family Members Discovered
+- **Johann Jacob Schauss** — born Jul 29, 1777 in Eckweiler. Confirms family was STILL in Eckweiler through the late 1700s — well after Hans Bernhardt left for Albisheim in 1674.
+
+### Key Contacts for Further Research
+- **WGfF Bezirksgruppe Nahe-Rhein-Hunsrück** — Orders: 0221-277 59 443 or 0221-277 59 447. They publish the Roxheim and Bad Sobernheim Familienbücher.
+- **Archiv der Evangelischen Kirche im Rheinland** — holds Eckweiler church records and Werner Bentz's Verkartung. Available on Archion (paid).
+- **WikiTree Schauss genealogists** — 6 active researchers on the Schauss tree at [wikitree.com/genealogy/SCHAUSS](https://www.wikitree.com/genealogy/SCHAUSS)
+- **Geni.com** — 254 Schauss profiles, allows direct messaging to tree managers
 
 ---
 

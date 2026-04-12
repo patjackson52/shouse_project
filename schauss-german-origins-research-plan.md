@@ -585,6 +585,39 @@ A **Schauß family winery** has been operating in **Monzingen an der Nahe** sinc
 - Phone: 0671 92897879
 - Another Schauß professional in the Bad Kreuznach area
 
+#### DAUBACH — Branch Parish of Eckweiler, Key Connection Point
+
+**Daubach** (Bad Kreuznach district, Verbandsgemeinde Bad Sobernheim) is the critical link between the Eckweiler Schauss origins and the present-day winery family:
+- **Daubach was a branch of Eckweiler's parish** — the Evangelical church in Daubach (built 1866) was a branch of Eckweiler's congregation
+- Daubach and Eckweiler **shared the same history for centuries** — both in the Amt of Winterburg since c. 1232
+- **Peter Schauß** lived in Daubach (daughter Susanna Maria b. 1781)
+- **Johann Nicolaus Schauß** left Daubach for Monzingen in 1800 to found the winery
+- Peter and Johann Nicolaus were very likely father and son, or uncle/nephew
+
+**ECKWEILER — The Abandoned Village (1979)**
+Eckweiler, the earliest Schauss homeland, was **abandoned in 1979** when NATO expanded the Pferdsfeld airbase for F-4 Phantom jets. 350 residents were resettled to the Leinenborn area east of Bad Sobernheim. The village was demolished in 1981-82.
+- **Only the church and cemetery survive** — the late-Gothic Heiligkreuzkirche (Holy Cross Church, c. 1500) is monument-protected
+- **The cemetery still exists** but no new graves since abandonment — may contain Schauss headstones from centuries ago
+- **Visitable today:** The Freundeskreis Eckweilerer Kirche opens the church May-October, first Sunday each month, 2-5 PM
+- **Hiking route:** "Vitaltour Um die Wüstung" — ~5km walk from Bad Sobernheim through the former village site
+
+#### COMPLETE SIBLING SET: Children of Johannes Schauss (c. 1620-1674)
+
+The Geni.com and Ancestry records reveal that Johannes (Gabriel) Schauss and Maria Magdalena Klein had **at least 5 documented sons** (WikiTree says "seven sons and three daughters"):
+
+| Name | Born | Location | What Happened |
+|------|------|----------|---------------|
+| **Hans Bernhardt Schauss** | c. 1650 | Büdingen | **Moved to Albisheim** 1674 → our main line |
+| **Hanss Caspar Schauss** | 1656 | Eckweiler | Stayed in Eckweiler area |
+| **Johannes Melchior Schauss** | Dec 10, 1657 | Eckweiler | Stayed in Eckweiler; married (1) Anna Sophia Corvini, (2) Maria Elisabetha Boehm; children: Johan Fredericus, Johan Eberhard, **Johan Gerg (b. Jul 9, 1690)** |
+| **Hanss Velten Schauss** | ? | Eckweiler | Stayed in Eckweiler area |
+| **Hans Christoph Schauss** | ? | Eckweiler | Stayed in Eckweiler; father of **Johan Valentin Schauss (b. Nov 16, 1698)**, Johan Philipo, Johann Heinrich |
+
+**This means the "Eckweiler branch" is not a separate family — it's the SAME family.** Hans Bernhardt was the brother who left for Albisheim, while at least 4 brothers stayed in Eckweiler and continued the family there for centuries. The present-day Schauß winery in Monzingen, the Schauss families in Roxheim, and the Schauß Mühle are all descended from these brothers who stayed.
+
+#### Niclaus Schousser — Possible Uncle or Cousin
+**Niclaus Schousser** of Winterburg (father of Anna Catharina Schauss, c. 1680) may be an earlier generation connecting to the Eckweiler Schauss family. The name "Schousser" is an older variant. Winterburg was the administrative center (Amt) that governed both Eckweiler and Daubach.
+
 #### Corrected Early Genealogy: Valentin Schaußes (Not Hanß)
 Research indicates that **Melchior Schauß's father was named Valentin Schaußes** (not Hanß Schauß as previously recorded on WikiTree). This comes from church record sources (Lutherische Kirchenbücher, 1533-1950, Evangelische Kirchenbuchamt Hannover). The WikiTree profile for Melchior lists Hanß as father, but the marriage record of Melchior names his father as Valentin. This discrepancy needs resolution.
 

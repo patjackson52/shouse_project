@@ -2996,6 +2996,13 @@ const TREE_DATA = {
 
     if (typeof updateEraUI === 'function') updateEraUI(era);
     if (typeof updateSliderRange === 'function') updateSliderRange(era);
+
+    // Animate Harle route on era 4
+    if (eraId === 4) {
+      setTimeout(function() {
+        animatePolyline(transatlanticPolyline, 2000);
+      }, 1600);
+    }
   }
 
   // ── Task 4: Era button controls ───────────────────────────────
@@ -3190,6 +3197,26 @@ const TREE_DATA = {
         filterByYear(yr);
       }, 200);
     }
+  }
+
+  // ── Polyline draw animation ─────────────────────────────────────
+  function animatePolyline(polyline, duration) {
+    if (reducedMotion) return;
+    var path = polyline.getElement();
+    if (!path) return;
+    var svg = path.closest('svg');
+    if (!svg) return;
+    var pathEl = path.querySelector('path') || path;
+    if (!pathEl.getTotalLength) return;
+    var length = pathEl.getTotalLength();
+    pathEl.style.strokeDasharray = length;
+    pathEl.style.strokeDashoffset = length;
+    pathEl.style.transition = 'stroke-dashoffset ' + duration + 'ms ease-in-out';
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        pathEl.style.strokeDashoffset = '0';
+      });
+    });
   }
 
   // ── Layers control ──────────────────────────────────────────────

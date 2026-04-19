@@ -2991,49 +2991,43 @@ const TREE_DATA = {
   Object.values(layers).forEach(function(lg) { lg.addTo(map); });
 
   // ── Task 3: Era filtering ─────────────────────────────────────
-  var isAnimating = false;
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function switchEra(eraId) {
-    if (isAnimating && eraId !== currentEra) return;
     var era = ERAS.find(function(e) { return e.id === eraId; });
     if (!era) return;
     currentEra = eraId;
-    isAnimating = true;
 
     if (reducedMotion) {
       map.setView(era.center, era.zoom);
-      isAnimating = false;
     } else {
       map.flyTo(era.center, era.zoom, { duration: 1.5 });
-      map.once('moveend', function() { isAnimating = false; });
     }
 
+    // First pass: remove markers not in this era
     allMarkers.forEach(function(entry) {
       var dominated = entry.data.eras.indexOf(currentEra) === -1;
-      var el = entry.marker.getElement && entry.marker.getElement();
       if (dominated) {
-        if (el) {
-          el.style.transition = reducedMotion ? 'opacity 0.1s' : 'opacity 0.3s';
-          el.style.opacity = '0';
-          setTimeout(function() { entry.layer.removeLayer(entry.marker); }, reducedMotion ? 100 : 300);
-        } else {
-          entry.layer.removeLayer(entry.marker);
-        }
-      } else {
-        if (!entry.layer.hasLayer(entry.marker)) {
-          entry.layer.addLayer(entry.marker);
-          el = entry.marker.getElement && entry.marker.getElement();
-          if (el) {
-            el.style.opacity = '0';
-            el.style.transition = reducedMotion ? 'opacity 0.1s' : 'opacity 0.3s';
-            requestAnimationFrame(function() {
-              requestAnimationFrame(function() { el.style.opacity = '1'; });
-            });
-          }
-        }
+        entry.layer.removeLayer(entry.marker);
       }
     });
+
+    // Second pass: add markers for this era
+    allMarkers.forEach(function(entry) {
+      var dominated = entry.data.eras.indexOf(currentEra) === -1;
+      if (!dominated && !entry.layer.hasLayer(entry.marker)) {
+        entry.layer.addLayer(entry.marker);
+      }
+    });
+
+    // Reset opacity on all visible markers after DOM settles
+    setTimeout(function() {
+      allMarkers.forEach(function(entry) {
+        if (entry.data.eras.indexOf(currentEra) === -1) return;
+        var el = entry.marker.getElement && entry.marker.getElement();
+        if (el) el.style.opacity = '1';
+      });
+    }, 50);
 
     allPolylines.forEach(function(pl) {
       var dominated = pl._eraData.eras.indexOf(currentEra) === -1;

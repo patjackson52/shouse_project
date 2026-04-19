@@ -133,25 +133,6 @@
 
     /* ── Map ────────────────────────────────────────────────────── */
     #map-section { padding-top: 48px; }
-    .map-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 18px;
-    }
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.82rem;
-      color: var(--text-dim);
-    }
-    .legend-dot {
-      width: 13px; height: 13px;
-      border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.25);
-      flex-shrink: 0;
-    }
     #map {
       width: 100%;
       height: 580px;
@@ -159,6 +140,91 @@
       border: 1px solid var(--border);
       background: #1a1610;
     }
+    /* ── Era controls (overlay on map) ─────────────────────────────── */
+    .era-bar {
+      display: flex;
+      gap: 4px;
+      pointer-events: auto;
+    }
+    .era-btn {
+      background: rgba(30,26,20,0.92);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.68rem;
+      font-family: inherit;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .era-btn:hover { border-color: var(--sepia); color: var(--text); }
+    .era-btn.active { border-color: var(--gold); color: var(--gold); }
+    .era-info {
+      background: rgba(30,26,20,0.92);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 4px;
+      max-width: 300px;
+      pointer-events: auto;
+      margin-top: 6px;
+    }
+    .era-info-title { font-size: 0.72rem; color: var(--gold); font-weight: bold; }
+    .era-info-desc { font-size: 0.65rem; color: var(--text-dim); margin-top: 2px; line-height: 1.4; }
+
+    @media (max-width: 767px) {
+      .era-bar {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        max-width: calc(100vw - 24px);
+      }
+      .era-bar::-webkit-scrollbar { display: none; }
+      .era-btn { padding: 6px 12px; font-size: 0.72rem; flex-shrink: 0; }
+      .era-info { max-width: calc(100vw - 70px); }
+      .era-info-desc { display: none; }
+      .era-info.expanded .era-info-desc { display: block; }
+    }
+
+    /* ── Timeline slider ───────────────────────────────────────────── */
+    .timeline-control {
+      pointer-events: auto;
+      background: linear-gradient(transparent, rgba(13,11,8,0.95));
+      padding: 10px 16px 12px;
+    }
+    .timeline-row { display: flex; align-items: center; gap: 10px; }
+    .timeline-year { font-size: 0.72rem; font-weight: bold; min-width: 32px; text-align: center; }
+    .timeline-year-start { color: var(--gold); }
+    .timeline-year-end { color: var(--text-dim); }
+    .timeline-slider {
+      flex: 1; -webkit-appearance: none; appearance: none;
+      height: 4px; background: var(--border); border-radius: 2px; outline: none; cursor: pointer;
+    }
+    .timeline-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 14px; height: 14px;
+      background: var(--gold); border-radius: 50%; cursor: pointer;
+      box-shadow: 0 0 6px rgba(232,201,122,0.4);
+    }
+    .timeline-slider::-moz-range-thumb {
+      width: 14px; height: 14px; background: var(--gold); border: none;
+      border-radius: 50%; cursor: pointer; box-shadow: 0 0 6px rgba(232,201,122,0.4);
+    }
+    .timeline-nav { display: flex; justify-content: center; gap: 12px; margin-top: 6px; }
+    .timeline-nav-btn {
+      background: none; border: none; color: var(--text-dim);
+      font-size: 0.65rem; cursor: pointer; font-family: inherit; padding: 2px 6px;
+    }
+    .timeline-nav-btn:hover { color: var(--gold); }
+    .timeline-hidden { display: none; }
+
+    @media (max-width: 767px) {
+      .timeline-control { padding: 8px 12px 10px; }
+      .timeline-slider { height: 6px; }
+      .timeline-slider::-webkit-slider-thumb { width: 20px; height: 20px; }
+      .timeline-slider::-moz-range-thumb { width: 20px; height: 20px; }
+      .timeline-nav-btn { font-size: 0.72rem; padding: 4px 8px; }
+    }
+
     .leaflet-popup-content-wrapper {
       background: #1e1a14;
       color: var(--text);
@@ -576,24 +642,6 @@
     finally to the Moravian settlements of North Carolina. Click any marker for
     historical detail. The orange dashed line traces the family's migration path.
   </p>
-
-  <div class="map-legend">
-    <div class="legend-item">
-      <div class="legend-dot" style="background:var(--blue-mk)"></div> Residences &amp; Settlements
-    </div>
-    <div class="legend-item">
-      <div class="legend-dot" style="background:var(--gold-mk)"></div> Churches
-    </div>
-    <div class="legend-item">
-      <div class="legend-dot" style="background:var(--gray-mk)"></div> Cemeteries
-    </div>
-    <div class="legend-item">
-      <div class="legend-dot" style="background:var(--green-mk)"></div> Archives &amp; Repositories
-    </div>
-    <div class="legend-item">
-      <div class="legend-dot" style="background:#e8703a;border-radius:2px;"></div> Migration Path
-    </div>
-  </div>
 
   <div id="map"></div>
 </section>
@@ -2808,6 +2856,257 @@ const TREE_DATA = {
 
   // ── Add all layer groups to map ─────────────────────────────
   Object.values(layers).forEach(function(lg) { lg.addTo(map); });
+
+  // ── Task 3: Era filtering ─────────────────────────────────────
+  var isAnimating = false;
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function switchEra(eraId) {
+    if (isAnimating && eraId !== currentEra) return;
+    var era = ERAS.find(function(e) { return e.id === eraId; });
+    if (!era) return;
+    currentEra = eraId;
+    isAnimating = true;
+
+    if (reducedMotion) {
+      map.setView(era.center, era.zoom);
+      isAnimating = false;
+    } else {
+      map.flyTo(era.center, era.zoom, { duration: 1.5 });
+      map.once('moveend', function() { isAnimating = false; });
+    }
+
+    allMarkers.forEach(function(entry) {
+      var dominated = entry.data.eras.indexOf(currentEra) === -1;
+      var el = entry.marker.getElement && entry.marker.getElement();
+      if (dominated) {
+        if (el) {
+          el.style.transition = reducedMotion ? 'opacity 0.1s' : 'opacity 0.3s';
+          el.style.opacity = '0';
+          setTimeout(function() { entry.layer.removeLayer(entry.marker); }, reducedMotion ? 100 : 300);
+        } else {
+          entry.layer.removeLayer(entry.marker);
+        }
+      } else {
+        if (!entry.layer.hasLayer(entry.marker)) {
+          entry.layer.addLayer(entry.marker);
+          el = entry.marker.getElement && entry.marker.getElement();
+          if (el) {
+            el.style.opacity = '0';
+            el.style.transition = reducedMotion ? 'opacity 0.1s' : 'opacity 0.3s';
+            requestAnimationFrame(function() {
+              requestAnimationFrame(function() { el.style.opacity = '1'; });
+            });
+          }
+        }
+      }
+    });
+
+    allPolylines.forEach(function(pl) {
+      var dominated = pl._eraData.eras.indexOf(currentEra) === -1;
+      if (dominated) {
+        layers.paths.removeLayer(pl);
+      } else if (!layers.paths.hasLayer(pl)) {
+        layers.paths.addLayer(pl);
+      }
+    });
+
+    if (typeof updateEraUI === 'function') updateEraUI(era);
+    if (typeof updateSliderRange === 'function') updateSliderRange(era);
+  }
+
+  // ── Task 4: Era button controls ───────────────────────────────
+  var EraControl = L.Control.extend({
+    options: { position: 'topleft' },
+    onAdd: function() {
+      var wrapper = L.DomUtil.create('div', '');
+      wrapper.style.pointerEvents = 'none';
+      L.DomEvent.disableClickPropagation(wrapper);
+      L.DomEvent.disableScrollPropagation(wrapper);
+
+      var bar = L.DomUtil.create('div', 'era-bar', wrapper);
+      ERAS.forEach(function(era) {
+        var btn = L.DomUtil.create('button', 'era-btn', bar);
+        btn.textContent = era.short;
+        btn.dataset.eraId = era.id;
+        btn.title = era.label + ' (' + era.range[0] + '\u2013' + era.range[1] + ')';
+        if (era.id === currentEra) btn.classList.add('active');
+        btn.addEventListener('click', function() { switchEra(era.id); });
+      });
+
+      var info = L.DomUtil.create('div', 'era-info', wrapper);
+      var infoTitle = L.DomUtil.create('div', 'era-info-title', info);
+      var infoDesc = L.DomUtil.create('div', 'era-info-desc', info);
+      var initEra = ERAS.find(function(e) { return e.id === currentEra; });
+      infoTitle.textContent = initEra.label;
+      infoDesc.textContent = initEra.range[0] + '\u2013' + initEra.range[1] + ' \u00b7 ' + initEra.desc;
+
+      info.addEventListener('click', function() { info.classList.toggle('expanded'); });
+
+      wrapper._bar = bar;
+      wrapper._infoTitle = infoTitle;
+      wrapper._infoDesc = infoDesc;
+      wrapper._info = info;
+      return wrapper;
+    }
+  });
+
+  var eraControl = new EraControl();
+  eraControl.addTo(map);
+
+  function updateEraUI(era) {
+    var container = eraControl.getContainer();
+    var buttons = container._bar.querySelectorAll('.era-btn');
+    buttons.forEach(function(btn) {
+      btn.classList.toggle('active', parseInt(btn.dataset.eraId) === era.id);
+    });
+    container._infoTitle.textContent = era.label;
+    container._infoDesc.textContent = era.range[0] + '\u2013' + era.range[1] + ' \u00b7 ' + era.desc;
+  }
+
+  // ── Task 5: Timeline slider control ───────────────────────────
+  var TimelineControl = L.Control.extend({
+    options: { position: 'bottomleft' },
+    onAdd: function() {
+      var container = L.DomUtil.create('div', 'timeline-control');
+      L.DomEvent.disableClickPropagation(container);
+      L.DomEvent.disableScrollPropagation(container);
+
+      var row = L.DomUtil.create('div', 'timeline-row', container);
+      var yearStart = L.DomUtil.create('span', 'timeline-year timeline-year-start', row);
+      var slider = L.DomUtil.create('input', 'timeline-slider', row);
+      slider.type = 'range';
+      var yearEnd = L.DomUtil.create('span', 'timeline-year timeline-year-end', row);
+
+      var nav = L.DomUtil.create('div', 'timeline-nav', container);
+      var prevBtn = L.DomUtil.create('button', 'timeline-nav-btn', nav);
+      prevBtn.textContent = '\u25c0 Prev Era';
+      var playBtn = L.DomUtil.create('button', 'timeline-nav-btn', nav);
+      playBtn.textContent = '\u25b6 Play';
+      var nextBtn = L.DomUtil.create('button', 'timeline-nav-btn', nav);
+      nextBtn.textContent = 'Next Era \u25b6';
+
+      container._slider = slider;
+      container._yearStart = yearStart;
+      container._yearEnd = yearEnd;
+      container._playBtn = playBtn;
+      container._row = row;
+
+      var era = ERAS.find(function(e) { return e.id === currentEra; });
+      setSliderRange(container, era);
+
+      slider.addEventListener('input', function() {
+        filterByYear(parseInt(slider.value));
+      });
+
+      prevBtn.addEventListener('click', function() {
+        var idx = ERAS.findIndex(function(e) { return e.id === currentEra; });
+        if (idx > 0) switchEra(ERAS[idx - 1].id);
+      });
+      nextBtn.addEventListener('click', function() {
+        var idx = ERAS.findIndex(function(e) { return e.id === currentEra; });
+        if (idx < ERAS.length - 1) switchEra(ERAS[idx + 1].id);
+      });
+
+      playBtn.addEventListener('click', function() { togglePlay(); });
+
+      return container;
+    }
+  });
+
+  function setSliderRange(container, era) {
+    var slider = container._slider;
+    var isSingleYear = era.range[0] === era.range[1];
+    if (isSingleYear) {
+      container._row.classList.add('timeline-hidden');
+    } else {
+      container._row.classList.remove('timeline-hidden');
+      slider.min = era.range[0];
+      slider.max = era.range[1];
+      slider.value = era.range[1];
+    }
+    container._yearStart.textContent = era.range[0];
+    container._yearEnd.textContent = era.range[1];
+  }
+
+  var timelineControl = new TimelineControl();
+  timelineControl.addTo(map);
+
+  // Position timeline to span full bottom
+  var tlContainer = timelineControl.getContainer();
+  tlContainer.style.position = 'absolute';
+  tlContainer.style.bottom = '0';
+  tlContainer.style.left = '0';
+  tlContainer.style.right = '0';
+  tlContainer.style.width = '100%';
+  tlContainer.style.boxSizing = 'border-box';
+  if (tlContainer.parentElement) tlContainer.parentElement.style.width = '100%';
+
+  function updateSliderRange(era) {
+    setSliderRange(tlContainer, era);
+  }
+
+  function filterByYear(yr) {
+    allMarkers.forEach(function(entry) {
+      if (entry.data.eras.indexOf(currentEra) === -1) return;
+      var el = entry.marker.getElement && entry.marker.getElement();
+      if (!el) return;
+      el.style.opacity = entry.data.year > yr ? '0.15' : '1';
+    });
+  }
+
+  // ── Task 6: Play mode ────────────────────────────────────────
+  var playInterval = null;
+  var playTimeout = null;
+
+  function togglePlay() {
+    if (playInterval || playTimeout) {
+      stopPlay();
+    } else {
+      startPlay();
+    }
+  }
+
+  function startPlay() {
+    tlContainer._playBtn.textContent = '\u23f8 Pause';
+    var eraIdx = ERAS.findIndex(function(e) { return e.id === currentEra; });
+    playEra(eraIdx);
+  }
+
+  function stopPlay() {
+    clearInterval(playInterval);
+    clearTimeout(playTimeout);
+    playInterval = null;
+    playTimeout = null;
+    tlContainer._playBtn.textContent = '\u25b6 Play';
+  }
+
+  function playEra(idx) {
+    if (idx >= ERAS.length) { stopPlay(); return; }
+    var era = ERAS[idx];
+    switchEra(era.id);
+
+    var isSingleYear = era.range[0] === era.range[1];
+    if (isSingleYear) {
+      playTimeout = setTimeout(function() { playEra(idx + 1); }, 5000);
+    } else {
+      var slider = tlContainer._slider;
+      var yr = era.range[0];
+      slider.value = yr;
+      filterByYear(yr);
+      playInterval = setInterval(function() {
+        yr++;
+        if (yr > era.range[1]) {
+          clearInterval(playInterval);
+          playInterval = null;
+          playTimeout = setTimeout(function() { playEra(idx + 1); }, 2000);
+          return;
+        }
+        slider.value = yr;
+        filterByYear(yr);
+      }, 200);
+    }
+  }
 
 })();
 </script>

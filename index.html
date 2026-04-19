@@ -135,10 +135,19 @@
     #map-section { padding-top: 48px; }
     #map {
       width: 100%;
-      height: 580px;
+      height: 70vh;
+      min-height: 500px;
+      max-height: 800px;
       border-radius: 6px;
       border: 1px solid var(--border);
       background: #1a1610;
+    }
+    @media (max-width: 767px) {
+      #map {
+        height: 60vh;
+        min-height: 350px;
+        max-height: none;
+      }
     }
     /* ── Era controls (overlay on map) ─────────────────────────────── */
     .era-bar {
@@ -223,6 +232,68 @@
       .timeline-slider::-webkit-slider-thumb { width: 20px; height: 20px; }
       .timeline-slider::-moz-range-thumb { width: 20px; height: 20px; }
       .timeline-nav-btn { font-size: 0.72rem; padding: 4px 8px; }
+    }
+
+    /* ── Layers panel ──────────────────────────────────────────────── */
+    .layers-toggle {
+      pointer-events: auto;
+      background: rgba(30,26,20,0.92);
+      border: 1px solid var(--border);
+      padding: 6px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      font-family: inherit;
+    }
+    .layers-toggle:hover { border-color: var(--sepia); color: var(--text); }
+    .layers-panel {
+      display: none;
+      background: rgba(30,26,20,0.95);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 12px;
+      margin-top: 6px;
+      min-width: 200px;
+      pointer-events: auto;
+    }
+    .layers-panel.open { display: block; }
+    .layers-section-title {
+      font-size: 0.62rem; color: var(--gold);
+      text-transform: uppercase; letter-spacing: 0.05em;
+      margin: 8px 0 4px;
+    }
+    .layers-section-title:first-child { margin-top: 0; }
+    .layers-option {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.68rem; color: var(--text-dim); padding: 2px 0; cursor: pointer;
+    }
+    .layers-option input { accent-color: var(--gold); }
+    .layers-opacity {
+      display: flex; align-items: center; gap: 6px;
+      margin-top: 4px; font-size: 0.62rem; color: var(--text-dim);
+    }
+    .layers-opacity input[type="range"] {
+      -webkit-appearance: none; appearance: none;
+      height: 3px; background: var(--border); border-radius: 2px; flex: 1;
+    }
+    .layers-opacity input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 10px; height: 10px;
+      background: var(--gold); border-radius: 50%;
+    }
+
+    @media (max-width: 767px) {
+      .layers-toggle span.layers-label { display: none; }
+      .layers-panel {
+        position: fixed; bottom: 0; left: 0; right: 0;
+        border-radius: 12px 12px 0 0; max-height: 50vh;
+        overflow-y: auto; z-index: 1000; margin-top: 0;
+      }
+      .layers-backdrop {
+        position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+        z-index: 999; display: none;
+      }
+      .layers-backdrop.open { display: block; }
     }
 
     .leaflet-popup-content-wrapper {
@@ -2382,14 +2453,26 @@ const TREE_DATA = {
 
   let currentEra = 7;
 
-  // Dark tile layer (CartoDB Dark Matter)
-  const map = L.map('map', { zoomControl: true }).setView([42, -30], 3);
+  // Map initialization
+  const map = L.map('map', {
+    zoomControl: true,
+    autoPanPaddingBottomRight: [10, 80]
+  }).setView([42, -30], 3);
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
-    subdomains: 'abcd',
-    maxZoom: 19
-  }).addTo(map);
+  // ── Base layers ───────────────────────────────────────────────
+  var baseLayers = {
+    'Dark': L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '\u00a9 OpenStreetMap \u00a9 CARTO', subdomains: 'abcd', maxZoom: 19
+    }),
+    'Light': L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '\u00a9 OpenStreetMap \u00a9 CARTO', subdomains: 'abcd', maxZoom: 19
+    }),
+    'Satellite': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: '\u00a9 Esri', maxZoom: 19
+    })
+  };
+  var activeBase = 'Dark';
+  baseLayers['Dark'].addTo(map);
 
   // ── Marker factories ────────────────────────────────────────────
   function makeIcon(color, size) {
@@ -2962,6 +3045,7 @@ const TREE_DATA = {
     });
     container._infoTitle.textContent = era.label;
     container._infoDesc.textContent = era.range[0] + '\u2013' + era.range[1] + ' \u00b7 ' + era.desc;
+    rebuildHistoricOverlayUI();
   }
 
   // ── Task 5: Timeline slider control ───────────────────────────
@@ -3107,6 +3191,112 @@ const TREE_DATA = {
       }, 200);
     }
   }
+
+  // ── Layers control ──────────────────────────────────────────────
+  function rebuildHistoricOverlayUI() {
+    var container = document.getElementById('hist-overlay-options');
+    if (!container) return;
+    container.innerHTML = '<div style="font-size:0.62rem;color:var(--text-dim);padding:2px 0;">No historic map available for this era</div>';
+  }
+
+  var dataLayerNames = [
+    { key: 'residences', label: 'Residences' },
+    { key: 'churches', label: 'Churches' },
+    { key: 'cemeteries', label: 'Cemeteries' },
+    { key: 'repos', label: 'Archives' },
+    { key: 'paths', label: 'Migration Paths' }
+  ];
+
+  var LayersControl = L.Control.extend({
+    options: { position: 'topright' },
+    onAdd: function() {
+      var wrapper = L.DomUtil.create('div', 'leaflet-bar');
+      wrapper.style.background = 'none';
+      wrapper.style.border = 'none';
+      wrapper.style.boxShadow = 'none';
+      L.DomEvent.disableClickPropagation(wrapper);
+      L.DomEvent.disableScrollPropagation(wrapper);
+
+      // Toggle button
+      var toggleBtn = L.DomUtil.create('button', 'layers-toggle', wrapper);
+      toggleBtn.innerHTML = '\ud83d\uddfa\ufe0f <span class="layers-label">Layers \u25be</span>';
+
+      // Panel
+      var panel = L.DomUtil.create('div', 'layers-panel', wrapper);
+
+      // Base Map section
+      var baseTitle = L.DomUtil.create('div', 'layers-section-title', panel);
+      baseTitle.textContent = 'Base Map';
+      var baseNames = ['Dark', 'Light', 'Satellite'];
+      baseNames.forEach(function(name) {
+        var label = L.DomUtil.create('label', 'layers-option', panel);
+        var radio = document.createElement('input');
+        radio.type = 'radio';
+        radio.name = 'base-layer';
+        radio.value = name;
+        if (name === activeBase) radio.checked = true;
+        radio.addEventListener('change', function() {
+          map.eachLayer(function(l) {
+            if (l._url && (l._url.indexOf('basemaps.cartocdn') !== -1 || l._url.indexOf('arcgisonline') !== -1)) {
+              map.removeLayer(l);
+            }
+          });
+          baseLayers[name].addTo(map);
+          activeBase = name;
+        });
+        label.appendChild(radio);
+        label.appendChild(document.createTextNode(' ' + name));
+      });
+
+      // Historic Overlay section
+      var histTitle = L.DomUtil.create('div', 'layers-section-title', panel);
+      histTitle.textContent = 'Historic Overlay';
+      var histContainer = L.DomUtil.create('div', '', panel);
+      histContainer.id = 'hist-overlay-options';
+
+      // Data section
+      var dataTitle = L.DomUtil.create('div', 'layers-section-title', panel);
+      dataTitle.textContent = 'Data';
+      dataLayerNames.forEach(function(item) {
+        var label = L.DomUtil.create('label', 'layers-option', panel);
+        var cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.checked = true;
+        cb.addEventListener('change', function() {
+          if (cb.checked) {
+            if (!map.hasLayer(layers[item.key])) layers[item.key].addTo(map);
+          } else {
+            if (map.hasLayer(layers[item.key])) map.removeLayer(layers[item.key]);
+          }
+        });
+        label.appendChild(cb);
+        label.appendChild(document.createTextNode(' ' + item.label));
+      });
+
+      // Mobile backdrop
+      var backdrop = document.createElement('div');
+      backdrop.className = 'layers-backdrop';
+      document.body.appendChild(backdrop);
+
+      // Toggle handler
+      toggleBtn.addEventListener('click', function() {
+        panel.classList.toggle('open');
+        backdrop.classList.toggle('open');
+      });
+      backdrop.addEventListener('click', function() {
+        panel.classList.remove('open');
+        backdrop.classList.remove('open');
+      });
+
+      // Populate historic overlay UI
+      rebuildHistoricOverlayUI();
+
+      return wrapper;
+    }
+  });
+
+  var layersControl = new LayersControl();
+  layersControl.addTo(map);
 
 })();
 </script>

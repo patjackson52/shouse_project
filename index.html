@@ -2451,6 +2451,56 @@ const TREE_DATA = {
       desc: 'All markers — present-day Schauß families, heritage sites, archives' },
   ];
 
+  // ── Historic tile overlays ──────────────────────────────────────
+  var HISTORIC_TILES = [
+    {
+      eras: [1, 2, 3],
+      layer: L.tileLayer.wms('https://geo4.service24.rlp.de/wms/hktm.fcgi?', {
+        layers: 'rp_hktm', format: 'image/png', transparent: true, opacity: 0.6,
+        attribution: '&copy;GeoBasis-DE / LVermGeoRP'
+      }),
+      label: 'Tranchot/Müffling Rhineland (1803–1820)',
+      defaultOpacity: 0.6
+    },
+    {
+      eras: [1, 2, 3],
+      layer: L.tileLayer.wms('https://geo4.service24.rlp.de/wms/hkpb.fcgi?', {
+        layers: 'rp_hkpb', format: 'image/png', transparent: true, opacity: 0.6,
+        attribution: '&copy;GeoBasis-DE / LVermGeoRP'
+      }),
+      label: 'Palatinate Uraufnahme (1836–1841)',
+      defaultOpacity: 0.6
+    },
+    {
+      eras: [5],
+      layer: L.tileLayer('https://mapwarper.net/maps/tile/65728/{z}/{x}/{y}.png', {
+        opacity: 0.6, maxZoom: 16,
+        attribution: 'Lewis Evans 1749 &ndash; MapWarper'
+      }),
+      label: 'Middle Colonies – Evans (1749)',
+      defaultOpacity: 0.6
+    },
+    {
+      eras: [5, 6],
+      layer: L.tileLayer('https://mapwarper.net/maps/tile/53751/{z}/{x}/{y}.png', {
+        opacity: 0.6, maxZoom: 16,
+        attribution: 'Fry-Jefferson 1755 &ndash; MapWarper'
+      }),
+      label: 'Virginia/MD/PA/NC – Fry-Jefferson (1755)',
+      defaultOpacity: 0.6
+    },
+    {
+      eras: [6],
+      layer: L.tileLayer('https://mapwarper.net/maps/tile/84681/{z}/{x}/{y}.png', {
+        opacity: 0.6, maxZoom: 16,
+        attribution: 'NC 1737 &ndash; MapWarper'
+      }),
+      label: 'North Carolina (1737)',
+      defaultOpacity: 0.6
+    }
+  ];
+  var activeOverlays = [];
+
   let currentEra = 7;
 
   // Map initialization
@@ -2994,6 +3044,25 @@ const TREE_DATA = {
       }
     });
 
+    // Swap historic tile overlays
+    activeOverlays.forEach(function(ol) { map.removeLayer(ol.layer); });
+    activeOverlays = [];
+    HISTORIC_TILES.forEach(function(ht) {
+      if (ht.eras.indexOf(currentEra) !== -1) {
+        ht.layer.setOpacity(0);
+        ht.layer.addTo(map);
+        activeOverlays.push(ht);
+        var target = ht.defaultOpacity;
+        var current = 0;
+        var step = target / 25;
+        var fadeIn = setInterval(function() {
+          current += step;
+          if (current >= target) { current = target; clearInterval(fadeIn); }
+          ht.layer.setOpacity(current);
+        }, 20);
+      }
+    });
+
     if (typeof updateEraUI === 'function') updateEraUI(era);
     if (typeof updateSliderRange === 'function') updateSliderRange(era);
 
@@ -3223,7 +3292,39 @@ const TREE_DATA = {
   function rebuildHistoricOverlayUI() {
     var container = document.getElementById('hist-overlay-options');
     if (!container) return;
-    container.innerHTML = '<div style="font-size:0.62rem;color:var(--text-dim);padding:2px 0;">No historic map available for this era</div>';
+    container.innerHTML = '';
+    var hasOverlays = false;
+    HISTORIC_TILES.forEach(function(ht, idx) {
+      if (ht.eras.indexOf(currentEra) === -1) return;
+      hasOverlays = true;
+      var label = L.DomUtil.create('label', 'layers-option', container);
+      var cb = L.DomUtil.create('input', '', label);
+      cb.type = 'checkbox';
+      cb.checked = activeOverlays.indexOf(ht) !== -1;
+      label.appendChild(document.createTextNode(' ' + ht.label));
+      cb.addEventListener('change', function() {
+        if (cb.checked) {
+          ht.layer.addTo(map);
+          ht.layer.setOpacity(ht.defaultOpacity);
+          activeOverlays.push(ht);
+        } else {
+          map.removeLayer(ht.layer);
+          activeOverlays = activeOverlays.filter(function(o) { return o !== ht; });
+        }
+      });
+      var opRow = L.DomUtil.create('div', 'layers-opacity', container);
+      opRow.innerHTML = 'Opacity ';
+      var opSlider = L.DomUtil.create('input', '', opRow);
+      opSlider.type = 'range';
+      opSlider.min = '0'; opSlider.max = '100';
+      opSlider.value = String(ht.defaultOpacity * 100);
+      opSlider.addEventListener('input', function() {
+        ht.layer.setOpacity(parseInt(opSlider.value) / 100);
+      });
+    });
+    if (!hasOverlays) {
+      container.innerHTML = '<div style="font-size:0.62rem;color:var(--text-dim);padding:2px 0;">No historic map available for this era</div>';
+    }
   }
 
   var dataLayerNames = [

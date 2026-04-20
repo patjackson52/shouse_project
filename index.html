@@ -1253,8 +1253,10 @@
       This is the <strong>definitive genealogical resource</strong> for Albisheim. An Ortsfamilienbuch
       (village family book) compiles <em>all</em> births, marriages, and deaths from parish records
       into family groups for the entire village across 259 years. <strong>Every Schauss family member
-      recorded in Albisheim from 1641 to 1900 should appear in this book</strong> &mdash; including the
-      descendants of Philipp Heinrich Schauss (Mayor) who stayed in Germany after 1736.<br><br>
+      recorded in Albisheim from 1641 to 1900 should appear in this book</strong> &mdash; including
+      any descendants of Philipp Heinrich Schauss (Mayor) from his second marriage, and the
+      line of his brother Johannes Schauss (b. 1678) via son Philipp Jacob (b. 1707). This book
+      is the key to identifying who the modern Zellertal Schau&szlig; families descend from.<br><br>
       <strong style="color:var(--gold);">Where to consult:</strong><br>
       &bull; <strong>Pfalzbibliothek</strong> (Palatinate Library), Kaiserslautern &mdash;
         <a href="https://www.pfalzbibliothek.de/bestand-und-schwerpunkte/kirchenbuecher/" target="_blank"
@@ -1432,9 +1434,12 @@
     </table>
     </div>
     <p style="font-size:0.82rem;color:var(--text-dim);margin-top:12px;line-height:1.6;">
-      <strong style="color:var(--gold);">Freia and Fritz</strong> almost certainly descend from
-      <strong>Philipp Heinrich Schauss</strong> (Mayor of Albisheim, 1686&ndash;1765) who stayed
-      in Germany while his nephew Johann Adam emigrated in 1736.
+      <strong style="color:var(--gold);">Freia and Fritz</strong> descend from the Albisheim Schauss line that stayed
+      in Germany while Johann Adam emigrated in 1736. Originally assumed to descend from
+      <strong>Philipp Heinrich Schauss</strong> (Mayor, 1686&ndash;1765), but his 5 documented
+      children all died young. They may instead trace through his brother <strong>Johannes Schauss</strong>
+      (b.&nbsp;1678) and son <strong>Philipp Jacob</strong> (b.&nbsp;1707). The Uhrig Ortsfamilienbuch
+      would resolve this.
       Zellertal-Niefernheim is the next village over from Albisheim &mdash; the family has remained
       in the same valley for over 350 years.
     </p>
@@ -2059,16 +2064,29 @@ const TREE_DATA = {
                 {
                   id: "johannes-1678", name: "Johannes Schauss", birth: "Feb 17, 1678", birthPlace: "Albisheim", death: "", deathPlace: "", occupation: "", tag: "german",
                   marriage: { spouse: "Maria Barbara Meyers", spouseBirth: "", spouseDeath: "", date: "Apr 14, 1705", place: "Albisheim" },
-                  sources: [{ label: "Albisheim Kirchenbuch", url: "" }], children: []
+                  sources: [{ label: "Albisheim Kirchenbuch", url: "" }],
+                  children: [
+                    { id: "johann-george-1706", name: "Johann George Schauss", birth: "Feb 13, 1706", birthPlace: "Albisheim", death: "Sep 3, 1706", deathPlace: "Albisheim", tag: "german", sources: [], children: [] },
+                    { id: "philipp-jacob-1707", name: "Philipp Jacob Schauss", birth: "Jul 22, 1707", birthPlace: "Albisheim", death: "", deathPlace: "",
+                      tag: "german", badge: "Possible ancestor of modern Zellertal Schau\u00df",
+                      sources: [{ label: "Trimble/Lindauer (1987)", url: "https://www.eugenetrimble.com/Shouse.pdf" }], children: [] }
+                  ]
                 },
                 { id: "anna-margaretha-1680", name: "Anna Margaretha Schauss", birth: "Oct 31, 1680", birthPlace: "Albisheim", death: "", deathPlace: "", tag: "german", sources: [], children: [] },
                 { id: "hans-adam-1683", name: "Hans Adam Schauss", birth: "Jun 10, 1683", birthPlace: "Albisheim", death: "", deathPlace: "", tag: "german", sources: [], children: [] },
                 {
                   id: "philipp-heinrich", name: "Philipp Heinrich Schauss", birth: "Feb 3, 1686", birthPlace: "Albisheim", death: "Apr 11, 1765", deathPlace: "Albisheim", occupation: "Linen Weaver & Mayor of Albisheim", tag: "stayed",
                   badge: "Stayed in Germany \u2014 Mayor of Albisheim",
-                  marriage: { spouse: "Anna Hedwig Waltherin", spouseBirth: "", spouseDeath: "", date: "", place: "Albisheim" },
-                  sources: [{ label: "Ancestry", url: "https://www.ancestry.com/genealogy/records/phillip-heinrich-schauss-24-1kycqf4" }, { label: "Ortsfamilienbuch Albisheim (Uhrig, 2009)", url: "" }],
-                  children: []
+                  marriage: { spouse: "Anna Barbara _____ (1st wife)", spouseBirth: "", spouseDeath: "Mar 4, 1729", date: "", place: "Albisheim" },
+                  notes: "Married twice per church records ('Zwei verheiratet'). Second wife unknown. Only 5 children documented, all died young. '16 children' claim (Geni/Ancestry) is unverified.",
+                  sources: [{ label: "Trimble/Lindauer (1987)", url: "https://www.eugenetrimble.com/Shouse.pdf" }, { label: "Ancestry", url: "https://www.ancestry.com/genealogy/records/phillip-heinrich-schauss-24-1kycqf4" }, { label: "Ortsfamilienbuch Albisheim (Uhrig, 2009)", url: "" }],
+                  children: [
+                    { id: "ph-johann", name: "Johann Schauss", birth: "", birthPlace: "Albisheim", death: "Jun 25, 1714", deathPlace: "Albisheim", tag: "died-young", sources: [], children: [] },
+                    { id: "ph-anna-maria", name: "Anna Maria Schauss", birth: "", birthPlace: "Albisheim", death: "Apr 3, 1719", deathPlace: "Albisheim", tag: "died-young", sources: [], children: [] },
+                    { id: "ph-anna-barbara", name: "Anna Barbara Schauss", birth: "", birthPlace: "Albisheim", death: "Aug 17, 1727", deathPlace: "Albisheim", tag: "died-young", sources: [], children: [] },
+                    { id: "ph-johann-conrad", name: "Johann Conrad Schauss", birth: "", birthPlace: "Albisheim", death: "Jan 31, 1731", deathPlace: "Albisheim", tag: "died-young", sources: [], children: [] },
+                    { id: "ph-conrad", name: "Conrad Schauss", birth: "", birthPlace: "Albisheim", death: "1741", deathPlace: "Albisheim", tag: "died-young", sources: [], children: [] }
+                  ]
                 }
               ]
             },
@@ -2383,7 +2401,7 @@ const TREE_DATA = {
     <div class="tl-item">
       <div class="tl-year">1674</div>
       <div class="tl-event">Schauss Family Established in Albisheim</div>
-      <div class="tl-detail">Hans Bernhardt Schauss (c. 1650, B&uuml;dingen) marries Anna Margarethe Naass (b. 1657, Albisheim) on Apr 21, 1674 in Albisheim an der Pfrimm. This marriage establishes the family permanently in Albisheim. They have four children: Johann Conrad (1675), Anna Margaretha (1680), Hans Adam (1683), and Philipp Heinrich (1686).</div>
+      <div class="tl-detail">Hans Bernhardt Schauss (c. 1650, B&uuml;dingen) marries Anna Margarethe Naass (b. 1657, Albisheim) on Apr 21, 1674 in Albisheim an der Pfrimm. This marriage establishes the family permanently in Albisheim. They have at least five children: Johann Conrad (1675), Johannes (1678), Anna Margaretha (1680), Hans Adam (1683), and Philipp Heinrich (1686).</div>
     </div>
 
     <div class="tl-item">
@@ -3110,7 +3128,7 @@ const TREE_DATA = {
       title: 'Zellertal-Niefernheim',
       historic: 'Present-day Schauss family · 67308',
       dates: 'Schauss family living here today',
-      body: 'Freia Schauss and Fritz Schauß live at Zeller Weg 3, 67308 Zellertal-Niefernheim — just 3km from Albisheim in the same valley. Almost certainly descendants of Philipp Heinrich Schauss (Mayor, d. 1765) who stayed in Germany. The family has been in this valley for over 350 years.',
+      body: 'Freia Schauss and Fritz Schauß live at Zeller Weg 3, 67308 Zellertal-Niefernheim — just 3km from Albisheim in the same valley. Originally assumed to descend from Philipp Heinrich Schauss (Mayor, d. 1765), but his 5 documented children all died young. They may instead descend from his brother Johannes Schauss (b. 1678) via son Philipp Jacob (b. 1707). The Uhrig Ortsfamilienbuch (2009) would resolve this.',
       eras: [7], year: 1900
     },
     {

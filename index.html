@@ -196,10 +196,19 @@
     }
 
     /* ── Timeline slider ───────────────────────────────────────────── */
-    .timeline-control {
-      pointer-events: auto;
-      background: linear-gradient(transparent, rgba(13,11,8,0.95));
+    #timeline-bar {
+      background: #252017;
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--gold);
+      border-radius: 0 0 6px 6px;
       padding: 10px 16px 12px;
+      max-width: 100%;
+    }
+    #timeline-bar .timeline-nav-btn {
+      color: var(--text);
+    }
+    #timeline-bar .timeline-nav-btn:hover {
+      color: var(--gold);
     }
     .timeline-row { display: flex; align-items: center; gap: 10px; }
     .timeline-year { font-size: 0.72rem; font-weight: bold; min-width: 32px; text-align: center; }
@@ -791,6 +800,19 @@
   </p>
 
   <div id="map"></div>
+
+  <div id="timeline-bar">
+    <div class="timeline-row">
+      <span class="timeline-year timeline-year-start" id="tl-year-start">1900</span>
+      <input type="range" class="timeline-slider" id="tl-slider" min="1900" max="2026" value="2026">
+      <span class="timeline-year timeline-year-end" id="tl-year-end">2026</span>
+    </div>
+    <div class="timeline-nav">
+      <button class="timeline-nav-btn" id="tl-prev">&#9664; Prev Era</button>
+      <button class="timeline-nav-btn" id="tl-play">&#9654; Play</button>
+      <button class="timeline-nav-btn" id="tl-next">Next Era &#9654;</button>
+    </div>
+  </div>
 </section>
 
 <!-- ═══════════════════════════════ GERMAN ORIGINS ══════════════════════ -->
@@ -3294,86 +3316,42 @@ const TREE_DATA = {
     rebuildHistoricOverlayUI();
   }
 
-  // ── Task 5: Timeline slider control ───────────────────────────
-  var TimelineControl = L.Control.extend({
-    options: { position: 'bottomleft' },
-    onAdd: function() {
-      var container = L.DomUtil.create('div', 'timeline-control');
-      L.DomEvent.disableClickPropagation(container);
-      L.DomEvent.disableScrollPropagation(container);
+  // ── Timeline bar (outside map, wired to HTML elements) ───────
+  var tlSlider = document.getElementById('tl-slider');
+  var tlYearStart = document.getElementById('tl-year-start');
+  var tlYearEnd = document.getElementById('tl-year-end');
+  var tlPlayBtn = document.getElementById('tl-play');
+  var tlRow = tlSlider.parentElement;
 
-      var row = L.DomUtil.create('div', 'timeline-row', container);
-      var yearStart = L.DomUtil.create('span', 'timeline-year timeline-year-start', row);
-      var slider = L.DomUtil.create('input', 'timeline-slider', row);
-      slider.type = 'range';
-      var yearEnd = L.DomUtil.create('span', 'timeline-year timeline-year-end', row);
+  // Refs used by play mode
+  var tlContainer = { _slider: tlSlider, _playBtn: tlPlayBtn, _row: tlRow };
 
-      var nav = L.DomUtil.create('div', 'timeline-nav', container);
-      var prevBtn = L.DomUtil.create('button', 'timeline-nav-btn', nav);
-      prevBtn.textContent = '\u25c0 Prev Era';
-      var playBtn = L.DomUtil.create('button', 'timeline-nav-btn', nav);
-      playBtn.textContent = '\u25b6 Play';
-      var nextBtn = L.DomUtil.create('button', 'timeline-nav-btn', nav);
-      nextBtn.textContent = 'Next Era \u25b6';
-
-      container._slider = slider;
-      container._yearStart = yearStart;
-      container._yearEnd = yearEnd;
-      container._playBtn = playBtn;
-      container._row = row;
-
-      var era = ERAS.find(function(e) { return e.id === currentEra; });
-      setSliderRange(container, era);
-
-      slider.addEventListener('input', function() {
-        filterByYear(parseInt(slider.value));
-      });
-
-      prevBtn.addEventListener('click', function() {
-        var idx = ERAS.findIndex(function(e) { return e.id === currentEra; });
-        if (idx > 0) switchEra(ERAS[idx - 1].id);
-      });
-      nextBtn.addEventListener('click', function() {
-        var idx = ERAS.findIndex(function(e) { return e.id === currentEra; });
-        if (idx < ERAS.length - 1) switchEra(ERAS[idx + 1].id);
-      });
-
-      playBtn.addEventListener('click', function() { togglePlay(); });
-
-      return container;
-    }
+  tlSlider.addEventListener('input', function() {
+    filterByYear(parseInt(tlSlider.value));
   });
 
-  function setSliderRange(container, era) {
-    var slider = container._slider;
-    var isSingleYear = era.range[0] === era.range[1];
-    if (isSingleYear) {
-      container._row.classList.add('timeline-hidden');
-    } else {
-      container._row.classList.remove('timeline-hidden');
-      slider.min = era.range[0];
-      slider.max = era.range[1];
-      slider.value = era.range[1];
-    }
-    container._yearStart.textContent = era.range[0];
-    container._yearEnd.textContent = era.range[1];
-  }
-
-  var timelineControl = new TimelineControl();
-  timelineControl.addTo(map);
-
-  // Position timeline to span full bottom
-  var tlContainer = timelineControl.getContainer();
-  tlContainer.style.position = 'absolute';
-  tlContainer.style.bottom = '0';
-  tlContainer.style.left = '0';
-  tlContainer.style.right = '0';
-  tlContainer.style.width = '100%';
-  tlContainer.style.boxSizing = 'border-box';
-  if (tlContainer.parentElement) tlContainer.parentElement.style.width = '100%';
+  document.getElementById('tl-prev').addEventListener('click', function() {
+    var idx = ERAS.findIndex(function(e) { return e.id === currentEra; });
+    if (idx > 0) switchEra(ERAS[idx - 1].id);
+  });
+  document.getElementById('tl-next').addEventListener('click', function() {
+    var idx = ERAS.findIndex(function(e) { return e.id === currentEra; });
+    if (idx < ERAS.length - 1) switchEra(ERAS[idx + 1].id);
+  });
+  tlPlayBtn.addEventListener('click', function() { togglePlay(); });
 
   function updateSliderRange(era) {
-    setSliderRange(tlContainer, era);
+    var isSingleYear = era.range[0] === era.range[1];
+    if (isSingleYear) {
+      tlRow.classList.add('timeline-hidden');
+    } else {
+      tlRow.classList.remove('timeline-hidden');
+      tlSlider.min = era.range[0];
+      tlSlider.max = era.range[1];
+      tlSlider.value = era.range[1];
+    }
+    tlYearStart.textContent = era.range[0];
+    tlYearEnd.textContent = era.range[1];
   }
 
   function filterByYear(yr) {
@@ -3400,6 +3378,8 @@ const TREE_DATA = {
   function startPlay() {
     tlContainer._playBtn.textContent = '\u23f8 Pause';
     var eraIdx = ERAS.findIndex(function(e) { return e.id === currentEra; });
+    // If on the last era, restart from the beginning
+    if (eraIdx >= ERAS.length - 1) eraIdx = 0;
     playEra(eraIdx);
   }
 

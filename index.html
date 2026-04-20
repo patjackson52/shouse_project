@@ -336,6 +336,42 @@
       .fullscreen-btn { width: 36px; height: 36px; font-size: 1.1rem; }
     }
 
+    /* ── Images ────────────────────────────────────────────────────── */
+    .heritage-img {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      margin: 12px 0;
+      filter: sepia(0.15) brightness(0.95);
+      transition: filter 0.3s;
+    }
+    .heritage-img:hover { filter: sepia(0) brightness(1); }
+    .heritage-img-wide { max-width: 800px; }
+    .heritage-img-small { max-width: 360px; }
+    .img-caption {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      line-height: 1.4;
+      margin-top: -6px;
+      margin-bottom: 16px;
+      max-width: 600px;
+    }
+    .img-caption a { color: var(--sepia); text-decoration: none; border-bottom: 1px solid var(--border); }
+    .img-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 12px 0;
+      max-width: 800px;
+    }
+    .img-grid .heritage-img { max-width: 100%; margin: 0; }
+    @media (max-width: 767px) {
+      .img-grid { grid-template-columns: 1fr; }
+      .heritage-img-small { max-width: 100%; }
+    }
+
     .leaflet-popup-content-wrapper {
       background: #1e1a14;
       color: var(--text);
@@ -802,6 +838,11 @@
     </div>
   </div>
 
+  <img class="heritage-img heritage-img-wide" loading="lazy"
+    src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Bad_Kreuznach_-_Br%C3%BCckenh%C3%A4user%2C_Nahe.JPG"
+    alt="The iconic bridge houses over the Nahe River in Bad Kreuznach, near the Schauss family homeland">
+  <div class="img-caption">Bad Kreuznach — bridge houses over the Nahe River, the regional center near Eckweiler. <a href="https://commons.wikimedia.org/wiki/File:Bad_Kreuznach_-_Br%C3%BCckenh%C3%A4user,_Nahe.JPG" target="_blank">Franzfoto</a>, CC BY-SA 4.0</div>
+
   <!-- Six Generations Table -->
   <h3 style="color:var(--gold-lt);font-weight:normal;font-size:1.1rem;margin:32px 0 8px;">Six Generations in Germany (c. 1560&ndash;1765)</h3>
   <p style="color:var(--text-dim);font-size:0.85rem;margin-bottom:16px;">
@@ -909,6 +950,21 @@
     situated in the Pfrimm Valley (Zellertal) about 21 km west of Worms. Postal code 67308.
   </p>
 
+  <div class="img-grid">
+    <div>
+      <img class="heritage-img" loading="lazy"
+        src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Albisheim_view.jpg"
+        alt="Panoramic view over the village of Albisheim an der Pfrimm, Donnersbergkreis, Rhineland-Palatinate">
+      <div class="img-caption">Albisheim an der Pfrimm — family seat since 1674. <a href="https://commons.wikimedia.org/wiki/File:Albisheim_view.jpg" target="_blank">Streetbuilder</a>, CC BY-SA 2.0 DE</div>
+    </div>
+    <div>
+      <img class="heritage-img" loading="lazy"
+        src="https://upload.wikimedia.org/wikipedia/commons/0/07/Peterskirche_Albisheim.jpg"
+        alt="The Peterskirche (St. Peter's Church) in Albisheim, where Schauss family baptisms and marriages were recorded">
+      <div class="img-caption">Peterskirche — the Schauss family church since 1674. Parish records from 1641. <a href="https://commons.wikimedia.org/wiki/File:Peterskirche_Albisheim.jpg" target="_blank">Streetbuilder</a>, CC BY-SA 2.0 DE</div>
+    </div>
+  </div>
+
   <div class="family-grid">
     <div class="family-card">
       <h3>Protestantische Peterskirche</h3>
@@ -974,6 +1030,21 @@
         survive &mdash; both monument-protected. Open May&ndash;Oct, 1st Sunday, 2&ndash;5 PM.
         The cemetery may contain Schauss headstones from the 1600s&ndash;1900s.
       </p>
+    </div>
+  </div>
+
+  <div class="img-grid">
+    <div>
+      <img class="heritage-img" loading="lazy"
+        src="https://upload.wikimedia.org/wikipedia/commons/6/68/Eckweiler_%E2%80%A6nur_die_Kirche_steht_noch_-_panoramio.jpg"
+        alt="The Heiligkreuzkirche (Holy Cross Church) of Eckweiler, the only structure still standing in the abandoned village">
+      <div class="img-caption">Eckweiler — only the church still stands. The village was demolished 1979–82 for a NATO airbase. <a href="https://commons.wikimedia.org/wiki/File:Eckweiler_%E2%80%A6nur_die_Kirche_steht_noch_-_panoramio.jpg" target="_blank">giggel</a>, CC BY 3.0</div>
+    </div>
+    <div>
+      <img class="heritage-img" loading="lazy"
+        src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Eckweiler_ehemaliges_Dorf.jpg"
+        alt="The site of the former village of Eckweiler, now empty meadows">
+      <div class="img-caption">Where Eckweiler once stood — meadows where Hanß Schauß lived before 1600. <a href="https://commons.wikimedia.org/wiki/File:Eckweiler_ehemaliges_Dorf.jpg" target="_blank">Gudrun Meyer</a>, CC BY-SA 3.0</div>
     </div>
   </div>
 
@@ -1535,6 +1606,21 @@
       <a href="https://www.immigrantships.net/v4/1700v4/harle17360901.html" target="_blank" style="color:var(--gold);text-decoration:none;border-bottom:1px solid var(--sepia);">Immigrant Ships &mdash; Full List</a>
     </p>
   </div>
+
+  <img class="heritage-img heritage-img-wide" loading="lazy"
+    src="https://upload.wikimedia.org/wikipedia/commons/b/b6/Adriaen_van_Salm_%28c.1660-1720%29_-_Harbour_Scene%2C_View_of_the_Leuvehaven%2C_Rotterdam%2C_The_Netherlands_-_KINCM-2005.6132_-_Ferens_Art_Gallery.jpg"
+    alt="Oil painting of the Leuvehaven harbor in Rotterdam, circa 1700-1720">
+  <div class="img-caption">Rotterdam harbor, c. 1700–1720. Palatine emigrants boarded ships here for the Atlantic crossing. <a href="https://commons.wikimedia.org/wiki/File:Adriaen_van_Salm_(c.1660-1720)_-_Harbour_Scene,_View_of_the_Leuvehaven,_Rotterdam,_The_Netherlands_-_KINCM-2005.6132_-_Ferens_Art_Gallery.jpg" target="_blank">Adriaen van Salm</a>, Public Domain</div>
+
+  <img class="heritage-img" loading="lazy"
+    src="https://upload.wikimedia.org/wikipedia/commons/1/12/Thomas_Luny_-_A_merchant_ship_signaling_for_a_pilot_off_the_cliffs_of_Dover.jpg"
+    alt="18th-century merchant sailing ship, representative of vessels that carried Palatine emigrants">
+  <div class="img-caption">An 18th-century merchant ship — the type of vessel that carried the Schauss family across the Atlantic in 1736. <a href="https://commons.wikimedia.org/wiki/File:Thomas_Luny_-_A_merchant_ship_signaling_for_a_pilot_off_the_cliffs_of_Dover.jpg" target="_blank">Thomas Luny</a>, Public Domain</div>
+
+  <img class="heritage-img heritage-img-wide" loading="lazy"
+    src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Philadelphia_in_1750_-_DPLA_-_3dd9442f5622f5dc76b19e5f2eca0558.jpg"
+    alt="Engraving of Philadelphia in 1750, showing the colonial waterfront where German immigrants arrived">
+  <div class="img-caption">Philadelphia in 1750 — Johann Adam Schauss arrived at this waterfront on September 1, 1736, aboard the Ship Harle. <a href="https://commons.wikimedia.org/wiki/File:Philadelphia_in_1750_-_DPLA_-_3dd9442f5622f5dc76b19e5f2eca0558.jpg" target="_blank">Boston Public Library/DPLA</a>, Public Domain</div>
 
   <!-- Complete Children of Johann Adam -->
   <h3 style="color:var(--gold-lt);font-weight:normal;font-size:1.1rem;margin:32px 0 8px;">Children of Johann Adam Schauss &amp; Maria Barbara Baum</h3>
@@ -2298,6 +2384,51 @@ const TREE_DATA = {
     Palatine emigrant to the post-Civil War era.
   </p>
 
+  <div class="img-grid">
+    <div>
+      <img class="heritage-img" loading="lazy"
+        src="https://upload.wikimedia.org/wikipedia/commons/4/47/BethaniaMill.JPG"
+        alt="Historic mill building in the Bethania Historic District, North Carolina">
+      <div class="img-caption">Bethania Historic District — the Moravian settlement where Schauss/Shouse families lived. <a href="https://commons.wikimedia.org/wiki/File:BethaniaMill.JPG" target="_blank">Ceh2624</a>, CC BY-SA 3.0</div>
+    </div>
+    <div>
+      <img class="heritage-img" loading="lazy"
+        src="https://upload.wikimedia.org/wikipedia/commons/6/67/Lovefeast_at_Bethania_Moravian_Church.jpg"
+        alt="A traditional Moravian lovefeast at Bethania Moravian Church">
+      <div class="img-caption">Moravian lovefeast at Bethania — a tradition the Schauss family would have known. <a href="https://commons.wikimedia.org/wiki/File:Lovefeast_at_Bethania_Moravian_Church.jpg" target="_blank">Will &amp; Deni McIntyre</a>, CC BY-SA 4.0</div>
+    </div>
+  </div>
+
+  <div class="img-grid">
+    <div>
+      <img class="heritage-img" loading="lazy"
+        src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Bethabara_Historic_Park-1.jpg"
+        alt="The Gemeinhaus at Bethabara Historic Park, first Moravian settlement in Wachovia (1753)">
+      <div class="img-caption">Bethabara Gemeinhaus — the first Moravian building in Wachovia, 1753. <a href="https://commons.wikimedia.org/wiki/File:Bethabara_Historic_Park-1.jpg" target="_blank">David Bjorgen</a>, CC BY-SA 3.0</div>
+    </div>
+    <div>
+      <img class="heritage-img" loading="lazy"
+        src="https://upload.wikimedia.org/wikipedia/commons/2/28/Bethabara_Moravian_Church%2C_2147_Bethabara_Road_%28State_Route_1681%29%2C_Old_Town_%28Forsyth_County%2C_North_Carolina%29.jpg"
+        alt="Historic 1934 photograph of Bethabara Moravian Church">
+      <div class="img-caption">Bethabara Moravian Church, 1934. <a href="https://commons.wikimedia.org/wiki/File:Bethabara_Moravian_Church,_2147_Bethabara_Road_(State_Route_1681),_Old_Town_(Forsyth_County,_North_Carolina).jpg" target="_blank">HABS/Library of Congress</a>, Public Domain</div>
+    </div>
+  </div>
+
+  <div class="img-grid">
+    <div>
+      <img class="heritage-img" loading="lazy"
+        src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Old_Salem-1.jpg"
+        alt="Winkler Bakery at Old Salem, the restored Moravian town in Winston-Salem">
+      <div class="img-caption">Old Salem — the planned Moravian congregation town, founded 1766. <a href="https://commons.wikimedia.org/wiki/File:Old_Salem-1.jpg" target="_blank">David Bjorgen</a>, CC BY-SA 3.0</div>
+    </div>
+    <div>
+      <img class="heritage-img" loading="lazy"
+        src="https://upload.wikimedia.org/wikipedia/commons/d/db/God%27s_Acre_Moravian_cemetery_in_Old_Salem.JPG"
+        alt="Flat headstones in the God's Acre Moravian cemetery at Old Salem">
+      <div class="img-caption">God's Acre — Moravian cemetery with flat headstones symbolizing equality in death. <a href="https://commons.wikimedia.org/wiki/File:God%27s_Acre_Moravian_cemetery_in_Old_Salem.JPG" target="_blank">Jelliclegerbils</a>, CC BY-SA 3.0</div>
+    </div>
+  </div>
+
   <div class="family-grid">
 
     <div class="family-card">
@@ -2381,6 +2512,11 @@ const TREE_DATA = {
     Archives in Winston-Salem holds unparalleled records of life in the Wachovia
     settlements.
   </p>
+
+  <img class="heritage-img heritage-img-small" loading="lazy"
+    src="https://upload.wikimedia.org/wikipedia/commons/0/07/Keferstein-museum-chronicle-p3.jpg"
+    alt="Page of German Kurrent handwriting (1864) showing the style used in church records">
+  <div class="img-caption">German Kurrent script — the handwriting style used in Kirchenbücher where Schauss entries are recorded. <a href="https://commons.wikimedia.org/wiki/File:Keferstein-museum-chronicle-p3.jpg" target="_blank">F. Welter-Schultes</a>, CC0</div>
 
   <div class="sources-grid">
 

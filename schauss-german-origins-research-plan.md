@@ -335,7 +335,7 @@ The Schauss family was documented as Reformed (Calvinist), but records were kept
 
 3. **What church records survive for Albisheim pre-1720?** — The parish began 1641 with gaps; Archion has from 1720. What exists for 1641-1720 (the period when the Schauss family arrived and first generation lived)?
 
-4. **Are there Schauss graves in the Albisheim Protestant cemetery?** — Philipp Heinrich Schauss died 1765 in Albisheim. Are there surviving headstones?
+4. **~~Are there Schauss graves in the Albisheim Protestant cemetery?~~** — **ANSWERED (April 19, 2026): Almost certainly not.** Germany's Ruhezeit (grave lease) system recycles plots every 20–30 years. The Albisheim Protestant churchyard at Kirchgasse 14 (adjacent to the Peterskirche) has been continuously active for centuries. The oldest protected headstones per the Denkmalliste Rheinland-Pfalz date from c. 1850 — elaborate Gründerzeit sandstone stelae (Schlossstein d. 1901, Hahn d. 1906). The last Schauss death in Albisheim was Philipp Heinrich in 1765, 85 years before the earliest surviving stone. No Schauss headstone appears in any monument registry, Find a Grave, BillionGraves, or CompGen Grabstein-Projekt. The family's physical burial evidence has been lost to routine cemetery management over 260 years. The record survives in the Kirchenbücher and Ortsfamilienbuch — paper, not stone. (Note: Eckweiler cemetery is frozen since 1979 abandonment and might theoretically have old stones, but the Schauss ancestors there predate the 1628 era of surviving headstones.)
 
 5. **What does the Albisheim 1100th Anniversary Book contain about the Schauss family?** — Referenced in genealogical sources. Locate and examine.
 
@@ -626,7 +626,7 @@ A **Schauß family winery** has been operating in **Monzingen an der Nahe** sinc
 **ECKWEILER — The Abandoned Village (1979)**
 Eckweiler, the earliest Schauss homeland, was **abandoned in 1979** when NATO expanded the Pferdsfeld airbase for F-4 Phantom jets. 350 residents were resettled to the Leinenborn area east of Bad Sobernheim. The village was demolished in 1981-82.
 - **Only the church and cemetery survive** — the late-Gothic Heiligkreuzkirche (Holy Cross Church, c. 1500) is monument-protected
-- **The cemetery still exists** but no new graves since abandonment — may contain Schauss headstones from centuries ago
+- **The cemetery still exists** but no new graves since abandonment. However, the earliest Schauss ancestors (Hanß d. unknown, Melchior d. 1628) predate the era of surviving headstones; any stones present likely date from the 19th–20th century
 - **Visitable today:** The Freundeskreis Eckweilerer Kirche opens the church May-October, first Sunday each month, 2-5 PM
 - **Hiking route:** "Vitaltour Um die Wüstung" — ~5km walk from Bad Sobernheim through the former village site
 
@@ -675,6 +675,8 @@ A quantum physicist named **Peter Schauss** (note spelling without ß) was educa
 - **April 10, 2026** — Research plan created with comprehensive web research findings
 - **April 10, 2026** — Added FamilySearch findings: Ship Harle details, complete children list, Baum family, Conrad family, Eckweiler branch, FHL microfilm numbers
 - **April 12, 2026** — Present-day Schauss listings (92 in Germany), Schauß Mühle, Weingut Schauß, Albert Schauß born in Eckweiler, Eckweiler brothers breakthrough, Familienbuch resources
+- **April 19, 2026** — Research question #4 answered: No Schauss headstones survive in Albisheim Protestant cemetery. Ruhezeit (grave lease/reuse) system means graves from 1720-1765 were cleared by early 1800s. Oldest protected stones in churchyard date from c. 1850 per Denkmalliste RLP. Eckweiler cemetery frozen since 1979 but Schauss ancestors there predate surviving headstone era.
+- **April 13, 2026** — Deep research on Schauß Mühle Roxheim. Confirmed GPS 49.8664°N, 7.7873°E on Katzenbach creek (Kreisstraße K 51). CORRECTION: German Wikipedia lists Roxheim Wohnplätze as "Rollars Mühle, Obere Mühle, Mühlwieshof" — NO Schauß Mühle. Only English Wikipedia (citing Stat. Landesamt RLP) and transit/weather DBs use that name. Most likely the "Schauß Mühle" name is a modern local renaming of what was historically the Obere Mühle, applied after a 20th-century Schauß owner — plausibly one of the Eckweiler resettlers of 1979–82. Not a Kulturdenkmal. Not in Eberhard Ref's Pfälzisches Mühlenlexikon. Not in Wikimedia Commons / Bildindex Foto Marburg / Deutsche Digitale Bibliothek. Today's Roxheim Schauß families (Albert, Dirk, Annette-Zimmermann, Winfried) almost certainly descend from the 1979–82 Eckweiler resettlement, not from a hereditary Roxheim milling dynasty. Four other Schauß/Schaus millers documented in the Palatinate per Ref's lexicon (Erzenhausen 1698, Göcklingen d.1732, Göcklingen→Maikammer post-1770, Maikammer Schwarzmühle Erbbestand 1756 with pillar inscription "Hans Schauß / Katharina Schaußin 1758") — confirming a real family milling tradition but not in Roxheim itself. Key book to order: Familienbuch Roxheim 1691–1905 (Heinz Augustin, WGfF Bd. 170, 967 pp., 2002, WG10060, ~€45). Webpage revised to reflect corrected narrative.
 
 ## Critical Unpursued Leads (April 12, 2026)
 
